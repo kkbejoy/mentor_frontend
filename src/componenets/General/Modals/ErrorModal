@@ -1,0 +1,60 @@
+import React from "react";
+import Modal from "react-modal";
+
+const modalStyle = {
+  overlay: {
+    position: "fixed",
+    top: 0,
+    left: 0,
+    right: 0,
+    bottom: 0,
+    backgroundColor: "rgba(176, 172, 194, 0.89)",
+  },
+  content: {
+    position: "absolute",
+    top: "50%",
+    left: "50%",
+    transform: "translate(-50%, -50%)",
+    backgroundColor: "white",
+    borderRadius: "8px",
+    padding: "20px",
+    boxShadow: "0 2px 4px rgba(0, 0, 0, 0.1)",
+    maxWidth: "400px",
+    width: "100%",
+    textAlign: "center",
+    maxHeight: "225px",
+  },
+};
+
+export const ErrorModal = ({ isOpen, onRequestClose, errorMessage }) => {
+  return (
+    <Modal isOpen={isOpen} style={modalStyle} onRequestClose={onRequestClose}>
+      <div className="bg-white px-4 pb-4 pt-5 sm:p-6 sm:pb-4">
+        <div className="sm:flex sm:items-start">
+          <div className="mx-auto flex h-12 w-12 flex-shrink-0 items-center justify-center rounded-full bg-red-100 sm:mx-0 sm:h-10 sm:w-10">
+            <svg
+              xmlns="http://www.w3.org/2000/svg"
+              fill="none"
+              viewBox="0 0 24 24"
+              stroke="currentColor"
+              className="h-6 w-6 text-red-600"
+            >
+              <path
+                strokeLinecap="round"
+                strokeLinejoin="round"
+                strokeWidth="2"
+                d="M12 4v16m0-10h.01m-6 10V4m6 20a9 9 0 110-18 9 9 0 010 18z"
+              />
+            </svg>
+          </div>
+          <div className="mt-3 text-center sm:ml-4 sm:mt-0 sm:text-left">
+            <h1 className="text-red-600">Error</h1>
+            <p className="text-sm text-gray-500">{errorMessage}</p>
+          </div>
+        </div>
+      </div>
+    </Modal>
+  );
+};
+
+// export default ErrorModal;

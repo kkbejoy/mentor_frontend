@@ -1,12 +1,17 @@
 import { createSlice, PayloadAction, createAsyncThunk } from "@reduxjs/toolkit";
-import axios from "axios";
-import END_POINTS from "../constants/endpoints";
-import { BASE_URL } from "../constants/constants";
+// import axios from "axios";
+// import END_POINTS from "../constants/endpoints";
+// import { BASE_URL } from "../constants/constants";
 import {
   ModeratorLoginInput,
   ModeratorLoginResponse,
   ModeratorsSlice,
 } from "../types/moderatorTypes";
+import { deleteUserFromLocalStoreage } from "../utilities/reusableFunctions";
+import {
+  moderatorLogOut,
+  moderatorLoginAPI,
+} from "../api/moderatorConfiguration/moderatorServices";
 
 const initialState: ModeratorsSlice = {
   isModeratorAuthenticated: false,
@@ -60,18 +65,21 @@ export const moderatorAsyncLogin = createAsyncThunk<
     throw new Error(error.message);
   }
 });
-const moderatorLoginAPI = async (
-  email: string,
-  password: string
-): Promise<ModeratorLoginResponse> => {
-  const credentials = { email: email, password: password };
 
-  const response = await axios.post(
-    `${BASE_URL}` + `${END_POINTS.MODERATOR_LOGIN}`,
-    credentials
-  );
-  console.log("respose from api", response);
-  return response;
-};
-
+//Logout
+export const moderatorAsyncLogout = createAsyncThunk(
+  "auth/moderator/logout",
+  async (moderatorLoggedinDetails) => {
+    try {
+      console.log(moderatorLoggedinDetails);
+      const response = await moderatorLogOut(moderatorLoggedinDetails);
+      await deleteUserFromLocalStoreage("moderatorAuth");
+      console.log(response);
+      return undefined;
+    } catch (error) {
+      console.error(error);
+      throw error;
+    }
+  }
+);
 export const moderatorReducer = moderatorSlice.reducer;

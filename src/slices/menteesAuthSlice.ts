@@ -3,6 +3,11 @@ import axios from "axios";
 import END_POINTS from "../constants/endpoints";
 import { BASE_URL } from "../constants/constants";
 import { MenteeLoginInput, MenteeLoginResponse } from "../types/menteesType";
+import {
+  menteeLoginAPI,
+  menteeLogOut,
+} from "../api/menteesConfiguration/menteeServices";
+import { deleteUserFromLocalStoreage } from "../utilities/reusableFunctions";
 interface MenteesSlice {
   isMenteeAuthenticated: boolean;
   menteeName: string | null;
@@ -48,7 +53,6 @@ const menteesSlice = createSlice({
         state.menteeRefreshToken = action.payload.refreshToken;
         state.menteeId = action.payload.menteeId;
         state.isLoading = "idle";
-
         state.error = null;
       })
       .addCase(menteeAsyncLogin.rejected, (state, action) => {
@@ -60,10 +64,20 @@ const menteesSlice = createSlice({
         state.isMenteeAuthenticated = false;
         state.error = null;
         state.isLoading = "pending";
+      })
+      .addCase(menteeAsyncLogout.fulfilled, (state, action) => {
+        state.isMenteeAuthenticated = false;
+        state.menteeId = null;
+        state.menteeName = null;
+        state.menteeAccessToken = null;
+        state.menteeRefreshToken = null;
+        state.isLoading = "idle";
+        state.error = null;
       });
   },
 });
 
+//Login
 export const menteeAsyncLogin = createAsyncThunk<
   MenteeLoginResponse,
   MenteeLoginInput
@@ -71,27 +85,31 @@ export const menteeAsyncLogin = createAsyncThunk<
   try {
     console.log("email", email, password);
     const response = await menteeLoginAPI(email, password);
-    console.log("respose from api", response);
+    console.log("respose from thunk", response.data);
+
     return response.data;
   } catch (error) {
     console.log("error from slice", error);
     throw new Error(error.message);
   }
 });
-const menteeLoginAPI = async (
-  email: string,
-  password: string
-): Promise<MenteeLoginResponse> => {
-  const credentials = { email: email, password: password };
 
-  const response = await axios.post(
-    `${BASE_URL}` + `${END_POINTS.MENTEE_LOGIN}`,
-    credentials
-  );
-  console.log("respose from api", response);
-  return response;
-};
-
+//Logout
+export const menteeAsyncLogout = createAsyncThunk(
+  "auth/mentees/logout",
+  async (menteeLoggedinDetails) => {
+    try {
+      console.log(menteeLoggedinDetails);
+      const response = await menteeLogOut(menteeLoggedinDetails);
+      await deleteUserFromLocalStoreage("menteeAuth");
+      console.log(response);
+      return undefined;
+    } catch (error) {
+      console.error(error);
+      throw error;
+    }
+  }
+);
 // export const { menteeLogin, menteeLogout } = menteesSlice.actions;
 // export const menteeSelector = (state: RootState) => ({
 //   isAuthenticated: state.mentees?.isAuthenticated,

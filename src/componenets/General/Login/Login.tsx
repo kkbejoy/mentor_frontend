@@ -1,4 +1,4 @@
-import { useEffect } from "react";
+import { useEffect, useState } from "react";
 import { Formik, Form, Field, ErrorMessage } from "formik";
 import { Link, useNavigate } from "react-router-dom";
 import END_POINTS from "../../../constants/endpoints.ts";
@@ -10,6 +10,8 @@ import { mentorAsyncLogin } from "../../../slices/mentorsAuthSlice.ts";
 import { moderatorAsyncLogin } from "../../../slices/moderatorsAuthSlice.ts";
 import { routesFrontend } from "../../../constants/frontendRoutes.ts";
 import GoogleSignin from "../GoogleSignin/GoogleSignin.tsx";
+import SpinnerModal from "../LoadingSpinners/SpinnerModal.tsx";
+import useLocalStorage from "../../../hooks/useLocalStorage.tsx";
 
 let LOGIN_URL: string;
 let mentee: boolean;
@@ -28,6 +30,14 @@ const Login: React.FC<LoginProps> = ({ role }) => {
   const menteeAuthData = useAppSelector((state) => state.menteeAuth);
   const mentorAuthData = useAppSelector((state) => state.mentorAuth);
   const moderatorAuthData = useAppSelector((state) => state.moderatorAuth);
+
+  const [isLoading, setLoading] = useState(false);
+  const [menteeAuth, setMenteeAuth] = useLocalStorage("menteeAuth", {});
+  const [mentorAuth, setMentorAuth] = useLocalStorage("mentorAuth", {});
+  const [moderatorAuth, setModeratorAuth] = useLocalStorage(
+    "moderatorAuth",
+    {}
+  );
 
   const dispatch = useDispatch();
   switch (role) {
@@ -50,6 +60,7 @@ const Login: React.FC<LoginProps> = ({ role }) => {
     default:
       LOGIN_URL = END_POINTS.MENTEE_LOGIN;
   }
+
   const navigate = useNavigate();
   const registerURL = mentee
     ? "/auth/mentee-register"
@@ -58,21 +69,22 @@ const Login: React.FC<LoginProps> = ({ role }) => {
   const forgotpasswordURL = mentee
     ? routesFrontend.MenteeForgotPassword
     : routesFrontend.MentorForgotPassword;
+
   useEffect(() => {
     if (menteeAuthData.isMenteeAuthenticated) {
-      navigate("/");
+      navigate("/mentees");
     }
   }, [menteeAuthData, navigate]);
 
   useEffect(() => {
     if (mentorAuthData.isMentorAuthenticated) {
-      navigate("/");
+      navigate("/mentors");
     }
   }, [mentorAuthData, navigate]);
 
   useEffect(() => {
     if (moderatorAuthData.isModeratorAuthenticated) {
-      navigate("/");
+      navigate("/moderator");
     }
   }, [moderatorAuthData]);
 
@@ -82,24 +94,49 @@ const Login: React.FC<LoginProps> = ({ role }) => {
   ) => {
     console.log("Form entry:", values);
     try {
+      setLoading(true);
       //For mentees
       if (role === "mentees") {
         const dispachResponse = dispatch(menteeAsyncLogin(values));
         dispachResponse
           .then((res) => {
-            console.log("res", res);
-            if (res?.type === "auth/mentees/rejected") {
-              if (res?.error.message === "Request failed with status code 401")
+            console.log("Res", res);
+            if (res?.type === "auth/mentees/fulfilled") {
+              const {
+                accessToken,
+                menteeId,
+                menteeName,
+                message,
+                refreshToken,
+              } = res.payload;
+              const menteeAuthData = {
+                isMenteeAuthenticated: true,
+                accessToken,
+                menteeId,
+                menteeName,
+                message,
+                refreshToken,
+              };
+              console.log("mentee", menteeAuthData);
+              setMenteeAuth(menteeAuthData);
+            } else if (res?.type === "auth/mentees/rejected") {
+              if (
+                res?.error.message === "Request failed with status code 401"
+              ) {
                 setFieldError(
                   "password",
                   "Please verify the entered Email and Password"
                 );
-              else if (res?.error.message === "Network Error")
+                setLoading(false);
+              } else if (res?.error.message === "Network Error") {
                 setFieldError("password", "Please try again later");
+                setLoading(false);
+              }
             }
           })
           .catch((error) => {
             console.log("error from catch", error?.error.message);
+            setLoading(false);
             // if(error.?error.message)
           });
       }
@@ -111,20 +148,48 @@ const Login: React.FC<LoginProps> = ({ role }) => {
 
         dispachResponse
           .then((res) => {
-            console.log("res", res);
-            if (res?.type === "auth/mentees/rejected") {
-              if (res?.error.message === "Request failed with status code 401")
+            console.log(res);
+            if (res?.type === "auth/mentors/fulfilled") {
+              const {
+                mentorAccessToken,
+                mentorId,
+                mentorName,
+                message,
+                mentorRefreshToken,
+              } = res.payload;
+
+              const mentorAuthData = {
+                isMentorAuthenticated: true,
+                accessToken: mentorAccessToken,
+                mentorId,
+                mentorName,
+                message,
+                refreshToken: mentorRefreshToken,
+              };
+              console.log("Mentor Then");
+              setMentorAuth(mentorAuthData); //Local Storage
+              setLoading(false);
+              console.log(isLoading);
+            }
+            if (res?.type === "auth/mentors/rejected") {
+              if (
+                res?.error.message === "Request failed with status code 409"
+              ) {
                 setFieldError(
                   "password",
                   "Please verify the entered Email and Password"
                 );
-              else if (res?.error.message === "Network Error")
+                setLoading(false);
+              } else if (res?.error.message === "Network Error") {
                 setFieldError("password", "Please try again later");
+                setLoading(false);
+              } // Add conditions for Blocked users and Inactive users
             }
           })
           .catch((error) => {
             console.log("error from catch", error?.error.message);
             setFieldError("password", "Please try again later");
+            setLoading(false);
           });
       }
       //For Moderator
@@ -132,20 +197,48 @@ const Login: React.FC<LoginProps> = ({ role }) => {
         const dispachResponse = dispatch(moderatorAsyncLogin(values));
         dispachResponse
           .then((res) => {
-            console.log("res", res);
-            if (res?.type === "auth/mentees/rejected") {
-              if (res?.error.message === "Request failed with status code 401")
+            console.log("Res", res);
+
+            if (res.type === "auth/moderator/fulfilled") {
+              const {
+                moderatorAccessToken,
+                moderatorId,
+                message,
+                moderatorRefreshToken,
+              } = res.payload;
+              const moderatorAuthData = {
+                isModeratorAuthenticated: true,
+                acessToken: moderatorAccessToken,
+                moderatorId,
+                message,
+                refreshToken: moderatorRefreshToken,
+              };
+              console.log("Moderator", moderatorAuthData);
+              setModeratorAuth(moderatorAuthData);
+            } else if (res?.type === "auth/moderator/rejected") {
+              if (
+                res?.error.message === "Request failed with status code 409"
+              ) {
                 setFieldError(
                   "password",
                   "Please verify the entered Email and Password"
                 );
-              else if (res?.error.message === "Network Error")
+                setLoading(false);
+              } else if (res?.error.message === "Network Error") {
                 setFieldError("password", "Please try again later");
+                setLoading(false);
+              }
+            } else if (
+              res?.error.message === "Request failed with status code 401"
+            ) {
+              setFieldError("password", "Please try again later");
+              setLoading(false);
             }
           })
           .catch((error) => {
             console.log("error from catch", error?.error.message);
             setFieldError("password", "Please try again later");
+            setLoading(false);
           });
       }
     } catch (error) {
@@ -225,6 +318,9 @@ const Login: React.FC<LoginProps> = ({ role }) => {
                     component="div"
                     className="text-red-500"
                   />
+                  <div className="flex w-full justify-end py-3">
+                    {isLoading && <SpinnerModal />}
+                  </div>
                 </div>
               </div>
 

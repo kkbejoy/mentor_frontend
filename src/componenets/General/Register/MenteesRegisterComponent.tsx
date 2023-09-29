@@ -1,10 +1,10 @@
 import React, { useState } from "react";
 import { Field, Formik, Form, ErrorMessage } from "formik";
 import { menteeRegistrationValidationSchema } from "../../../validations/menteeRegisterValidation";
-import { menteeRegistration } from "../../../api/menteesManagement";
+import { menteeRegistration } from "../../../api/menteesConfiguration/menteeServices";
 import { Link, useNavigate } from "react-router-dom";
 import RegistrationSucessModal from "../Modals/RegistrationSucessModal";
-import SpinnerModal from "../Modals/SpinnerModal";
+import SpinnerModal from "../LoadingSpinners/SpinnerModal";
 import { messageToFront } from "../../../constants/messageToFront";
 
 const MenteeRegisterComponent: React.FC = () => {

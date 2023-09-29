@@ -1,14 +1,22 @@
 import React from "react";
 import { menteeAsyncLogin } from "../../../slices/menteesAuthSlice";
-import { menteeGoogleSignIn } from "../../../api/menteesManagement";
+import { menteeGoogleSignIn } from "../../../api/menteesConfiguration/menteeServices";
 
 const GoogleSignin = () => {
   const handleGoogleSignIn = async () => {
     try {
       console.log("he");
+
       const responseFromServer = await menteeGoogleSignIn();
+      console.log(responseFromServer);
+
       responseFromServer?.then((res) => {
-        const authWindow = window.open(res.data.url, "_blank");
+        console.log(res);
+        const authWindow = window.open(
+          "/api/mentees/google_auth_mentee",
+          "_blank"
+        );
+
         console.log(authWindow);
       });
     } catch (error) {

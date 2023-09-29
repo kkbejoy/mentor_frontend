@@ -15,3 +15,18 @@ export function Moderator() {
     </>
   );
 }
+
+export function Mentee() {
+  return (
+    <>
+      <Outlet />
+    </>
+  );
+}
+export function Mentor() {
+  return (
+    <>
+      <Outlet />
+    </>
+  );
+}

@@ -7,6 +7,7 @@ import NoMatchComponent from "../../componenets/General/NoMatchComponent/NoMatch
 
 import { LoginPage } from "../../pages/LoginPage";
 import { Home } from "../../App";
+import HeroSection from "../../componenets/General/Hero/HeroSection";
 export const homeRoutes = {
   path: "/",
   element: <Home />,

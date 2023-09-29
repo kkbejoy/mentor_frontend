@@ -2,8 +2,8 @@
 import React, { useState } from "react";
 import { Field, Formik, Form, ErrorMessage } from "formik";
 import { menteeRegistrationValidationSchema } from "../../../validations/menteeRegisterValidation";
-import { mentorRegistration } from "../../../api/menteesManagement";
-import SpinnerModal from "../Modals/SpinnerModal";
+import { mentorRegistration } from "../../../api/mentorConfiguration/mentorServices";
+import SpinnerModal from "../LoadingSpinners/SpinnerModal";
 import RegistrationSucessModal from "../Modals/RegistrationSucessModal";
 import { messageToFront } from "../../../constants/messageToFront";
 import { Link, useNavigate } from "react-router-dom";

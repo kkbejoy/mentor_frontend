@@ -1,9 +1,15 @@
 import { createSlice, PayloadAction, createAsyncThunk } from "@reduxjs/toolkit";
-import axios from "axios";
-import END_POINTS from "../constants/endpoints";
-import { BASE_URL } from "../constants/constants";
+// import axios from "axios";
+// import END_POINTS from "../constants/endpoints";
+// import { BASE_URL } from "../constants/constants";
 // import { MenteeLoginInput, MenteeLoginResponse } from "../types/menteesType";
 import { MentorLoginInput, MentorLoginResponse } from "../types/mentorType";
+import { deleteUserFromLocalStoreage } from "../utilities/reusableFunctions";
+import { menteeLogOut } from "../api/menteesConfiguration/menteeServices";
+import {
+  mentorLogOut,
+  mentorLoginAPI,
+} from "../api/mentorConfiguration/mentorServices";
 interface MentorSlice {
   isMentorAuthenticated: boolean;
   mentorName: string | null;
@@ -52,6 +58,7 @@ const mentorSlice = createSlice({
   },
 });
 
+//Mentor Log out
 export const mentorAsyncLogin = createAsyncThunk<
   MentorLoginResponse,
   MentorLoginInput
@@ -66,18 +73,21 @@ export const mentorAsyncLogin = createAsyncThunk<
     throw new Error(error.message);
   }
 });
-const mentorLoginAPI = async (
-  email: string,
-  password: string
-): Promise<MentorLoginResponse> => {
-  const credentials = { email: email, password: password };
 
-  const response = await axios.post(
-    `${BASE_URL}` + `${END_POINTS.MENTOR_LOGIN}`,
-    credentials
-  );
-  console.log("respose from api", response);
-  return response;
-};
-
+//Logout
+export const mentorAsyncLogout = createAsyncThunk(
+  "auth/mentor/logout",
+  async (mentorLoggedinDetails) => {
+    try {
+      console.log(mentorLoggedinDetails);
+      const response = await mentorLogOut(mentorLoggedinDetails);
+      await deleteUserFromLocalStoreage("mentorAuth");
+      console.log(response);
+      return undefined;
+    } catch (error) {
+      console.error(error);
+      throw error;
+    }
+  }
+);
 export const mentorReducer = mentorSlice.reducer;

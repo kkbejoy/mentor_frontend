@@ -6,6 +6,7 @@ import { Provider } from "react-redux";
 import { store } from "./store/store.ts";
 import { RouterProvider } from "react-router-dom";
 import { ApplicationBaseRoutes } from "./routes/ApplicationRoutesBase.tsx";
+import "react-big-calendar/lib/css/react-big-calendar.css";
 ReactDOM.createRoot(document.getElementById("root")!).render(
   <React.StrictMode>
     <Provider store={store}>
