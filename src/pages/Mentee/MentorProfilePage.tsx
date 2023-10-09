@@ -1,18 +1,33 @@
-import React from "react";
+import React, { useEffect } from "react";
 import MentorPricingCard from "../../componenets/Mentee/MentorPricingCard";
 import NavbarMentee from "../../componenets/Mentee/NavbarMentee";
 import MentorProfileIntro from "../../componenets/Mentee/MentorProfileIntro";
 import MentorAboutComponent from "../../componenets/Mentor/MentorAboutComponent";
 import MentorReviewComponenet from "../../componenets/Mentee/MentorReviewComponenet";
 import BorderLine from "../../componenets/General/BorderLine/BorderLine";
+import { useDispatch, useSelector } from "react-redux";
+import { mentorProfileDetails } from "../../slices/MenteeSlices/mentorProfile";
+import { useParams } from "react-router-dom";
 const MentorProfilePage = () => {
+  const dispatch = useDispatch();
+  const mentorDetailsObject = useSelector(
+    (state) => state.mentorProfileData.data.mentorData
+  );
+  console.log("mentor object from page:", mentorDetailsObject);
+  const params = useParams();
+  const { id: mentorId } = params;
+
+  useEffect(() => {
+    console.log("Location Data", mentorId);
+    dispatch(mentorProfileDetails(mentorId));
+  }, [mentorId]);
   return (
     <div>
       <NavbarMentee />
-      <MentorProfileIntro />
+      <MentorProfileIntro mentorDetailsObject={mentorDetailsObject} />
       {/* <MentorPricingCard /> */}
       <BorderLine />
-      <MentorAboutComponent />
+      <MentorAboutComponent mentorAbout={mentorDetailsObject?.bio} />
       <MentorReviewComponenet />
     </div>
   );

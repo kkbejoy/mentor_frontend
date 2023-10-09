@@ -5,9 +5,15 @@ import { stripeCheckOut } from "../../api/menteesConfiguration/menteeServices";
 
 const MentorPricingCard = ({ mentorId, mentorFees, mentorPriceId }) => {
   const navigate = useNavigate();
+
   const handleSubscriptionButton = async () => {
     try {
-      console.log("Subscribe Button Clicked");
+      console.log(
+        "Subscribe Button Clicked",
+        mentorId,
+        mentorFees,
+        mentorPriceId
+      );
 
       const responses = stripeCheckOut(mentorPriceId, mentorId);
       console.log("Reponse from title page", responses);
@@ -26,7 +32,7 @@ const MentorPricingCard = ({ mentorId, mentorFees, mentorPriceId }) => {
   };
   return (
     <div className="  top-0 z-50  max-w-md mx-auto bg-white rounded-xl  p-6 ">
-      <div className="text-2xl font-bold">{mentorFees} / month</div>
+      <div className="text-2xl font-bold">{mentorFees} / Hour</div>
 
       <div className="text-gray-600 text-sm">
         4 calls per month (60min/call)

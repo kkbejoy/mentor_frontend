@@ -1,19 +1,15 @@
 import React, { useEffect } from "react";
 import MentorPricingCard from "./MentorPricingCard";
-import { useLocation } from "react-router-dom";
+import { useLocation, useParams } from "react-router-dom";
 import { useDispatch, useSelector } from "react-redux";
 import { mentorProfileDetails } from "../../slices/MenteeSlices/mentorProfile";
+import { UilLocationPinAlt } from "@iconscout/react-unicons";
+import { UilSuitcase } from "@iconscout/react-unicons";
 
-const MentorProfileIntro = () => {
-  const dispatch = useDispatch();
-  const location = useLocation();
-  const { mentorId } = location.state;
-  const mentorDetailsObject = useSelector(
-    (state) => state.mentorProfileData.data.mentorData
-  );
-  useEffect(() => {
-    dispatch(mentorProfileDetails(mentorId));
-  }, [mentorId]);
+//Component
+const MentorProfileIntro = ({ mentorDetailsObject }) => {
+  console.log("Mentor Object:", mentorDetailsObject);
+
   return (
     <div className="shadow-inherit mx-auto py-5">
       <div className="max-w-full mx-5 bg-white rounded-xl overflow-hidden  shadow-lg flex">
@@ -21,7 +17,7 @@ const MentorProfileIntro = () => {
           <div className="flex items-center mb-4">
             <div className="w-1/2 h-1/2 shadow-lg rounded-full overflow-hidden">
               <img
-                src="https://cdn.mentorcruise.com/cache/364d329b06763551ebdc12ae7766f573/e33a634bd6969139/e430a17344571e52d743224172c3d618.jpg" // Replace with your image URL
+                src={`https://res.cloudinary.com/dlcsyyk7z/image/upload/v1696240416/${mentorDetailsObject?.profileImageUrl}`} // Replace with your image URL
                 alt="User Profile"
                 className="w-full h-full object-cover"
               />
@@ -30,22 +26,30 @@ const MentorProfileIntro = () => {
               <div className="text-3xl font-bold">
                 {mentorDetailsObject?.firstName} {mentorDetailsObject?.lastName}
               </div>
-              <div className="text-gray-600 text-sm">
-                {mentorDetailsObject?.jobTitle} @{" "}
-                {mentorDetailsObject?.firmName}
+              <div className="flex flex-col-2">
+                <div className="text-gray-600 text-sm">
+                  <UilSuitcase />
+                </div>
+                <div className="text-gray-600 text-sm pl-1">
+                  {mentorDetailsObject?.jobTitle} @{" "}
+                  {mentorDetailsObject?.firmName}
+                </div>
               </div>
               <div className="text-gray-600 text-sm">
-                Organic and Paid Growth Expert with 10+ years of Agency &amp;
-                In-house experience in Digital Marketing
+                {mentorDetailsObject?.shortBio}
               </div>
-              <div className="text-gray-600 text-sm">
-                {mentorDetailsObject?.location}
+              <div className="flex flex-col-2">
+                <div className="text-gray-600 text-sm">
+                  <UilLocationPinAlt />
+                </div>{" "}
+                <div className="text-gray-600 text-sm pl-1">
+                  {mentorDetailsObject?.location}
+                </div>
               </div>
               <div className="text-gray-700 text-base">
                 <span className="text-yellow-500">5.0</span> (17 reviews)
               </div>
               <div className="text-gray-600 text-sm">Active today</div>
-
               {/* <button className="mt-4 bg-blue-500 hover:bg-blue-600 text-white font-bold py-2 px-4 rounded-full">
                 Play intro
               </button> */}

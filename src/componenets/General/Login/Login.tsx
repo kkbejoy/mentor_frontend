@@ -26,7 +26,7 @@ interface LoginProps {
   role: string;
 }
 
-const Login: React.FC<LoginProps> = ({ role }) => {
+const Login: React.FC<LoginProps> = ({ role, setSuccess, isSuccess }) => {
   const menteeAuthData = useAppSelector((state) => state.menteeAuth);
   const mentorAuthData = useAppSelector((state) => state.mentorAuth);
   const moderatorAuthData = useAppSelector((state) => state.moderatorAuth);
@@ -119,6 +119,7 @@ const Login: React.FC<LoginProps> = ({ role }) => {
               };
               console.log("mentee", menteeAuthData);
               setMenteeAuth(menteeAuthData);
+              setSuccess(!isSuccess);
             } else if (res?.type === "auth/mentees/rejected") {
               if (
                 res?.error.message === "Request failed with status code 401"
@@ -169,7 +170,8 @@ const Login: React.FC<LoginProps> = ({ role }) => {
               console.log("Mentor Then");
               setMentorAuth(mentorAuthData); //Local Storage
               setLoading(false);
-              console.log(isLoading);
+              setSuccess(!isSuccess);
+              // console.log("Is loading", isSuccess);
             }
             if (res?.type === "auth/mentors/rejected") {
               if (
@@ -215,6 +217,7 @@ const Login: React.FC<LoginProps> = ({ role }) => {
               };
               console.log("Moderator", moderatorAuthData);
               setModeratorAuth(moderatorAuthData);
+              setSuccess(!isSuccess);
             } else if (res?.type === "auth/moderator/rejected") {
               if (
                 res?.error.message === "Request failed with status code 409"

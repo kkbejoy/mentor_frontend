@@ -92,11 +92,11 @@ export default function NavbarHome() {
                   <div className="text-centre text-white ">
                     {/* {isAuthenticated ? (
                       "Logout"
-                    ) : (
-                      <Link to={"/auth/login"}>
-                        <p className="font-normal">Login</p>
-                      </Link>
-                    )} */}
+                    ) : ( */}
+                    <Link to={"/auth/login"}>
+                      <p className="font-normal">Login</p>
+                    </Link>
+                    {/* )} */}
                     <Menu.Button className="relative flex rounded-full bg-gray-800 text-sm focus:outline-none focus:ring-2 focus:ring-white focus:ring-offset-2 focus:ring-offset-gray-800">
                       <span className="absolute -inset-1.5" />
                       <span className="sr-only">Open user menu</span>

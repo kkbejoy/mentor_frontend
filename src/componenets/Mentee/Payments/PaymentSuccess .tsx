@@ -1,14 +1,17 @@
 import React, { useEffect } from "react";
 import { makeEnrollmentActive } from "../../../api/menteesConfiguration/menteeServices";
-import { useLocation } from "react-router-dom";
+import { useLocation, useNavigate } from "react-router-dom";
 
 const PaymentSuccess = ({ amount, paymentMethod, transactionId }) => {
+  const navigate = useNavigate();
   const location = useLocation();
   const url = new URL("https://example.com" + location.pathname);
   const id = url.pathname.split("/").pop();
   console.log(id);
   useEffect(() => {
-    makeEnrollmentActive(id);
+    makeEnrollmentActive(id).then((res) => {
+      navigate("/mentees");
+    });
   });
   return (
     <div className="bg-green-200 p-4 rounded-lg shadow-lg">

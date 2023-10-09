@@ -9,10 +9,15 @@ import { setMentorSearchTextReducer } from "../slices/MenteeSlices/searchSlice";
 import { mentorsSearchResultReducer } from "../slices/MenteeSlices/mentorSearchResultSlice";
 import { mentorProfileDetailsReducer } from "../slices/MenteeSlices/mentorProfile";
 import { mentorTimeSlotReducer } from "../slices/MentorSlices/AvailableTimeSlotsSlice";
+import { menteeSideTimeSlotReducer } from "../slices/MenteeSlices/timeSlotSlice";
+import { subscibedMentorsListReducer } from "../slices/MenteeSlices/subscribedMentorsListSlice";
+import { subscibedMenteesListReducer } from "../slices/MentorSlices/subscibedMentees";
 export const store = configureStore({
   reducer: {
     menteeAuth: menteeReducer,
     mentorAuth: mentorReducer,
+    menteeSideTimeSlot: menteeSideTimeSlotReducer,
+    menteeSideSubscribedMentorsList: subscibedMentorsListReducer,
     moderatorAuth: moderatorReducer,
     menteesList: menteesTableDetailsReducer,
     mentorsList: mentorsTableDetailsReducer,
@@ -21,6 +26,7 @@ export const store = configureStore({
     mentorSearchResult: mentorsSearchResultReducer,
     mentorProfileData: mentorProfileDetailsReducer,
     mentorTimeSlots: mentorTimeSlotReducer,
+    subscribedMenteesList: subscibedMenteesListReducer,
   },
 });
 

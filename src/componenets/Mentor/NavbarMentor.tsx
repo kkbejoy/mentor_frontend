@@ -7,9 +7,10 @@ import LogoutComponent from "./Logout Component/LogoutComponent";
 
 const NavbarMentor = () => {
   const navigation = [
-    { name: "Home", href: "/" },
+    { name: "Home", href: "/mentors" },
+    { name: "Profile", href: "/mentors/profile" },
     { name: "Schedule", href: "/mentors/scheduler" },
-    { name: "Mentees", href: "#" },
+    { name: "Mentees", href: "/mentors/subscribed-mentees" },
     { name: "Statistics", href: "#" },
     { name: "Raise a ticket", href: "#" },
     // { name: "Mentors List", href: "#", current: false },
@@ -17,7 +18,10 @@ const NavbarMentor = () => {
   const isAuthenticated = checkAuthentication();
   console.log("Authenticated", isAuthenticated);
   return (
-    <Disclosure as="nav" className="bg-mentorBlue">
+    <Disclosure
+      as="nav"
+      className="relative bg-mentorBlue  sticky top-0 z-10 w-full  shadow-stone-500/40"
+    >
       {({ open }) => (
         <>
           <div className="mx-auto max-w-7xl px-2 sm:px-6 lg:px-8">

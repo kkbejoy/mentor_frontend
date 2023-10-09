@@ -8,8 +8,9 @@ import { routesFrontend } from "../../constants/frontendRoutes";
 
 const NavbarMentee = () => {
   const navigation = [
-    { name: "Settings", href: "#" },
-    { name: "Applications", href: "#" },
+    { name: "Home", href: "/mentees" },
+    { name: "Subscriptions", href: "/mentees/subscribed-mentors" },
+    { name: "Schedules", href: "/mentees/schedules" },
     {
       name: "Browse Mentors",
       href: routesFrontend.MentorBrowsePage,
@@ -22,7 +23,10 @@ const NavbarMentee = () => {
   console.log("Authenticated", isAuthenticated);
 
   return (
-    <Disclosure as="nav" className="bg-mentorBlue">
+    <Disclosure
+      as="nav"
+      className=" relative bg-mentorBlue  sticky top-0 z-10 w-full  shadow-stone-500/40"
+    >
       {({ open }) => (
         <>
           <div className="mx-auto max-w-7xl px-2 sm:px-6 lg:px-8">

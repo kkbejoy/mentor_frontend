@@ -13,6 +13,9 @@ const END_POINTS = {
   MENTEE_Stripe_Intent: "/api/mentees/create-payment-intent",
   MENTEE_Stripe_CHECKOUT: "/api/mentees/create-checkout",
   MENTEE_PAYMENT_SUCCESS: "/api/mentees/enrollment-success",
+  MENTEE_ALL_SUBSCRIBED_MENTROS: "/api/mentees/subscribed-mentors",
+  MENTEES_Time_Slots: "/api/mentees/timeslots",
+  MENTEES_Subscribed_Mentors: "/api/mentees/subscribed-mentors",
   MENTEE_TRAIL_ROUTE: "/api/mentees/trail",
 
   //Mentor
@@ -21,6 +24,12 @@ const END_POINTS = {
   MENTOR_LOGOUT: "/api/mentors/logout",
   MENTOR_AccessTokenRegenerate: "/api/mentors/regenerate_access_token",
   MENTOR_Iime_Slots: "/api/mentors/available-timeslots",
+
+  MENTOR_ALLOTED_SLOT_DETAILS: "/api/mentors/slot-details",
+  MENTOR_CLOUDINARY_Upload:
+    "https://api.cloudinary.com/v1_1/dlcsyyk7z/image/upload",
+  MENTOR_Profile_Update: "/api/mentors/edit-profile",
+  MENTOR_SUBSCRIBED_Mentees: "/api/mentors/subscribed-mentees",
 
   //Moderator
   MODERATOR_LOGIN: "/api/moderator/login",

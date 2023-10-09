@@ -5,6 +5,7 @@ import {
   getMenteeIdFromLocalStorage,
   getUserIdAndToken,
 } from "../../utilities/reusableFunctions";
+import { Toaster, toast } from "sonner";
 
 //API For Mentee Registration
 export const menteeRegistration = async (values) => {
@@ -120,6 +121,41 @@ export const makeEnrollmentActive = async (mentorId) => {
     return response;
   } catch (error) {
     console.log(error);
+    throw error;
+  }
+};
+
+//API for  Getting all Mentors Subscribed by a menteee
+
+export const fetchAllSubscribedMentees = async () => {
+  try {
+    const menteeId = await getMenteeIdFromLocalStorage();
+    const response = await menteesAxiosInstance.get(
+      `${BASE_URL}${END_POINTS.MENTEE_ALL_SUBSCRIBED_MENTROS}/${menteeId}`
+    );
+    console.log("All subscibed mentors", response);
+    return response;
+  } catch (error) {
+    console.log(error);
+    throw error;
+  }
+};
+
+//API to Book Mentor avaliable slots from mentee side
+
+export const fixMentorSlotByMentee = async (values, slotId) => {
+  try {
+    const menteeId = await getMenteeIdFromLocalStorage();
+    values.menteeId = menteeId;
+    const resonse = await menteesAxiosInstance.post(
+      BASE_URL + END_POINTS.MENTEES_Time_Slots + "/" + "1",
+      { values, slotId }
+    );
+    toast.success("Slot allocated Succssfully");
+    return resonse.data;
+  } catch (error) {
+    console.log(error);
+    toast.error("Slot allocation Failed");
     throw error;
   }
 };

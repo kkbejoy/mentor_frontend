@@ -1,3 +1,5 @@
+import { v4 as uuidv4 } from "uuid";
+
 //Check the login state of any of the user type
 
 export const checkAuthentication = () => {
@@ -72,5 +74,21 @@ export const deleteUserFromLocalStoreage = async (user) => {
     return;
   } catch (error) {
     console.log(error);
+  }
+};
+
+//Generate Unique names
+export const generateUniqueNames = async () => {
+  try {
+    const uniqueId = uuidv4();
+    // Generate a random string (e.g., timestamp)
+    const randomString = Date.now().toString();
+
+    const uniqueFileName = `${uniqueId}-${randomString}`; // Replace 'jpg' with the file extension you're using
+    console.log("Uniwue nmae:", uniqueFileName);
+    return uniqueFileName;
+  } catch (error) {
+    console.log(error);
+    return;
   }
 };

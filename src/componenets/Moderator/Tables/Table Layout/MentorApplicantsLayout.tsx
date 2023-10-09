@@ -13,7 +13,7 @@ const Table = ({ columns, data }) => {
   //Function to block Mentor
   const handleButtonClick = (id, name, email) => {
     try {
-      console.log("Mentor Approval Button Clicked");
+      console.log("Mentor Approval Button Clicked", id, name, email);
       const response = mentorApplicantsRequestAcceptAPI(id, name, email);
 
       response.then((res) => {

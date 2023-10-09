@@ -2,7 +2,7 @@ import React, { useState } from "react";
 import Login from "./Login";
 // ... (imports and constants)
 
-const Logintrail: React.FC = () => {
+const Logintrail: React.FC = ({ setSuccess, isSuccess }) => {
   const [selectedRole, setSelectedRole] = useState<string>("mentees"); // Default role is 'user'
   const handleRoleSelection = (role: string) => {
     setSelectedRole(role);
@@ -13,9 +13,27 @@ const Logintrail: React.FC = () => {
     <>
       <div className="w-full p-4 flex-col justify-between h-screen">
         <div className="w-full p-4 flex items-center justify-center">
-          {selectedRole === "mentees" && <Login role="mentees" />}
-          {selectedRole === "mentors" && <Login role="mentors" />}
-          {selectedRole === "modarators" && <Login role="moderators" />}
+          {selectedRole === "mentees" && (
+            <Login
+              role="mentees"
+              setSuccess={setSuccess}
+              isSuccess={isSuccess}
+            />
+          )}
+          {selectedRole === "mentors" && (
+            <Login
+              role="mentors"
+              setSuccess={setSuccess}
+              isSuccess={isSuccess}
+            />
+          )}
+          {selectedRole === "modarators" && (
+            <Login
+              role="moderators"
+              setSuccess={setSuccess}
+              isSuccess={isSuccess}
+            />
+          )}
         </div>
 
         <div className="w-full flex flex-col items-center mt-4">

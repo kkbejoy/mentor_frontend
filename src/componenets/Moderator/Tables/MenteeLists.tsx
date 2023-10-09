@@ -11,7 +11,7 @@ const MenteeListsComponent = () => {
   const menteesListArray = useSelector(
     (state) => state.menteesList.data.mentees
   );
-  // console.log("Mentees List Array From Mentes-list page", menteesListArray);
+  console.log("Mentees List Array From Mentes-list page", menteesListArray);
   useEffect(() => {
     disptch(fetchMenteesList());
   }, []);

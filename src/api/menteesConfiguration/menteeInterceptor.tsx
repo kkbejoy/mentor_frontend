@@ -1,7 +1,10 @@
 import axios from "axios";
 import END_POINTS, { BASE_URL } from "../../constants/endpoints";
 import { getUserIdAndToken } from "../../utilities/reusableFunctions";
-import { editLocalStorageField } from "../../utilities/localStorageUtilities";
+import {
+  deleteFromLocalStorage,
+  editLocalStorageField,
+} from "../../utilities/localStorageUtilities";
 
 const menteesAxiosInstance = axios.create({
   baseURL: BASE_URL,
@@ -53,6 +56,7 @@ menteesAxiosInstance.interceptors.response.use(
         return menteesAxiosInstance(originalRequest);
       } catch (error) {
         console.error("Token refresh unsuccessfull", error);
+        await deleteFromLocalStorage("menteeAuth");
       }
     }
   }

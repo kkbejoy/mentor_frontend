@@ -1,7 +1,10 @@
 import axios from "axios";
 import END_POINTS, { BASE_URL } from "../../constants/endpoints";
 import { getUserIdAndToken } from "../../utilities/reusableFunctions";
-import { editLocalStorageField } from "../../utilities/localStorageUtilities";
+import {
+  deleteFromLocalStorage,
+  editLocalStorageField,
+} from "../../utilities/localStorageUtilities";
 
 //Moderators Base instance for routes that requires JWT
 const moderatorAxiosInstance = axios.create({
@@ -75,6 +78,7 @@ moderatorAxiosInstance.interceptors.response.use(
         return moderatorAxiosInstance(originalRequest);
       } catch (error) {
         console.error("Token refresh unsuccessfull", error);
+        await deleteFromLocalStorage("mentorAuth");
       }
     }
   }

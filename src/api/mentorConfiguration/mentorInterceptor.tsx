@@ -1,7 +1,10 @@
 import axios from "axios";
 import END_POINTS, { BASE_URL } from "../../constants/endpoints";
 import { getUserIdAndToken } from "../../utilities/reusableFunctions";
-import { editLocalStorageField } from "../../utilities/localStorageUtilities";
+import {
+  deleteFromLocalStorage,
+  editLocalStorageField,
+} from "../../utilities/localStorageUtilities";
 
 const mentorAxiosInstance = axios.create({
   baseURL: BASE_URL,
@@ -53,7 +56,8 @@ mentorAxiosInstance.interceptors.response.use(
         console.log("New Access Token", accessToken);
         return mentorAxiosInstance(originalRequest);
       } catch (error) {
-        console.error("Token refresh unsuccessfull", error);
+        console.error("Token refresh unsuccessfull Mentor Side", error);
+        await deleteFromLocalStorage("mentorAuth");
       }
     }
   }

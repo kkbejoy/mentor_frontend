@@ -34,7 +34,7 @@ const MenteeRegisterComponent: React.FC = () => {
           setIsPageLoading(false);
           setIsModalOpen(true);
           setTimeout(() => {
-            navigate("/login");
+            navigate("/mentees");
           }, 5000);
         }
       })
