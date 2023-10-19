@@ -6,6 +6,7 @@ import { fetchSubscribedMentorsList } from "../../slices/MenteeSlices/subscribed
 import { useDispatch, useSelector } from "react-redux";
 import { getUserIdAndToken } from "../../utilities/reusableFunctions";
 import HorizontalDivider from "../../componenets/General/HorizontalDivider/HorizontalDivider";
+import FooterComponent from "../../componenets/General/Footer/FooterComponent";
 
 const SubscribedMentorsPage = () => {
   const subscribedMentorsList = useSelector(
@@ -24,7 +25,6 @@ const SubscribedMentorsPage = () => {
   return (
     <div className="">
       <NavbarMentee />
-
       <HorizontalDivider title={"Subscibed Mentors"} />
       <div className="grid ml-5 py-4 md:grid-cols-5 items-center px-10">
         {subscribedMentorsList
@@ -38,7 +38,8 @@ const SubscribedMentorsPage = () => {
               );
             })
           : null}
-      </div>
+      </div>{" "}
+      <FooterComponent />
     </div>
   );
 };

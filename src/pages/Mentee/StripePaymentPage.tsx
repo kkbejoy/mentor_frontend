@@ -5,6 +5,7 @@ import LeftSidePaymentForm from "../../componenets/Mentee/Stripe Component/LeftS
 import NavbarMentor from "../../componenets/Mentor/NavbarMentor";
 import PaymentDetailsComponent from "../../componenets/Mentee/Stripe Component/PaymentDetailsLeftSideComponenet";
 import NavbarMentee from "../../componenets/Mentee/NavbarMentee";
+import FooterComponent from "../../componenets/General/Footer/FooterComponent";
 const StripePaymentPage = () => {
   return (
     <div>
@@ -12,7 +13,8 @@ const StripePaymentPage = () => {
       <div className="flex">
         <PaymentDetailsComponent />
         <StripePaymentComponent />
-      </div>
+      </div>{" "}
+      <FooterComponent />
     </div>
   );
 };

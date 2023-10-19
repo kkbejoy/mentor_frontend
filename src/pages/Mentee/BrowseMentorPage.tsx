@@ -3,6 +3,7 @@ import SearchComponent from "../../componenets/General/SearchComponent/SearchCom
 import NavbarMentee from "../../componenets/Mentee/NavbarMentee";
 import { MentorSearchResultComponent } from "../../componenets/Mentee/MentorSearchResultComponent";
 import BorderLine from "../../componenets/General/BorderLine/BorderLine";
+import FooterComponent from "../../componenets/General/Footer/FooterComponent";
 
 const BrowseMentorPage = () => {
   return (
@@ -11,6 +12,7 @@ const BrowseMentorPage = () => {
       <SearchComponent />
       <BorderLine />
       <MentorSearchResultComponent />
+      <FooterComponent />
     </div>
   );
 };

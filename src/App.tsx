@@ -1,9 +1,10 @@
 import { Outlet } from "react-router-dom";
+import { Toaster } from "sonner";
 
 export function Home() {
   return (
     <>
-      <Outlet />
+      <Outlet /> <Toaster />
     </>
   );
 }
@@ -11,7 +12,7 @@ export function Home() {
 export function Moderator() {
   return (
     <>
-      <Outlet />
+      <Outlet /> <Toaster />
     </>
   );
 }
@@ -20,13 +21,14 @@ export function Mentee() {
   return (
     <>
       <Outlet />
+      <Toaster />
     </>
   );
 }
 export function Mentor() {
   return (
     <>
-      <Outlet />
+      <Outlet /> <Toaster />
     </>
   );
 }

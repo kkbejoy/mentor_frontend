@@ -16,6 +16,17 @@ const END_POINTS = {
   MENTEE_ALL_SUBSCRIBED_MENTROS: "/api/mentees/subscribed-mentors",
   MENTEES_Time_Slots: "/api/mentees/timeslots",
   MENTEES_Subscribed_Mentors: "/api/mentees/subscribed-mentors",
+
+  //Chat Routes
+  MENTEES_Send_Message: "/api/chats/mentee-messages",
+  MENTEES_Get_Conversations: "/api/chats/mentee-messages",
+  MENTEES_Get_Messages: "/api/chats/mentee-messages",
+
+  MENTORS_Send_Message: "/api/chats/mentor-messages",
+  MENTOR_Get_Conversations: "/api/chats/mentor-messages",
+
+  MENTORS_Get_Messages: "/api/chats/mentor-messages",
+
   MENTEE_TRAIL_ROUTE: "/api/mentees/trail",
 
   //Mentor

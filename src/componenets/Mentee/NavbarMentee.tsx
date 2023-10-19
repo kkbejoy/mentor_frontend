@@ -15,12 +15,12 @@ const NavbarMentee = () => {
       name: "Browse Mentors",
       href: routesFrontend.MentorBrowsePage,
     },
-    { name: "Invite a Friend", href: "#" },
+    { name: "Connect", href: "/mentees/connect/inbox/1" },
     // { name: "Applicants", href: "#", current: false },
     // { name: "Mentors List", href: "#", current: false },
   ];
   const isAuthenticated = checkAuthentication();
-  console.log("Authenticated", isAuthenticated);
+  // console.log("Authenticated", isAuthenticated);
 
   return (
     <Disclosure

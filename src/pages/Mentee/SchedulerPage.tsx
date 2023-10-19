@@ -5,6 +5,7 @@ import { useDispatch } from "react-redux";
 import { getUserIdAndToken } from "../../utilities/reusableFunctions";
 import NavbarMentee from "../../componenets/Mentee/NavbarMentee";
 import { fetchTimeSlotsMenteeSide } from "../../slices/MenteeSlices/timeSlotSlice";
+import FooterComponent from "../../componenets/General/Footer/FooterComponent";
 
 const SchedulerPage = () => {
   const dispatch = useDispatch();
@@ -20,7 +21,8 @@ const SchedulerPage = () => {
       <NavbarMentee />
       <div className="w-3/4 mx-auto my-10">
         <CalenderComponent setCalenderRerender={setCalenderRerender} />
-      </div>
+      </div>{" "}
+      <FooterComponent />
     </div>
   );
 };

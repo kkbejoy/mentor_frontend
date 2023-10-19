@@ -127,18 +127,19 @@ export const updateMentorProfile = async (updatedFields) => {
     throw error;
   }
 };
+//Api for sending messages
 
-//API Fetching list of Mentees
+export const sentMessageFromMentor = async (message, conversationId) => {
+  try {
+    const { mentorId } = getUserIdAndToken("mentorAuth");
 
-// export const subscribedMenteesList = async () => {
-//   try {
-//     const { mentorId } = getUserIdAndToken("mentorAuth");
-//     const response = await mentorAxiosInstance.get(
-//       `${BASE_URL}${END_POINTS.MENTOR_SUBSCRIBED_Mentees}${mentorId}`
-//     );
-//     console.log("List of subscribed mentees", response);
-//   } catch (error) {
-//     console.log(error);
-//     toast.error("Error Fetching Mentees List");
-//   }
-// };
+    const sendResponse = await mentorAxiosInstance.post(
+      `${BASE_URL}${END_POINTS.MENTORS_Send_Message}/${conversationId}`,
+      { message, sender: mentorId }
+    );
+    console.log("Response From mentor Send messafe", sendResponse);
+    return sendResponse.data;
+  } catch (error) {
+    console.log("Error from send massage api", error);
+  }
+};

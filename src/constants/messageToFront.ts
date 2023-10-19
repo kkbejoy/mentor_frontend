@@ -12,3 +12,9 @@ export const messageToFront = {
     "Please be patient..!!We will get back to after detail verification",
   ],
 };
+
+export const namesTitlesAndContents = {
+  Name: "Mentor.com",
+  MotoToFooter:
+    " Your trusted source to find highly-vetted mentors & industry professionals to move your career ahead.",
+};

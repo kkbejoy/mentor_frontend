@@ -12,12 +12,17 @@ import { mentorTimeSlotReducer } from "../slices/MentorSlices/AvailableTimeSlots
 import { menteeSideTimeSlotReducer } from "../slices/MenteeSlices/timeSlotSlice";
 import { subscibedMentorsListReducer } from "../slices/MenteeSlices/subscribedMentorsListSlice";
 import { subscibedMenteesListReducer } from "../slices/MentorSlices/subscibedMentees";
+import { menteeConversationsReducer } from "../slices/MenteeSlices/conversationsSlice";
+import { menteeMessageReducer } from "../slices/MenteeSlices/messageSlice";
+import { mentorMessageReducer } from "../slices/MentorSlices/messageSlice";
+import { fetchMentorConversationsReducer } from "../slices/MentorSlices/conversationsList";
 export const store = configureStore({
   reducer: {
     menteeAuth: menteeReducer,
-    mentorAuth: mentorReducer,
     menteeSideTimeSlot: menteeSideTimeSlotReducer,
     menteeSideSubscribedMentorsList: subscibedMentorsListReducer,
+    menteeConversations: menteeConversationsReducer,
+    menteeMessage: menteeMessageReducer,
     moderatorAuth: moderatorReducer,
     menteesList: menteesTableDetailsReducer,
     mentorsList: mentorsTableDetailsReducer,
@@ -25,6 +30,9 @@ export const store = configureStore({
     mentorSearchInput: setMentorSearchTextReducer,
     mentorSearchResult: mentorsSearchResultReducer,
     mentorProfileData: mentorProfileDetailsReducer,
+    mentorAuth: mentorReducer,
+    mentorMessage: mentorMessageReducer,
+    mentorConversations: fetchMentorConversationsReducer,
     mentorTimeSlots: mentorTimeSlotReducer,
     subscribedMenteesList: subscibedMenteesListReducer,
   },

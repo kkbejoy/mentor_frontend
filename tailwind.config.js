@@ -5,6 +5,7 @@ export default {
     extend: {
       colors: {
         mentorBlue: "#172e59",
+        sendMessages: "#172e59",
       },
     },
   },

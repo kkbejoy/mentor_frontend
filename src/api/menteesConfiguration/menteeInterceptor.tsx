@@ -15,12 +15,12 @@ menteesAxiosInstance.interceptors.request.use(
     let menteesAuthData = localStorage.getItem("menteeAuth");
     menteesAuthData = JSON.parse(menteesAuthData);
     const menteesAccessToken = menteesAuthData?.accessToken || 0;
-    console.log("Access Token", menteesAccessToken);
+    // console.log("Access Token", menteesAccessToken);
 
     if (menteesAccessToken) {
       config.headers.Authorization = `Bearer ${menteesAccessToken}`;
     }
-    console.log(config);
+    // console.log(config);
     return config;
   },
   (error) => {
@@ -31,15 +31,15 @@ menteesAxiosInstance.interceptors.request.use(
 //Mentee axios response Interceptor
 menteesAxiosInstance.interceptors.response.use(
   (response) => {
-    console.log("Success Response from response Interceptors", response);
+    // console.log("Success Response from response Interceptors", response);
     return response;
   },
   async (error) => {
-    console.log("Error Response  From response Interceptros", error);
+    // console.log("Error Response  From response Interceptros", error);
     const authDetails = await getUserIdAndToken("menteeAuth");
     const { refreshToken: refreshTokenFromLocalStorage } = authDetails;
     const originalRequest = error.config;
-    console.log("auth detail", authDetails, refreshTokenFromLocalStorage);
+    // console.log("auth detail", authDetails, refreshTokenFromLocalStorage);
 
     if (error.response.status === 401 && !originalRequest._retry) {
       originalRequest._retry = true;

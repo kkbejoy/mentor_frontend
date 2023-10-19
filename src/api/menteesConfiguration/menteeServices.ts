@@ -6,6 +6,9 @@ import {
   getUserIdAndToken,
 } from "../../utilities/reusableFunctions";
 import { Toaster, toast } from "sonner";
+import mentorAxiosInstance from "../mentorConfiguration/mentorInterceptor";
+import { useDispatch } from "react-redux";
+import { addNewMessage } from "../../slices/MenteeSlices/messageSlice";
 
 //API For Mentee Registration
 export const menteeRegistration = async (values) => {
@@ -27,7 +30,7 @@ export const menteeGoogleSignIn = async () => {
     const response = await axios.get(
       "http://localhost:5000/api/mentees/google_auth_mentee"
     );
-    console.log("res", response);
+    // console.log("res", response);
     return response;
   } catch (error) {
     console.log("Error:", error);
@@ -45,7 +48,7 @@ export const menteeLoginAPI = async (
     `${BASE_URL}` + `${END_POINTS.MENTEE_LOGIN}`,
     credentials
   );
-  console.log("respose from api", response);
+  // console.log("respose from api", response);
   return response;
 };
 
@@ -57,7 +60,7 @@ export const menteeLogOut = async (menteeDetails) => {
       `${BASE_URL}` + `${END_POINTS.MENTEE_LOGOUT}`,
       menteeDetails
     );
-    console.log("res", response);
+    // console.log("res", response);
     return response;
   } catch (error) {
     console.log(error);
@@ -84,7 +87,7 @@ export const fetchStripeIntent = async () => {
     const response = await menteesAxiosInstance.post(
       BASE_URL + END_POINTS.MENTEE_Stripe_Intent
     );
-    console.log("Response from Stripe", response);
+    // console.log("Response from Stripe", response);
     return response;
   } catch (error) {
     console.log("Error", error);
@@ -101,7 +104,7 @@ export const stripeCheckOut = async (mentorPriceId, mentorId) => {
       BASE_URL + END_POINTS.MENTEE_Stripe_CHECKOUT,
       { mentorPriceId: mentorPriceId, menteeId: menteeId, mentorId: mentorId }
     );
-    console.log("Stripe CHeckout", response);
+    // console.log("Stripe CHeckout", response);
     return response;
   } catch (error) {
     console.log(error);
@@ -133,7 +136,7 @@ export const fetchAllSubscribedMentees = async () => {
     const response = await menteesAxiosInstance.get(
       `${BASE_URL}${END_POINTS.MENTEE_ALL_SUBSCRIBED_MENTROS}/${menteeId}`
     );
-    console.log("All subscibed mentors", response);
+    // console.log("All subscibed mentors", response);
     return response;
   } catch (error) {
     console.log(error);
@@ -159,3 +162,47 @@ export const fixMentorSlotByMentee = async (values, slotId) => {
     throw error;
   }
 };
+
+//API For Sending Messages
+
+export const sentMessageFromMentee = async (message, conversationId) => {
+  try {
+    const menteeId = await getMenteeIdFromLocalStorage();
+    console.log("Message Sent api Mentee Side:", message, menteeId);
+    // const conversationId = "6524e9e2941ba2b335e63c5f";
+    const response = await menteesAxiosInstance.post(
+      `${BASE_URL}${END_POINTS.MENTEES_Send_Message}/${conversationId}`,
+      { message, sender: menteeId }
+    );
+    console.log(
+      "Send message to database response",
+      response.data.responseFromMessageCreation
+    );
+    // const check = await addNewMessage(
+    //   response.data.responseFromMessageCreation
+    // );
+    toast.success("Message successfully sent");
+    return response.data;
+  } catch (error) {
+    console.log(error);
+    toast.error("Something went Wrong from the API");
+  }
+};
+
+//Fetch the conversation Details for Mentee
+
+// export const fetchConversations = async () => {
+//   try {
+//     const menteeId = await getMenteeIdFromLocalStorage();
+//     const responseFromConversationsAPI = await mentorAxiosInstance.post(
+//       `${BASE_URL} ${END_POINTS.MENTEES_Get_Conversations}`,
+//       menteeId
+//     );
+//     console.log(
+//       "Response form Fetch conversations",
+//       responseFromConversationsAPI
+//     );
+//   } catch (error) {
+//     toast.error("Somthing went wrong from Fetchng converestions");
+//   }
+// };

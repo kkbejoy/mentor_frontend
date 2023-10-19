@@ -11,7 +11,7 @@ const NavbarMentor = () => {
     { name: "Profile", href: "/mentors/profile" },
     { name: "Schedule", href: "/mentors/scheduler" },
     { name: "Mentees", href: "/mentors/subscribed-mentees" },
-    { name: "Statistics", href: "#" },
+    { name: "Inbox", href: "/mentors/connect/inbox/" },
     { name: "Raise a ticket", href: "#" },
     // { name: "Mentors List", href: "#", current: false },
   ];

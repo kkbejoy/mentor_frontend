@@ -18,7 +18,7 @@ const SearchComponent = () => {
           onChange={handleSearchInput}
           className=" py-3 px-4  w-2/5 pr-10 sm:text-sm  rounded-md"
           type="search"
-          placeholder="Search for Skills,Mentors"
+          placeholder="Search Skills and Mentors"
           autoComplete="off"
           autoCorrect="off"
           autoCapitalize="off"

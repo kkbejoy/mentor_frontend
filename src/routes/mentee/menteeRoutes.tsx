@@ -1,15 +1,15 @@
 import { Mentee } from "../../App";
-import StripePaymentComponent from "../../componenets/Mentee/Stripe Component/StripeComponent";
-import SubscibedMentorsList from "../../componenets/Mentee/SubscibedMentorsList/SubscibedMentorsList";
+
 import BrowseMentorPage from "../../pages/Mentee/BrowseMentorPage";
 import LandingPageMentee from "../../pages/Mentee/LandingPageMentees";
 import MentorProfilePage from "../../pages/Mentee/MentorProfilePage";
 import PaymentFailedPage from "../../pages/Mentee/PaymentFailedPage";
 import PaymentSuccesPage from "../../pages/Mentee/PaymentSuccesPage";
 import SchedulerPage from "../../pages/Mentee/SchedulerPage";
-import StripePaymentPage from "../../pages/Mentee/StripePaymentPage";
 import SubscribedMentorsPage from "../../pages/Mentee/SubscribedMentorsPage";
 import MenteeAuthProvider from "./MenteeAuthProvider";
+import InboxPageMentee from "../../pages/Mentee/InboxPageMentee";
+import InboxEmptyPage from "../../pages/Mentee/InboxEmptyPage";
 export const MenteeRoute = {
   path: "/mentees",
   element: (
@@ -45,6 +45,14 @@ export const MenteeRoute = {
     {
       path: "schedules",
       element: <SchedulerPage />,
+    },
+    {
+      // path: "connect/inbox",
+      // element: <InboxEmptyPage />,
+    },
+    {
+      path: "connect/inbox/:conversationId?",
+      element: <InboxPageMentee />,
     },
   ],
 };
