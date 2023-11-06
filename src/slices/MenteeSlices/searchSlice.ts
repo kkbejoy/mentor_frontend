@@ -2,6 +2,8 @@ import { createSlice } from "@reduxjs/toolkit";
 
 const initialState = {
   searchText: "",
+  priceRange: "",
+  rating: "",
   error: null,
 };
 const mentorSearchInputSlice = createSlice({
@@ -11,8 +13,15 @@ const mentorSearchInputSlice = createSlice({
     setMentorSearchText: (state, action) => {
       state.searchText = action.payload;
     },
+    setPriceRange: (state, action) => {
+      state.priceRange = action.payload;
+    },
+    setRating: (state, action) => {
+      state.rating = action.payload;
+    },
   },
 });
 
-export const { setMentorSearchText } = mentorSearchInputSlice.actions;
+export const { setMentorSearchText, setPriceRange, setRating } =
+  mentorSearchInputSlice.actions;
 export const setMentorSearchTextReducer = mentorSearchInputSlice.reducer;

@@ -16,12 +16,12 @@ mentorAxiosInstance.interceptors.request.use(
     let mentorAuthData = localStorage.getItem("mentorAuth");
     mentorAuthData = JSON.parse(mentorAuthData);
     const mentorAccessToken = mentorAuthData?.accessToken;
-    console.log("Access Token", mentorAccessToken);
+    // console.log("Access Token", mentorAccessToken);
 
     if (mentorAccessToken) {
       config.headers.Authorization = `Bearer ${mentorAccessToken}`;
     }
-    console.log(config);
+    // console.log(config);
     return config;
   },
   (error) => {
@@ -60,6 +60,7 @@ mentorAxiosInstance.interceptors.response.use(
         await deleteFromLocalStorage("mentorAuth");
       }
     }
+    return error;
   }
 );
 export default mentorAxiosInstance;

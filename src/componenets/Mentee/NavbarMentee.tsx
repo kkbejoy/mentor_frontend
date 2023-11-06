@@ -1,12 +1,31 @@
-import React from "react";
+import React, { useEffect, useState } from "react";
 import { Fragment } from "react";
 import { Disclosure, Menu, Transition } from "@headlessui/react";
 import { Bars3Icon, BellIcon, XMarkIcon } from "@heroicons/react/24/outline";
 import LogoutComponent from "./Logout Component/LogoutComponent";
 import { checkAuthentication } from "../../utilities/reusableFunctions";
 import { routesFrontend } from "../../constants/frontendRoutes";
+import NotificationDropdown from "../General/Notification/MenteeNotificationDropdown";
+import { useSelector } from "react-redux";
 
 const NavbarMentee = () => {
+  const [notifications, setNotifications] = useState([]); // Store new notifications
+  const [previousNotifications, setPreviousNotifications] = useState([]);
+  const notificationsFromApi = useSelector(
+    (state) => state.menteeNotifications
+  );
+
+  // useEffect(() => {
+  //   setPreviousNotifications(notificationsFromApi);
+  //   setNotifications(notificationsFromApi);
+  // }, [notificationsFromApi]);
+
+  // const newNotifications = notifications.filter(
+  //   (notification) =>
+  //     !previousNotifications.some(
+  //       (prevNotification) => prevNotification.id === notification.id
+  //     )
+  // );
   const navigation = [
     { name: "Home", href: "/mentees" },
     { name: "Subscriptions", href: "/mentees/subscribed-mentors" },
@@ -15,7 +34,7 @@ const NavbarMentee = () => {
       name: "Browse Mentors",
       href: routesFrontend.MentorBrowsePage,
     },
-    { name: "Connect", href: "/mentees/connect/inbox/1" },
+    { name: "Connect", href: "/mentees/connect/inbox/" },
     // { name: "Applicants", href: "#", current: false },
     // { name: "Mentors List", href: "#", current: false },
   ];
@@ -71,14 +90,19 @@ const NavbarMentee = () => {
                   </div>
                 </div>
               </div>
+
               <div className="absolute inset-y-0 right-0 flex items-center pr-2 sm:static sm:inset-auto sm:ml-6 sm:pr-0">
                 <button
                   type="button"
-                  className="relative rounded-full bg-gray-800 p-1 text-gray-400 hover:text-white focus:outline-none focus:ring-2 focus:ring-white focus:ring-offset-2 focus:ring-offset-gray-800"
+                  className="relative rounded-full bg-gray-800 p-1 text-gray-400  focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-offset-gray-800"
                 >
                   <span className="absolute -inset-1.5" />
                   <span className="sr-only">View notifications</span>
-                  <BellIcon className="h-6 w-6" aria-hidden="true" />
+                  {/* <BellIcon className="h-6 w-6" aria-hidden="true" /> */}
+                  <NotificationDropdown
+                    notifications={notificationsFromApi}
+                    newNotification={true}
+                  />
                 </button>
                 {/* Profile dropdown */}
                 <Menu as="div" className="relative ml-3">

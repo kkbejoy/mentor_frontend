@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import { Field, Formik, Form, ErrorMessage } from "formik";
 import {
   addOneHour,
@@ -11,6 +11,8 @@ import { Link } from "react-router-dom";
 import { Toaster, toast } from "sonner";
 import { menteesInputWhileFixingTimeSlot } from "../../../validations/menteesInputWhileSlotFixing";
 import { fetchTimeSlotsMenteeSide } from "../../../slices/MenteeSlices/timeSlotSlice";
+import { setUpSocket } from "../../../utilities/chatUtilities";
+import { getMenteeIdFromLocalStorage } from "../../../utilities/reusableFunctions";
 
 Modal.setAppElement("#root");
 
@@ -19,10 +21,12 @@ const SlotModalMenteeSide = ({
   setNewSlotModal,
   slotObject,
   menteeId,
-  setCalenderRerender,
+  renderState,
+  setCalenderRerenderFunction,
 }) => {
+  let socket;
   const [isLoading, setLoading] = useState(false);
-
+  const [slotStatus, setSlotStatus] = useState({});
   const formattedStartTime = convertTimeToISoFormat(slotObject.start);
 
   const endTime = addOneHour(formattedStartTime);
@@ -30,7 +34,12 @@ const SlotModalMenteeSide = ({
     formattedStartTime,
     endTime
   );
-
+  useEffect(() => {
+    socket = setUpSocket(menteeId);
+  }, []);
+  useEffect(() => {
+    socket.emit("slotBooked", slotStatus);
+  }, [slotStatus]);
   //Initial Form Values
   const initialValues = {
     menteeQueryTitle: " ",
@@ -48,21 +57,26 @@ const SlotModalMenteeSide = ({
       delete values.end;
       delete values.start;
       const respose = fixMentorSlotByMentee(values, slotObject._id);
+      console.log("Res00", respose);
 
       respose.then((res) => {
-        setCalenderRerender(res);
-
+        console.log("Res001", res);
+        setSlotStatus(res);
+        const newRes = { ...renderState, ...res };
+        setCalenderRerenderFunction(newRes);
         setNewSlotModal(false);
-
         setLoading(false);
       });
       respose.catch((error) => {
+        console.log("Err", error);
         throw error;
       });
     } catch (error) {
-      toast.error("Slot allocation failed");
-
-      console.log(error);
+      toast.error("Sorry SLot allocation failed");
+      setLoading(false);
+      setCalenderRerenderFunction(error);
+      setNewSlotModal(false);
+      console.log("Error", error);
     }
   };
   return (

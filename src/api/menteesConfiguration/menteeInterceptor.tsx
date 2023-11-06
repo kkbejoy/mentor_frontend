@@ -5,6 +5,7 @@ import {
   deleteFromLocalStorage,
   editLocalStorageField,
 } from "../../utilities/localStorageUtilities";
+import { toast } from "sonner";
 
 const menteesAxiosInstance = axios.create({
   baseURL: BASE_URL,
@@ -12,18 +13,23 @@ const menteesAxiosInstance = axios.create({
 
 menteesAxiosInstance.interceptors.request.use(
   (config) => {
-    let menteesAuthData = localStorage.getItem("menteeAuth");
-    menteesAuthData = JSON.parse(menteesAuthData);
-    const menteesAccessToken = menteesAuthData?.accessToken || 0;
-    // console.log("Access Token", menteesAccessToken);
-
-    if (menteesAccessToken) {
-      config.headers.Authorization = `Bearer ${menteesAccessToken}`;
+    try {
+      let menteesAuthData = localStorage.getItem("menteeAuth");
+      menteesAuthData = JSON.parse(menteesAuthData);
+      const menteesAccessToken = menteesAuthData?.accessToken || 0;
+      // console.log("Access Token", menteesAccessToken);
+      // console.log("Checking  mentee axios interceptor ");
+      if (menteesAccessToken) {
+        config.headers.Authorization = `Bearer ${menteesAccessToken}`;
+      }
+      // console.log(config);
+      return config;
+    } catch (error) {
+      console.log("Error from req interceptor", error);
     }
-    // console.log(config);
-    return config;
   },
   (error) => {
+    console.log("Error Form mentee req interceptor", error);
     return Promise.reject(error);
   }
 );
@@ -35,7 +41,7 @@ menteesAxiosInstance.interceptors.response.use(
     return response;
   },
   async (error) => {
-    // console.log("Error Response  From response Interceptros", error);
+    console.log("Error Response  From response Interceptros", error);
     const authDetails = await getUserIdAndToken("menteeAuth");
     const { refreshToken: refreshTokenFromLocalStorage } = authDetails;
     const originalRequest = error.config;
@@ -59,6 +65,7 @@ menteesAxiosInstance.interceptors.response.use(
         await deleteFromLocalStorage("menteeAuth");
       }
     }
+    return error;
   }
 );
 

@@ -43,8 +43,8 @@ export const getMenteeIdFromLocalStorage = () => {
 
 export const getMentorIdFromLocalStorage = () => {
   try {
-    const menteeDetails = JSON.parse(localStorage.getItem("mentorAuth"));
-    const mentorId = menteeDetails.mentorId;
+    const mentorDetails = JSON.parse(localStorage.getItem("mentorAuth"));
+    const mentorId = mentorDetails?.mentorId;
     // console.log("Mentee Id from Local storage", menteeDetails);
     return mentorId;
   } catch (error) {

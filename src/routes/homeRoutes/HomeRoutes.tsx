@@ -8,6 +8,8 @@ import NoMatchComponent from "../../componenets/General/NoMatchComponent/NoMatch
 import { LoginPage } from "../../pages/LoginPage";
 import { Home } from "../../App";
 import HeroSection from "../../componenets/General/Hero/HeroSection";
+import BrowseMentorPage from "../../pages/Mentee/BrowseMentorPage";
+import MentorProfilePage from "../../pages/Mentee/MentorProfilePage";
 export const homeRoutes = {
   path: "/",
   element: <Home />,
@@ -15,6 +17,14 @@ export const homeRoutes = {
     {
       path: "/",
       element: <Homepage />,
+    },
+    {
+      path: "browse/mentor/:search",
+      element: <BrowseMentorPage />,
+    },
+    {
+      path: "browse/mentor/profile/:id",
+      element: <MentorProfilePage />,
     },
     {
       path: "/auth/login",

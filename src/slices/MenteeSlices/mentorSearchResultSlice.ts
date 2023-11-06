@@ -11,22 +11,17 @@ const initialState = {
 //Async Thunk fucntion to fetch datas of mentees from backend
 export const fetchMentorsListUsingSearchInput = createAsyncThunk(
   "data/fetchMentorsList",
-  async (search) => {
+  async ({ search, price, rating }) => {
     try {
-      console.log("Search INput", search);
-      const input = search ? search : "";
+      console.log("Search INput", search, price, rating);
+      const searchInput = search ? search : "";
+      const priceInput = price ? price : "a"; // Dummy values to fetch all the metors for null case
+      const ratingInput = rating ? rating : "9";
+      console.log("Price:", price);
       const response = await axios.get(
-        `${BASE_URL}${END_POINTS.MENTEE_MENTOR_Search}?search=${input}`
+        `${BASE_URL}${END_POINTS.MENTEE_MENTOR_Search}?search=${searchInput}&price=${priceInput}&rating=${ratingInput}`
       );
-      // .then((res) => {
-      //   console.log("Mentor Search result from slice", res);
-      // })
-      // .catch((error) => {
-      //   console.log(error);
-      //   throw error;
-      // });
-      //   const data = await response.JSON();
-      console.log("check1");
+
       // console.log("Mentor Search Result:", response);
       return response.data;
     } catch (error) {

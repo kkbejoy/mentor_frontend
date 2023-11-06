@@ -13,6 +13,10 @@ const SubscribedMentorsPage = () => {
     (state) => state.menteeSideSubscribedMentorsList
   );
 
+  const isLoadingSubscriptionList = useSelector(
+    (state) => state.menteeSideSubscribedMentorsList.isLoading
+  );
+
   const { menteeId } = getUserIdAndToken("menteeAuth");
   console.log(
     "Data from mentee side subscribed Mentors",
@@ -38,7 +42,7 @@ const SubscribedMentorsPage = () => {
               );
             })
           : null}
-      </div>{" "}
+      </div>
       <FooterComponent />
     </div>
   );

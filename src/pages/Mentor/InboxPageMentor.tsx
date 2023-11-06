@@ -29,7 +29,7 @@ const InboxPageMentor = () => {
   const { conversationId } = location;
   const messages = useSelector((state) => state.mentorMessage.data);
   const mentorConversations = useSelector(
-    (state) => state.mentorConversations.data.conversations
+    (state) => state.mentorConversations?.data?.conversations
   );
   const dispatch = useDispatch();
 
@@ -55,7 +55,7 @@ const InboxPageMentor = () => {
       setNewMessageFromSocket(newMessage);
     });
     socket.emit("chat room", conversationId);
-  });
+  }, []);
   useEffect(() => {
     dispatch(fetchMessageMentorSide(conversationId));
     dispatch(fetchMentorConversations());
@@ -71,10 +71,15 @@ const InboxPageMentor = () => {
   //   socket.emit("chat room", conversationId);
   // }, [conversationId]);
   useEffect(() => {
-    dispatch(addNewMessagMentorSide(newMessageFromSocket));
+    if (newMessageFromSocket?.conversation?._id === conversationId) {
+      console.log("Mesage Recieved", newMessageFromSocket);
+
+      dispatch(addNewMessagMentorSide(newMessageFromSocket));
+    }
   }, [newMessageFromSocket]);
   useEffect(() => {
     socket?.emit("new message", messagesSocket);
+    // socket?.emit("notification", messagesSocket);
   }, [messagesSocket]);
   return (
     <div>
@@ -84,6 +89,7 @@ const InboxPageMentor = () => {
         <ChatUsersListComponent
           userType="mentor"
           conversationsList={mentorConversations}
+          conversationId={conversationId}
         />
         {conversationId ? (
           <InteractionsComponent

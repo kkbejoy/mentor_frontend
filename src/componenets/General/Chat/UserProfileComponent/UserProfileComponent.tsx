@@ -1,20 +1,39 @@
 import React from "react";
 import { Link } from "react-router-dom";
+import { getTimeDifference } from "../../../../utilities/timeManagementFunctions";
 
-const UserProfileComponent = ({ profile, userType }) => {
+const UserProfileComponent = ({
+  profile,
+  userType,
+  conversationId,
+  activeOrNot,
+}) => {
   // if (userType === "mentee") console.log("Mentee side Proifles", profile);
   // if (userType === "mentor") console.log("Mentor side Proifles", profile);
-
+  // console.log("Conversations Isread Check", profile);
+  const inputTime = profile?.latestMessage?.createdAt;
+  const time = getTimeDifference(inputTime);
+  // console.log("Active or not", activeOrNot);
   if (userType === "mentee") {
     return (
-      <div className=" bg-slate-50 cursor-pointer  hover:bg-slate-300 ">
+      <div
+        className={`${
+          profile.isRead ? "bg-slate-50" : "bg-slate-200"
+        } cursor-pointer  hover:bg-slate-300`}
+      >
         <Link to={`/mentees/connect/inbox/${profile._id}`}>
-          <div className="flex flex-col-2 justify-between">
+          <div
+            className={`flex flex-col-2 justify-between ${
+              activeOrNot
+                ? "bg-gray-400 transition-colors"
+                : "bg-none transition-colors"
+            }`}
+          >
             <div className="text-center  w-1/4">
               {" "}
               <img
                 className="ml-2 h-1/2 rounded-full object-cover mt-5"
-                src={`https://res.cloudinary.com/dlcsyyk7z/image/upload/v1696240416/${profile.participants[0].mentor.profileImageUrl}`}
+                src={`https://res.cloudinary.com/dlcsyyk7z/image/upload/v1696240416/${profile?.participants[0]?.mentor?.profileImageUrl}`}
                 alt=""
               />
             </div>
@@ -27,12 +46,12 @@ const UserProfileComponent = ({ profile, userType }) => {
                     {profile.participants[0].mentor.lastName}
                   </h1>
                   <p className="text-xs mb-2 flex justify-between truncate">
-                    Latest messges
+                    {profile?.latestMessage?.content}
                   </p>
                 </div>
                 <div className="text-end justify-end my-5">
                   {" "}
-                  <h1 className="text-xs font-extralight mr-1">5.32 am</h1>
+                  <h1 className="text-xs font-extralight mr-1"> {time}</h1>
                 </div>
               </div>{" "}
             </div>
@@ -41,15 +60,22 @@ const UserProfileComponent = ({ profile, userType }) => {
       </div>
     );
   } else if (userType === "mentor") {
+    console.log("Mentor side", activeOrNot);
     return (
-      <div className=" bg-slate-50 cursor-pointer  hover:bg-slate-300 ">
+      <div className="bg-slate-100 cursor-pointer  hover:bg-slate-300">
         <Link to={`/mentors/connect/inbox/${profile._id}`}>
-          <div className="flex flex-col-2 justify-between">
+          <div
+            className={`flex flex-col-2 justify-between ${
+              activeOrNot
+                ? "bg-gray-400 transition-colors"
+                : "bg-none transition-colors"
+            }`}
+          >
             <div className="text-center  w-1/3">
               {" "}
               <img
                 className="ml-2 h-1/2 rounded-full object-cover mt-5"
-                src={`https://res.cloudinary.com/dlcsyyk7z/image/upload/v1696240416/${profile.participants[0].mentor.profileImageUrl}`}
+                src={`https://res.cloudinary.com/dlcsyyk7z/image/upload/v1696240416/${profile.participants[0].mentee.profileImageUrl}`}
                 alt=""
               />
             </div>
@@ -61,15 +87,12 @@ const UserProfileComponent = ({ profile, userType }) => {
                     {profile.participants[0].mentee.lastName}
                   </h1>
                   <p className="text-xs mb-2 flex justify-between truncate">
-                    Lorem ipsum dolor sit amet consectetur adipisicing elit.
-                    Numquam rerum quas saepe itaque officia magni assumenda, at
-                    pariatur illum praesentium repellat, molestiae doloribus ea
-                    ad soluta? Exercitationem praesentium deleniti magnam.
+                    {profile?.latestMessage?.content}
                   </p>
                 </div>
                 <div className="text-end justify-end my-5">
                   {" "}
-                  <h1 className="text-xs font-extralight mr-1">5.32 am</h1>
+                  <h1 className="text-xs font-extralight mr-1">{time}</h1>
                 </div>
               </div>{" "}
             </div>

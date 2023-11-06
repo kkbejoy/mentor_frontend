@@ -100,14 +100,17 @@ export const stripeCheckOut = async (mentorPriceId, mentorId) => {
   try {
     const { menteeId } = await getUserIdAndToken("menteeAuth");
     console.log("Menteee di from stripe chekckui", menteeId);
-    const response = await menteesAxiosInstance.post(
+    const responseFromAPI = await menteesAxiosInstance.post(
       BASE_URL + END_POINTS.MENTEE_Stripe_CHECKOUT,
       { mentorPriceId: mentorPriceId, menteeId: menteeId, mentorId: mentorId }
     );
-    // console.log("Stripe CHeckout", response);
-    return response;
+    // if (!responseFromAPI) throw new Error("Undefined Response");
+    console.log("Stripe CHeckout", responseFromAPI);
+
+    return responseFromAPI;
   } catch (error) {
     console.log(error);
+    toast.error("something went wrong");
   }
 };
 
@@ -154,6 +157,9 @@ export const fixMentorSlotByMentee = async (values, slotId) => {
       BASE_URL + END_POINTS.MENTEES_Time_Slots + "/" + "1",
       { values, slotId }
     );
+    console.log("Slot allotment", resonse);
+    if (resonse?.response?.status === 400)
+      throw new Error("Slot allotment Failed");
     toast.success("Slot allocated Succssfully");
     return resonse.data;
   } catch (error) {
@@ -174,18 +180,14 @@ export const sentMessageFromMentee = async (message, conversationId) => {
       `${BASE_URL}${END_POINTS.MENTEES_Send_Message}/${conversationId}`,
       { message, sender: menteeId }
     );
-    console.log(
-      "Send message to database response",
-      response.data.responseFromMessageCreation
-    );
-    // const check = await addNewMessage(
-    //   response.data.responseFromMessageCreation
-    // );
-    toast.success("Message successfully sent");
+
+    response.data.responseFromMessageCreation.receiver =
+      response.data.responseFromMessageCreation.conversation.participants[0].mentor;
+    // console.log("Send message to database response", response.data);
     return response.data;
   } catch (error) {
     console.log(error);
-    toast.error("Something went Wrong from the API");
+    toast.error("Something went Wrong from the Send API");
   }
 };
 
@@ -206,3 +208,72 @@ export const sentMessageFromMentee = async (message, conversationId) => {
 //     toast.error("Somthing went wrong from Fetchng converestions");
 //   }
 // };
+
+//Fetch Messages Between mentor and Mentee Or Create a new Conversation
+
+export const getMessagesBetweenMentorAndMentee = async (mentorId) => {
+  try {
+    const menteeId = await getMenteeIdFromLocalStorage();
+    const responseFromAPI = await menteesAxiosInstance.post(
+      BASE_URL + END_POINTS.MENTEES_GetMessagesBetweenMentorAndMentee,
+      { menteeId, mentorId }
+    );
+    console.log("Response from message", responseFromAPI);
+    return responseFromAPI.data;
+  } catch (error) {
+    console.log(error);
+    toast.error("Something Went wrong");
+  }
+};
+
+//Profile
+
+//API Uploading Image to cloudinary
+export const imageUploadToCloudinaryFromMenteeSide = async (formdata) => {
+  try {
+    console.log("Image upload ");
+    const response = await axios.post(
+      END_POINTS.MENTEE_CLOUDINARY_Upload,
+      formdata
+    );
+    console.log("Response Form cloudinary Databse: ", response);
+    return response.data;
+  } catch (error) {
+    console.log(error);
+    throw error;
+  }
+};
+
+//Profile update
+export const updateMenteeProfile = async (updatedFields) => {
+  try {
+    const { menteeId } = getUserIdAndToken("menteeAuth");
+    console.log("mentee id from update api", updatedFields);
+    const response = await mentorAxiosInstance.patch(
+      `${BASE_URL}${END_POINTS.MENTEE_Profile_Update}/${menteeId}`,
+      updatedFields
+    );
+    console.log("menteeId Profile Updatation", response);
+    return response;
+  } catch (error) {
+    console.log(error);
+    throw error;
+  }
+};
+
+//Cancel a Booked SLot
+
+export const cancelABookedSlot = async (slotId) => {
+  try {
+    const responseFromAPI = await menteesAxiosInstance.patch(
+      `${BASE_URL}${END_POINTS.MENTEE_Booked_Time_SLots}/1`,
+      { slotId }
+    );
+    console.log("Responme Form SLot cancellatrion", responseFromAPI);
+    toast.success("Booking cancelled");
+    return responseFromAPI;
+  } catch (error) {
+    console.log(error);
+    toast.error("Somethign wetn wrong");
+  }
+};

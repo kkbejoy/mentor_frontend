@@ -7,7 +7,7 @@ const END_POINTS = {
   MENTEE_LOGOUT: "/api/mentees/logout",
   MENTEE_GOOGLE_AUTH: "/api/mentees/google_auth_mentee",
   MENTEE_AccessTokenRegenerate: "/api/mentees/regenerate_access_token",
-  MENTEE_MENTOR_Search: "/api/mentees/mentors/:search",
+  MENTEE_MENTOR_Search: "/api/mentees/mentors",
   MENTEE_MENTOR_Profile: "/api/mentees/mentor/profile",
   MENTEE_Stripe_Publishible_Key: "/api/mentees/stripe-config",
   MENTEE_Stripe_Intent: "/api/mentees/create-payment-intent",
@@ -16,8 +16,14 @@ const END_POINTS = {
   MENTEE_ALL_SUBSCRIBED_MENTROS: "/api/mentees/subscribed-mentors",
   MENTEES_Time_Slots: "/api/mentees/timeslots",
   MENTEES_Subscribed_Mentors: "/api/mentees/subscribed-mentors",
+  MENTEES_Notifications: "/api/mentees/notifications",
+  MENTEE_Profile_Update: "/api/mentees/edit-profile",
+  MENTEE_Booked_Time_SLots: "/api/mentees/booked-slots",
 
   //Chat Routes
+  MENTEES_Conversations_Read_Unread: "/api/chats/messages",
+  MENTEES_GetMessagesBetweenMentorAndMentee: "/api/chats/messages",
+
   MENTEES_Send_Message: "/api/chats/mentee-messages",
   MENTEES_Get_Conversations: "/api/chats/mentee-messages",
   MENTEES_Get_Messages: "/api/chats/mentee-messages",
@@ -28,6 +34,8 @@ const END_POINTS = {
   MENTORS_Get_Messages: "/api/chats/mentor-messages",
 
   MENTEE_TRAIL_ROUTE: "/api/mentees/trail",
+  MENTEE_CLOUDINARY_Upload:
+    "https://api.cloudinary.com/v1_1/dlcsyyk7z/image/upload",
 
   //Mentor
   MENTOR_LOGIN: "/api/mentors/login",

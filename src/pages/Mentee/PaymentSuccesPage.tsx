@@ -6,7 +6,8 @@ const PaymentSuccesPage = () => {
   return (
     <div>
       <NavbarHome />
-      <PaymentSuccess /> <FooterComponent />
+      <PaymentSuccess />
+      {/* <FooterComponent /> */}
     </div>
   );
 };

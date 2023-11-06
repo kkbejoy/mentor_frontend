@@ -6,6 +6,7 @@ import { useDispatch } from "react-redux";
 import { fetchMentorTimeSlots } from "../../slices/MentorSlices/AvailableTimeSlotsSlice";
 import { getUserIdAndToken } from "../../utilities/reusableFunctions";
 import { Toaster } from "sonner";
+import FooterComponent from "../../componenets/General/Footer/FooterComponent";
 
 const SchedulerPage = () => {
   const dispatch = useDispatch();
@@ -15,14 +16,17 @@ const SchedulerPage = () => {
   useEffect(() => {
     dispatch(fetchMentorTimeSlots(mentorId));
     console.log("Mentor id", mentorId);
-  }, [dispatch, mentorId, renderCalender]);
+  }, [mentorId, renderCalender]);
   return (
     <div>
       <NavbarMentor />
       <div className="w-3/4 mx-auto my-10">
-        <CalenderComponent setCalenderRerender={setCalenderRerender} />
+        <CalenderComponent
+          setCalenderRerenderFunction={setCalenderRerender}
+          renderState={renderCalender}
+        />
       </div>
-      <Toaster />
+      <FooterComponent />
     </div>
   );
 };

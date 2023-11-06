@@ -1,6 +1,6 @@
 import React from "react";
 
-const SendMessagesComponent = ({ text }) => {
+const SendMessagesComponent = ({ text, time }) => {
   return (
     <div className=" bg-sendMessages max-w-3xl min-w-2xl max-h-[100vh] rounded-lg p-4 my-3 mr-2 ">
       <div className=" text-white text-sm">
@@ -8,7 +8,7 @@ const SendMessagesComponent = ({ text }) => {
       </div>{" "}
       <div className=" ml-auto max-w-fit text-slate-200 ">
         {" "}
-        <p className="text-xs mt-2 ">10.30 am</p>
+        <p className="text-xs mt-2 ">{time}</p>
       </div>
     </div>
   );

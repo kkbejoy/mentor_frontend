@@ -10,6 +10,8 @@ import SubscribedMentorsPage from "../../pages/Mentee/SubscribedMentorsPage";
 import MenteeAuthProvider from "./MenteeAuthProvider";
 import InboxPageMentee from "../../pages/Mentee/InboxPageMentee";
 import InboxEmptyPage from "../../pages/Mentee/InboxEmptyPage";
+import MenteeProfile from "../../pages/Mentee/MenteeProfile";
+import BookedSlotsList from "../../pages/Mentee/BookedSlotsList";
 export const MenteeRoute = {
   path: "/mentees",
   element: (
@@ -21,6 +23,10 @@ export const MenteeRoute = {
     {
       path: "",
       element: <LandingPageMentee />,
+    },
+    {
+      path: "profile",
+      element: <MenteeProfile />,
     },
     {
       path: "browse/mentor/:search",
@@ -53,6 +59,10 @@ export const MenteeRoute = {
     {
       path: "connect/inbox/:conversationId?",
       element: <InboxPageMentee />,
+    },
+    {
+      path: "booked-slots",
+      element: <BookedSlotsList />,
     },
   ],
 };

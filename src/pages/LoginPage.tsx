@@ -5,7 +5,9 @@ import SuccessModal from "../componenets/General/Modals/SuccessModal";
 
 export const LoginPage: React.FC = () => {
   const [isSuccess, setSuccess] = useState(false);
-  useEffect(() => {}, [isSuccess]);
+  useEffect(() => {
+    //
+  }, [isSuccess]);
   return (
     <div>
       <div className="flex h-full flex-1 flex-col lg:flex-row lg:mx-auto lg:px-0">

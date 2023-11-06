@@ -1,6 +1,7 @@
 import { createSlice, createAsyncThunk } from "@reduxjs/toolkit";
 import axios from "axios";
 import END_POINTS, { BASE_URL } from "../../constants/endpoints";
+import menteesAxiosInstance from "../../api/menteesConfiguration/menteeInterceptor";
 
 const initialState = {
   data: [],
@@ -14,7 +15,7 @@ export const mentorProfileDetails = createAsyncThunk(
   async (mentorId) => {
     try {
       console.log("MentorId", mentorId);
-      const response = await axios.get(
+      const response = await menteesAxiosInstance.get(
         `${BASE_URL}${END_POINTS.MENTEE_MENTOR_Profile}/${mentorId}`
       );
       console.log("Mentor Details", response.data);

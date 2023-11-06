@@ -3,10 +3,12 @@ import LandingPageMentor from "../../pages/Mentor/LandingPageMentees";
 import MentorAuthProvider from "./MentorAuthProvider";
 import SchedulerPage from "../../pages/Mentor/SchedulerPage";
 import MentorsProfile from "../../pages/Mentor/MentorsProfile";
-
+import MentorPricingCardShimmer from "../../componenets/Mentee/Shimmers/MentorPricingCardShimmer";
 import SubscribedMentees from "../../pages/Mentor/SubscribedMentees";
 
 import InboxPageMentor from "../../pages/Mentor/InboxPageMentor";
+import MentorHeaderShimmer from "../../componenets/Mentee/Shimmers/MentorHeaderShimmer";
+import ConfirmationModal from "../../componenets/General/Modals/CancelConfirmationModal";
 export const MentorRoutes = {
   path: "/mentors",
   element: (
@@ -41,7 +43,14 @@ export const MentorRoutes = {
     },
     {
       path: "/mentors/trail",
-      element: <InboxPageMentor />,
+      element: (
+        <ConfirmationModal
+          isOpen={undefined}
+          onConfirm={undefined}
+          onCancel={undefined}
+          message={undefined}
+        />
+      ),
     },
   ],
 };

@@ -4,31 +4,48 @@ import Modal from "react-modal";
 
 import { convertTimeForMentorSlotViewModal } from "../../../utilities/calenderUtilities";
 import { deleteSlot } from "../../../api/mentorConfiguration/mentorServices";
+import { setUpSocket } from "../../../utilities/chatUtilities";
+import { getMentorIdFromLocalStorage } from "../../../utilities/reusableFunctions";
 
 const SlotUpdateForm = ({
   updateModalOpen,
   setUpdateModal,
   SlotObject,
-  setCalenderRerender,
+  setCalenderRerenderFunction,
+  renderState,
 }) => {
   const [isLoading, setLoading] = useState(false);
   const [data, setData] = useState({});
-  console.log("Modal Data", SlotObject.resonseFromDb);
+  const [isDeleted, setDeleted] = useState(false);
+  const mentorId = getMentorIdFromLocalStorage();
+  useEffect(() => {
+    SlotObject.then((slot) => {
+      setData(slot.resonseFromDb);
+    });
+  }, [SlotObject]);
 
-  SlotObject.then((slot) => {
-    console.log(slot);
-    setData(slot.resonseFromDb);
-  });
+  // useEffect(() => {
+  //   const socketInstance = setUpSocket(mentorId);
+  //   socketInstance?.emit("scheduler", data);
+  // }, [data]);
 
   const dateObject = convertTimeForMentorSlotViewModal(data.start, data.end);
 
   const handleSlotDeletion = async () => {
     try {
-      console.log("Handle Slot Deletion", data?._id);
-      const res = deleteSlot(data?._id);
-      setCalenderRerender(res);
+      setLoading(true);
+      console.log("Delete Button Pressed");
+
+      const res = await deleteSlot(data?._id);
+
+      const newRes = { ...renderState, ...res };
+      setData(true);
+      setCalenderRerenderFunction(newRes);
+      setLoading(false);
       setUpdateModal(false);
     } catch (error) {
+      setLoading(false);
+
       console.log(error);
     }
   };
@@ -46,7 +63,7 @@ const SlotUpdateForm = ({
           </h1>
 
           {/* <Formik> */}
-          <form className="space-y-6">
+          <div className="space-y-6">
             <div className="flex flex-row mt-3">
               <div>
                 <h1 className="text-md font-semibold text-gray-950">
@@ -116,12 +133,17 @@ const SlotUpdateForm = ({
             <div className="flex justify-center">
               <button
                 onClick={handleSlotDeletion}
-                className="flex w-1/2  justify-center rounded-md bg-red-600 px-3 py-1.5 text-sm font-semibold leading-6 text-white shadow-sm hover:bg-red-700 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-indigo-600"
+                // className="flex w-1/2  justify-center rounded-md bg-red-600 px-3 py-1.5 text-sm font-semibold leading-6 text-white shadow-sm hover:bg-red-700 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-indigo-600"
+                className={`flex w-1/2 justify-center rounded-md px-3 py-1.5 text-sm font-semibold leading-6 text-white shadow-sm ${
+                  isLoading ? "bg-gray-400 cursor-wait" : "bg-red-600"
+                } ${
+                  isLoading ? "pointer-events-none" : "pointer-events-auto"
+                } hover:bg-red-700 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-indigo-600`}
               >
                 {isLoading ? "Loading......." : "Remove Slot"}
               </button>
             </div>
-          </form>
+          </div>
           {/* </Formik> */}
         </div>
       </Modal>

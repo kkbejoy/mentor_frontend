@@ -25,9 +25,15 @@ export const MentorRegisterComponent: React.FC = () => {
   ) => {
     setIsPageLoading(true);
     console.log("Form entered Details", values);
+    const skills = values.skills.split(",");
+    console.log(skills);
+    delete values.skills;
+    values.expertise = skills;
+    console.log("Form entered Details", values);
+
     await mentorRegistration(values)
       .then((res) => {
-        console.log(res);
+        console.log("Mentor Registration success", res);
         // setIsPageLoading(false);
         setIsModalOpen(true);
 
@@ -36,8 +42,9 @@ export const MentorRegisterComponent: React.FC = () => {
         }, 4000);
       })
       .catch((error) => {
-        console.log(error);
+        console.log("Error From Mentor reg error", error.response);
         if (error?.response.status === 403 && error?.response.data?.blocked) {
+          console.log(1);
           setFieldError("confirmpassword", error?.response.data.error);
           setIsPageLoading(false);
         } else if (error?.response.status === 403) {
@@ -48,11 +55,18 @@ export const MentorRegisterComponent: React.FC = () => {
             navigate("/");
           }, 4000);
         } else if (error?.response.status === 409) {
+          console.log(3);
           setFieldError("confirmpassword", error?.response.data.error);
           setIsPageLoading(false);
           setTimeout(() => {
-            navigate("/");
+            navigate("/auth/login");
           }, 4000);
+        } else {
+          console.log("SOmething went wriog");
+          setFieldError(
+            "confirmpassword",
+            "Something went wrong..!! Please try Again"
+          );
         }
       });
     setSubmitting(false);
@@ -330,14 +344,14 @@ export const MentorRegisterComponent: React.FC = () => {
                   </label>
                   <div className="mt-2">
                     <Field
-                      id="expertise"
-                      name="expertise"
+                      id="skills"
+                      name="skills"
                       type="text"
                       required
                       className="block w-full rounded-md border-0 py-1.5 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:text-sm sm:leading-6"
                     />
                     <ErrorMessage
-                      name="expertise"
+                      name="skills"
                       component="div"
                       className="text-red-500 text-sm mt-1"
                     />

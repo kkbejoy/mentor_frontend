@@ -14,6 +14,9 @@ const MentorProfilePage = () => {
   const mentorDetailsObject = useSelector(
     (state) => state.mentorProfileData.data.mentorData
   );
+  const isThisMentorSubscriptionActive = useSelector(
+    (state) => state.mentorProfileData.data.isEnrollmentActive
+  );
   console.log("mentor object from page:", mentorDetailsObject);
   const params = useParams();
   const { id: mentorId } = params;
@@ -25,7 +28,10 @@ const MentorProfilePage = () => {
   return (
     <div>
       <NavbarMentee />
-      <MentorProfileIntro mentorDetailsObject={mentorDetailsObject} />
+      <MentorProfileIntro
+        mentorDetailsObject={mentorDetailsObject}
+        subscriptionStatus={isThisMentorSubscriptionActive}
+      />
       {/* <MentorPricingCard /> */}
       <BorderLine />
       <MentorAboutComponent mentorAbout={mentorDetailsObject?.bio} />

@@ -21,6 +21,7 @@
     "@types/react-big-calendar": "^1.6.4",
     "@types/react-router-dom": "^5.3.3",
     "axios": "^1.4.0",
+    "date-fns": "^2.30.0",
     "formik": "^2.4.3",
     "react": "^18.2.0",
     "react-big-calendar": "^1.8.4",

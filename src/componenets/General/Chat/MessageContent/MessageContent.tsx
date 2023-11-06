@@ -1,6 +1,10 @@
 import React, { useEffect, useRef } from "react";
 import ReceivedMessages from "../ReceivedMessages/ReceivedMessages";
 import SendMessagesComponent from "../SendMessages/SendMessagesComponent";
+import {
+  convertMessageCreatedTime,
+  convertTimeToISoFormat,
+} from "../../../../utilities/timeManagementFunctions";
 
 const MessageContent = ({ messages, userType }) => {
   const chatContainerRef = useRef(null);
@@ -19,13 +23,17 @@ const MessageContent = ({ messages, userType }) => {
       >
         {messages
           ? messages.map((text) => {
+              // console.log("text", text);
               if (text?.sender?.senderType === "mentor") {
-                return <ReceivedMessages text={text?.content} />;
+                const time = convertMessageCreatedTime(text?.createdAt);
+                return <ReceivedMessages text={text?.content} time={time} />;
               } else if (text?.sender?.senderType === "mentee") {
+                const time = convertMessageCreatedTime(text?.createdAt);
+
                 return (
                   <>
                     <div className="flex justify-end ">
-                      <SendMessagesComponent text={text?.content} />
+                      <SendMessagesComponent text={text?.content} time={time} />
                     </div>
                   </>
                 );
@@ -51,12 +59,14 @@ const MessageContent = ({ messages, userType }) => {
         {messages
           ? messages.map((text) => {
               if (text?.sender?.senderType === "mentee") {
-                return <ReceivedMessages text={text.content} />;
+                const time = convertMessageCreatedTime(text?.createdAt);
+                return <ReceivedMessages text={text.content} time={time} />;
               } else if (text?.sender?.senderType === "mentor") {
+                const time = convertMessageCreatedTime(text?.createdAt);
                 return (
                   <>
                     <div className="flex justify-end ">
-                      <SendMessagesComponent text={text?.content} />
+                      <SendMessagesComponent text={text?.content} time={time} />
                     </div>
                   </>
                 );

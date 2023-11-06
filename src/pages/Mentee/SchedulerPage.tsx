@@ -15,12 +15,15 @@ const SchedulerPage = () => {
 
   useEffect(() => {
     dispatch(fetchTimeSlotsMenteeSide(menteeId));
-  }, [menteeId]);
+  }, [menteeId, renderCalender]);
   return (
     <div>
       <NavbarMentee />
       <div className="w-3/4 mx-auto my-10">
-        <CalenderComponent setCalenderRerender={setCalenderRerender} />
+        <CalenderComponent
+          setCalenderRerenderFunction={setCalenderRerender}
+          renderState={renderCalender}
+        />
       </div>{" "}
       <FooterComponent />
     </div>

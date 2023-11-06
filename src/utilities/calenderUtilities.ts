@@ -2,7 +2,7 @@ import moment from "moment";
 
 export const formatCalenderSlots = (timeSlotData) => {
   try {
-    console.log("Input Time Array to convert", timeSlotData);
+    // console.log("Input Time Array to convert", timeSlotData);
     const formattedSlot = timeSlotData.map((slot) => ({
       _id: slot._id,
       type: slot.type,
@@ -29,9 +29,9 @@ export const convertTimeForMentorSlotViewModal = (start, end) => {
     const date = moment(start).format("MMMM Do YYYY");
     const startTime = moment(start).format(" h:mm a");
     const endTime = moment(end).format(" h:mm a");
-    console.log("Date", start, end);
+    // console.log("Date", start, end);
 
-    console.log("Date", date, startTime, endTime);
+    // console.log("Date", date, startTime, endTime);
     return { date, startTime, endTime };
   } catch (error) {
     console.log(error);

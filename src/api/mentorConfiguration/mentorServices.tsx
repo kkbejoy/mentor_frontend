@@ -2,8 +2,13 @@ import axios from "axios";
 import mentorAxiosInstance from "./mentorInterceptor";
 import END_POINTS, { BASE_URL } from "../../constants/endpoints";
 import { ErrorModal } from "../../componenets/General/Modals/ErrorModal";
-import { getUserIdAndToken } from "../../utilities/reusableFunctions";
+import {
+  getMentorIdFromLocalStorage,
+  getUserIdAndToken,
+} from "../../utilities/reusableFunctions";
 import { Toaster, toast } from "sonner";
+import { setSocket } from "../../slices/socketSlice";
+import { setUpSocket } from "../../utilities/chatUtilities";
 
 //API linking Mentor Registration
 export const mentorRegistration = async (values) => {
@@ -15,6 +20,7 @@ export const mentorRegistration = async (values) => {
     return mentorRegistrationResponse;
   } catch (error) {
     console.log("Error");
+    throw error;
   }
 };
 
@@ -54,8 +60,15 @@ export const mentorNewTimeSlotApi = async (slotDetails) => {
       BASE_URL + END_POINTS.MENTOR_Iime_Slots + "/id",
       { slotDetails, mentorId }
     );
+    if (response?.response?.status == "400") {
+      // console.log("Failedddddddddddddddddddddddddddddddddddddddd");
+      throw new Error("400 error");
+    }
     toast.success("Slot allocated Succssfully");
-    // console.log("Response from new time slot allotment api", response);
+    console.log(
+      "Response from new time slot allotment api",
+      response?.response
+    );
     return response;
   } catch (error) {
     console.log(error);
@@ -71,7 +84,7 @@ export const fetchAllotedSlotDetails = async (slotId) => {
     const response = await mentorAxiosInstance.get(
       `${BASE_URL}${END_POINTS.MENTOR_ALLOTED_SLOT_DETAILS}/${slotId}`
     );
-    console.log("Response Alloted Time slots", response.data);
+    // console.log("Response Alloted Time slots", response.data);
     return response.data;
   } catch (error) {
     console.log(error);
@@ -86,6 +99,7 @@ export const deleteSlot = async (slotId) => {
     const response = await mentorAxiosInstance.delete(
       `${BASE_URL}${END_POINTS.MENTOR_ALLOTED_SLOT_DETAILS}/${slotId}`
     );
+
     console.log("Response From slot deletion", response);
     toast.success("Slot Deleted");
     return response;
@@ -137,9 +151,12 @@ export const sentMessageFromMentor = async (message, conversationId) => {
       `${BASE_URL}${END_POINTS.MENTORS_Send_Message}/${conversationId}`,
       { message, sender: mentorId }
     );
-    console.log("Response From mentor Send messafe", sendResponse);
+    sendResponse.data.responseFromMessageCreation.receiver =
+      sendResponse.data.responseFromMessageCreation.conversation.participants[0].mentee;
+    // console.log("Response From mentor Send messafe", sendResponse);
     return sendResponse.data;
   } catch (error) {
     console.log("Error from send massage api", error);
+    toast.error("Something went Wrong from the Send API");
   }
 };

@@ -12,7 +12,10 @@ import SchedulerTitleMentor from "./Title/SchedulerTitleMentee";
 import { Toaster } from "sonner";
 
 //Component
-export default function CalenderComponent({ setCalenderRerender }) {
+export default function CalenderComponent({
+  setCalenderRerenderFunction,
+  renderState,
+}) {
   const maxDate = new Date("2023-10-06");
   const [newSlotModalOpen, setNewSlotModal] = useState(false);
   const [updateModalOpen, setUpdateModal] = useState(false);
@@ -38,7 +41,7 @@ export default function CalenderComponent({ setCalenderRerender }) {
   };
 
   const handleSelectedEvent = async (id) => {
-    console.log("Id of Slot", id);
+    // console.log("Id of Slot", id);
     modalData = fetchAllotedSlotDetails(id);
     // console.log("Modal data", modalData);
     setUpdateModalData(modalData);
@@ -59,7 +62,7 @@ export default function CalenderComponent({ setCalenderRerender }) {
 
       const formattedTime = convertTimeForMentorSlotViewModal(start, end);
       // const formattedTime = convertTimeForMentorSlotViewModal(start, end);
-      console.log("COmponent props", formattedTime);
+      // console.log("COmponent props", formattedTime);
       switch (slotType) {
         case "available":
           return (
@@ -103,7 +106,8 @@ export default function CalenderComponent({ setCalenderRerender }) {
             startTime={startTime}
             newSlotModalOpen={newSlotModalOpen}
             setNewSlotModal={setNewSlotModal}
-            setCalenderRerender={setCalenderRerender}
+            setCalenderRerenderFunction={setCalenderRerenderFunction}
+            renderState={renderState}
           />
         </div>
       )}
@@ -112,7 +116,7 @@ export default function CalenderComponent({ setCalenderRerender }) {
       <Calendar
         selectable
         defaultView="week"
-        views={["month", "week", "day"]}
+        views={["month", "week"]}
         events={timeSlotData}
         style={{ height: 1200 }}
         onSelectSlot={({ start, end }) => handleSelect(start, end)}
@@ -127,7 +131,8 @@ export default function CalenderComponent({ setCalenderRerender }) {
           updateModalOpen={updateModalOpen}
           setUpdateModal={setUpdateModal}
           SlotObject={updataModalData}
-          setCalenderRerender={setCalenderRerender}
+          setCalenderRerenderFunction={setCalenderRerenderFunction}
+          renderState={renderState}
         />
       )}
     </>

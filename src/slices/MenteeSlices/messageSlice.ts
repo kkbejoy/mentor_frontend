@@ -13,6 +13,7 @@ export const fetchMessageWithConversationId = createAsyncThunk(
   "data/fetchMessage",
   async (conversationId) => {
     try {
+      console.log("hello fromm fetch message");
       const messages = await menteesAxiosInstance.get(
         `${BASE_URL}${END_POINTS.MENTEES_Get_Messages}/${conversationId}`
       );
@@ -29,7 +30,7 @@ const messageSlice = createSlice({
   initialState: initialState,
   reducers: {
     addNewMessage: (state, action) => {
-      state.data.push(action.payload);
+      state?.data?.push(action.payload);
     },
   },
   extraReducers: (builder) => {

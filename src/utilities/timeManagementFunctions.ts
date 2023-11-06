@@ -1,4 +1,5 @@
 import moment from "moment";
+import { formatDistanceToNow, parseISO } from "date-fns";
 export const convertTimeToISoFormat = (inputTime) => {
   try {
     const parsedDateTime = moment(
@@ -23,6 +24,49 @@ export const addOneHour = (inputTime) => {
   // Format the updated date-time as ISO 8601
   const updatedDateTime = dateTime.format("YYYY-MM-DDTHH:mm");
 
-  console.log(updatedDateTime);
+  // console.log(updatedDateTime);
   return updatedDateTime;
+};
+
+export const getTimeDifference = (time) => {
+  try {
+    const dateString = time.toString();
+    const createdAtUTC = parseISO(dateString);
+    const timeAgo = formatDistanceToNow(createdAtUTC, { addSuffix: true });
+    // console.log("Time ago", timeAgo);
+    return timeAgo;
+  } catch (error) {
+    console.log(error);
+  }
+};
+
+export const convertMessageCreatedTime = (time) => {
+  try {
+    const formattedTime = moment(time).format("h:mm A");
+    return formattedTime;
+  } catch (error) {
+    console.log(error);
+  }
+};
+
+//Extract date from input
+export const extractDateFromInput = (time) => {
+  try {
+    const Date = moment(time).format("MMMM Do YYYY");
+    console.log("Date:", Date);
+    return Date;
+  } catch (error) {
+    console.log(error);
+  }
+};
+
+//Extract Time from input
+export const extractTimeFromInput = (time) => {
+  try {
+    const Time = moment(time).format("h:mm a");
+    console.log("TIme:", Time);
+    return Time;
+  } catch (error) {
+    console.log(error);
+  }
 };

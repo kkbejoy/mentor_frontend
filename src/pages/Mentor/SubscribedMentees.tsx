@@ -5,6 +5,7 @@ import SubscribedMenteesTable from "../../componenets/Mentor/SubscribedMentees/S
 import { useDispatch } from "react-redux";
 import { fetchSubscribedMenteesList } from "../../slices/MentorSlices/subscibedMentees";
 import HorizontalDivider from "../../componenets/General/HorizontalDivider/HorizontalDivider";
+import FooterComponent from "../../componenets/General/Footer/FooterComponent";
 
 const SubscribedMentees = () => {
   const dispatch = useDispatch();
@@ -16,6 +17,7 @@ const SubscribedMentees = () => {
       <NavbarMentor />
       <HorizontalDivider title={"Subscribed Mentees"} />
       <SubscribedMenteesTable />
+      <FooterComponent />
     </>
   );
 };

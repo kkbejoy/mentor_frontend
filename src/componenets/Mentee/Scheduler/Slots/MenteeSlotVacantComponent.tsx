@@ -1,7 +1,7 @@
 import React from "react";
 
 const MenteeSlotVacantComponent = ({ props, formattedTime }) => {
-  console.log("Compoent", props, formattedTime);
+  // console.log("Compoent", props, formattedTime);
   return (
     <div className=" h-full shadow-md bg-green-400  text-black text-center transform-cpu transition-transform hover:scale-105">
       <div className="flex flex-col-2">

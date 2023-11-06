@@ -1,11 +1,17 @@
 import React from "react";
 
-const ButtonComponenet = ({ ButtonName, handleButtonClcik }) => {
+const ButtonComponenet = ({
+  ButtonName,
+  handleButtonClcik,
+  BackgroundColor,
+}) => {
   return (
     <div>
       <button
         onClick={(e) => handleButtonClcik()}
-        className="mt-4 bg-mentorBlue hover:bg-blue-900 text-white font-bold py-2 px-4 rounded"
+        className={`mt-4 bg-${
+          BackgroundColor ? BackgroundColor : "mentorBlue"
+        } hover:bg-blue-900 text-white font-bold py-2 px-4 rounded`}
       >
         {ButtonName}
       </button>

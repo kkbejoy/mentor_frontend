@@ -16,7 +16,8 @@ const MentorFormModalComponent = ({
   newSlotModalOpen,
   setNewSlotModal,
   startTime,
-  setCalenderRerender,
+  setCalenderRerenderFunction,
+  renderState,
 }) => {
   const [isModalOpen, setIsModalOpen] = useState(false);
   const [isLoading, setLoading] = useState(false);
@@ -38,12 +39,12 @@ const MentorFormModalComponent = ({
   ) => {
     try {
       setLoading(true);
-      console.log("Form Entry:", values);
       const respose = mentorNewTimeSlotApi(values);
       respose.then((res) => {
+        const newRes = { ...renderState, ...res };
         setLoading(false);
         setNewSlotModal(false);
-        setCalenderRerender(res);
+        setCalenderRerenderFunction(newRes);
       });
     } catch (error) {
       console.log(error);

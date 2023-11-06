@@ -11,6 +11,7 @@ const MessageInputComponent = ({
   setSocketMessage,
 }) => {
   const [inputValue, setinputValue] = useState("");
+
   const dispatch = useDispatch();
   //Submit Form
   const handleMessageSending = async (values, { resetForm }) => {
@@ -18,7 +19,7 @@ const MessageInputComponent = ({
       const messageInput = values.messageInput;
       console.log("Message input", values);
       if (values.messageInput.trim() === "") {
-        // console.log("no inpu");
+        console.log("no inpu");
         return;
       }
       const responseFromMessageSendAPI = await sentMessageAPI(
@@ -32,13 +33,22 @@ const MessageInputComponent = ({
       dispatch(
         addNewMessage(responseFromMessageSendAPI.responseFromMessageCreation)
       );
+      setinputValue("");
       resetForm();
     } catch (error) {
       console.log(error);
       // toast.error("Message Sending failed... Please refersh the page");
     }
   };
-
+  const handleTyping = async (e) => {
+    try {
+      console.log("Typing", e.target.value);
+      setinputValue();
+      return;
+    } catch (error) {
+      toast.error("Somee error");
+    }
+  };
   //Formik Inital Values
   const initialValues = {
     messageInput: "",
@@ -47,14 +57,14 @@ const MessageInputComponent = ({
     <div className=" h-[10vh] justify-center rounded-full p-3 w-full">
       <Formik onSubmit={handleMessageSending} initialValues={initialValues}>
         <Form>
-          {" "}
           <div className="flex ">
             <Field
               name="messageInput"
-              autoComplete="off"
               // value={inputValue}
+              autoComplete="off"
+              // onChange={(e) => handleTyping(e)}
               placeholder="Please type your query or question here              "
-              className=" text-center h-[7vh] bg-gray-100 rounded-md w-full mx-5 border-spacing-2 "
+              className=" text-end p-4 h-[7vh] bg-gray-100 rounded-md w-full mx-5 border-spacing-2 "
             />
             <button className="w=2/5 mr-9">
               <UilEnvelopeUpload color="mentorBlue" />

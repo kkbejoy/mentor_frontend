@@ -16,13 +16,18 @@ import { menteeConversationsReducer } from "../slices/MenteeSlices/conversations
 import { menteeMessageReducer } from "../slices/MenteeSlices/messageSlice";
 import { mentorMessageReducer } from "../slices/MentorSlices/messageSlice";
 import { fetchMentorConversationsReducer } from "../slices/MentorSlices/conversationsList";
+import { menteeNotificationsReducer } from "../slices/MenteeSlices/menteeNotificationSlice";
+import { socketReducer } from "../slices/socketSlice";
+import { menteeBookedTimeSlotReducer } from "../slices/MenteeSlices/bookedTimeSlots";
 export const store = configureStore({
   reducer: {
     menteeAuth: menteeReducer,
     menteeSideTimeSlot: menteeSideTimeSlotReducer,
     menteeSideSubscribedMentorsList: subscibedMentorsListReducer,
+    menteeNotifications: menteeNotificationsReducer,
     menteeConversations: menteeConversationsReducer,
     menteeMessage: menteeMessageReducer,
+    menteeBookedTime: menteeBookedTimeSlotReducer,
     moderatorAuth: moderatorReducer,
     menteesList: menteesTableDetailsReducer,
     mentorsList: mentorsTableDetailsReducer,
@@ -35,7 +40,18 @@ export const store = configureStore({
     mentorConversations: fetchMentorConversationsReducer,
     mentorTimeSlots: mentorTimeSlotReducer,
     subscribedMenteesList: subscibedMenteesListReducer,
+    socket: socketReducer,
   },
+  middleware: (getDefaultMiddleware) =>
+    getDefaultMiddleware({
+      serializableCheck: {
+        // Ignore specific action types
+        ignoredActions: ["socket/setSocket/fulfilled"], // Replace with your action type
+
+        // Ignore specific paths in the state
+        ignoredPaths: ["socket"], // Replace with your state paths
+      },
+    }),
 });
 
 // Infer the `RootState` and `AppDispatch` types from the store itself

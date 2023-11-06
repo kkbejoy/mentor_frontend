@@ -11,9 +11,10 @@ import SchedulerTitleMentee from "./Title/SchedulerTitleMentee";
 import SlotModalMenteeSide from "./SlotModalMenteeSide";
 import TooltipComponents from "./TooltipComponents/TooltipComponents";
 
-import { Toaster } from "sonner";
-
-export default function CalenderComponent({ setCalenderRerender }) {
+export default function CalenderComponent({
+  setCalenderRerenderFunction,
+  renderState,
+}) {
   const dispatch = useDispatch();
   const [newSlotModalOpen, setNewSlotModal] = useState(false);
   const [updateModalOpen, setUpdateModal] = useState(false);
@@ -24,7 +25,7 @@ export default function CalenderComponent({ setCalenderRerender }) {
   const [slot, setSlot] = useState();
 
   const timeSlotData = useSelector((state) => state.menteeSideTimeSlot.data);
-  console.log("Time slot data", timeSlotData);
+  // console.log("Time slot data", timeSlotData);
   const { menteeId } = getUserIdAndToken("menteeAuth");
 
   const handleSelectedEvent = async (
@@ -66,7 +67,6 @@ export default function CalenderComponent({ setCalenderRerender }) {
 
       const formattedTime = convertTimeForMentorSlotViewModal(start, end);
       // const formattedTime = convertTimeForMentorSlotViewModal(start, end);
-      console.log("COmponent props", formattedTime);
       switch (slotType) {
         case "available":
           return (
@@ -97,7 +97,8 @@ export default function CalenderComponent({ setCalenderRerender }) {
             newSlotModalOpen={newSlotModalOpen}
             setNewSlotModal={setNewSlotModal}
             slotObject={slotObject}
-            setCalenderRerender={setCalenderRerender}
+            setCalenderRerenderFunction={setCalenderRerenderFunction}
+            renderState={renderState}
           />
           {/* </div> */}
         </div>
@@ -107,7 +108,7 @@ export default function CalenderComponent({ setCalenderRerender }) {
       <Calendar
         selectable
         defaultView="week"
-        views={["month", "week", "day"]}
+        views={["month", "week"]}
         events={timeSlotData}
         style={{ height: 1200 }}
         onSelectSlot={({
@@ -141,7 +142,6 @@ export default function CalenderComponent({ setCalenderRerender }) {
         components={components}
         min={"Fri Oct 06 2023 05:00:00 GMT+0530"}
       />
-      <Toaster />
     </>
   );
 }
