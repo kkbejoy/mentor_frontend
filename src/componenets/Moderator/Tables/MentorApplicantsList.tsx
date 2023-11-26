@@ -10,7 +10,7 @@ const MentorApplicantsListsComponent = () => {
   const disptch = useDispatch();
 
   const mentorApplicantsListArray = useSelector(
-    (state) => state.mentorApplicantsList.data.allMentorRequests
+    (state) => state?.mentorApplicantsList?.data?.allMentorRequests
   );
   console.log(
     "Mentor Applicants List Array From Mentes-list page",

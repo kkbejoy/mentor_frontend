@@ -7,7 +7,8 @@ import { checkAuthentication } from "../../utilities/reusableFunctions";
 import { routesFrontend } from "../../constants/frontendRoutes";
 import NotificationDropdown from "../General/Notification/MenteeNotificationDropdown";
 import { useSelector } from "react-redux";
-
+import MenteeDropDown from "./OptionsDropdown/MenteeDropdown";
+import { Link } from "react-router-dom";
 const NavbarMentee = () => {
   const [notifications, setNotifications] = useState([]); // Store new notifications
   const [previousNotifications, setPreviousNotifications] = useState([]);
@@ -73,9 +74,10 @@ const NavbarMentee = () => {
                 <div className="hidden sm:ml-6 sm:block">
                   <div className="flex space-x-14 text-white">
                     {navigation.map((item) => (
-                      <a
+                      <Link
+                        to={item.href}
                         key={item.name}
-                        href={item.href}
+                        // href={item.href}
                         // className={classNames(
                         //   item.current
                         //     ? "bg-gray-900 text-white"
@@ -85,7 +87,7 @@ const NavbarMentee = () => {
                         aria-current={item.current ? "page" : undefined}
                       >
                         {item.name}
-                      </a>
+                      </Link>
                     ))}
                   </div>
                 </div>
@@ -106,7 +108,7 @@ const NavbarMentee = () => {
                 </button>
                 {/* Profile dropdown */}
                 <Menu as="div" className="relative ml-3">
-                  {isAuthenticated && <LogoutComponent />}
+                  {isAuthenticated && <MenteeDropDown />}
                   <div>
                     {/* <Menu.Button className="relative flex rounded-full bg-gray-800 text-sm focus:outline-none focus:ring-2 focus:ring-white focus:ring-offset-2 focus:ring-offset-gray-800">
                       <span className="absolute -inset-1.5" />

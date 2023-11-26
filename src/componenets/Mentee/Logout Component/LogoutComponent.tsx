@@ -29,9 +29,9 @@ const LogoutComponent = () => {
     }
   };
   return (
-    <div>
-      <button onClick={handleLogout}>
-        <p className="text-white">Logout</p>
+    <div onClick={handleLogout}>
+      <button>
+        <p className="text-balck">Logout</p>
       </button>
     </div>
   );

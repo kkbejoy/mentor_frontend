@@ -15,7 +15,7 @@ export const fetchMessageMentorSide = createAsyncThunk(
         `${BASE_URL}${END_POINTS.MENTORS_Get_Messages}/${conversationId}`
       );
       console.log("Mesage from message api slice", messages);
-      return messages.data.messages;
+      return messages?.data?.messages;
     } catch (error) {
       console.log("Message api erroro", error);
     }
@@ -38,7 +38,7 @@ const mentorMessageSlice = createSlice({
       })
       .addCase(fetchMessageMentorSide.fulfilled, (state, action) => {
         state.isLoading = false;
-        state.data = action.payload;
+        state.data = action?.payload;
       })
       .addCase(fetchMessageMentorSide.rejected, (state, action) => {
         state.isLoading = false;

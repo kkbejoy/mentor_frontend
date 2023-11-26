@@ -3,6 +3,7 @@ import END_POINTS, { BASE_URL } from "../../constants/endpoints";
 import moderatorAxiosInstance from "./moderatorInterceptor";
 import { getUserIdAndToken } from "../../utilities/reusableFunctions";
 import { localStorageFields } from "../../constants/localStorageFileds";
+import { toast } from "sonner";
 
 //API linking Mentro Logout
 export const moderatorLogOut = async (mentorDetails) => {
@@ -72,6 +73,23 @@ export const mentorApplicantsRequestAcceptAPI = async (id, name, email) => {
     );
     console.log(response);
     return response;
+  } catch (error) {
+    console.log(error);
+  }
+};
+
+//API Linking Ticket status modification
+
+export const modifyTicketStatus = async (ticketId) => {
+  try {
+    console.log("Hello");
+    const responseFromAPI = await moderatorAxiosInstance.patch(
+      `${BASE_URL}${END_POINTS.MODERATOR_Tickets}`,
+      { ticketId }
+    );
+    console.log("Response from status mod", responseFromAPI);
+    toast.success("User Blocked");
+    return responseFromAPI;
   } catch (error) {
     console.log(error);
   }

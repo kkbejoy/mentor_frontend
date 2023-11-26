@@ -2,17 +2,38 @@ import React, { useState } from "react";
 import { Link } from "react-router-dom";
 import { routesFrontend } from "../../../constants/frontendRoutes";
 import { Formik, Form, ErrorMessage, Field } from "formik";
+import { toast } from "sonner";
 
 const EnterEmailIdComponent = () => {
   const [otpSend, setOtpSend] = useState(false);
-  const initialValues = {
+  const [emailVerified, setEmailVerified] = useState(false);
+  const [isLoading, setIsLoading] = useState(false);
+
+  const initialValuesEmail = {
     email: "",
   };
-  const handleOtpSend = async () => {
+
+  const initialValuesPasswrod = {
+    otp: "",
+    password: "",
+    confirmpassword: "",
+  };
+  const handleSubmitEmail = async () => {
+    // e.preventDefault();
     try {
-      setOtpSend(true);
+      setEmailVerified(true);
     } catch (error) {
       console.log(error);
+    }
+  };
+
+  const handleNewPasswordSubmission = async () => {
+    try {
+      setIsLoading(true);
+      toast.success("Successfully entered teh details");
+    } catch (error) {
+      console.log(error);
+      toast.error("Error..!!!");
     }
   };
 
@@ -32,16 +53,11 @@ const EnterEmailIdComponent = () => {
                   registered Email.
                 </p>
                 <Formik
-                  initialValues={initialValues}
+                  initialValues={initialValuesEmail}
                   // validationSchema={loginValidationSchema}
-                  onSubmit={handleOtpSend}
+                  onSubmit={handleSubmitEmail}
                 >
-                  <form method="post" className="margin-top: 1em">
-                    {/* <input
-                    type="hidden"
-                    name="csrfmiddlewaretoken"
-                    value="i3mJY1BDGiPG5bgR0TpGUeQs6puTn5jcndJLJTMQ0RQxVeSxt3PfB1LJ6KTWAGW8"
-                  /> */}
+                  <Form>
                     <label
                       htmlFor="id_email"
                       className="block text-sm font-medium leading-6 text-gray-900"
@@ -64,26 +80,115 @@ const EnterEmailIdComponent = () => {
                       className="text-red-500 text-sm mt-1"
                     />
                     <div className="mt-4">
-                      <button
-                        type="submit"
-                        className="flex w-full justify-center rounded-md bg-mentorBlue px-3 py-1.5 text-sm font-semibold leading-6 text-white shadow-sm hover:bg-indigo-500 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-indigo-600"
-                      >
-                        Send OTP
-                      </button>
+                      {!emailVerified ? (
+                        <button
+                          type="submit"
+                          className="flex w-full justify-center rounded-md bg-mentorBlue px-3 py-1.5 text-sm font-semibold leading-6 text-white shadow-sm hover:bg-indigo-500 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-indigo-600"
+                        >
+                          Send OTP
+                        </button>
+                      ) : null}
                     </div>
-                    <p className="text-sm mt-6">
-                      <Link to={routesFrontend.LogIN}>
-                        <p className="text-teal-700 font-normal underline">
-                          Back to login
-                        </p>
-                      </Link>
-                    </p>
-                  </form>
+                    <p className="text-sm mt-6"></p>
+                    {/* </form> */}
+                  </Form>
                 </Formik>
+
+                {emailVerified ? (
+                  <Formik
+                    initialValues={initialValuesPasswrod}
+                    // validationSchema={loginValidationSchema}
+                    onSubmit={handleNewPasswordSubmission}
+                  >
+                    <Form>
+                      <label
+                        htmlFor="otp"
+                        className="block text-sm font-medium leading-6 text-gray-900"
+                      >
+                        Enter the OTP
+                      </label>
+                      <div>
+                        <Field
+                          type="otp"
+                          name="otp"
+                          id="otp"
+                          placeholder=" Enter the OTP received on email here"
+                          className="block w-full rounded-md border-0 py-1.5 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-blue-light-100 sm:text-sm sm:leading-6"
+                          required
+                        />
+                      </div>
+                      <ErrorMessage
+                        name="otp"
+                        component="div"
+                        className="text-red-500 text-sm mt-1"
+                      />
+                      <label
+                        htmlFor="password"
+                        className="block text-sm font-medium leading-6 text-gray-900"
+                      >
+                        Enter the new Password
+                      </label>
+                      <div>
+                        <Field
+                          type="password"
+                          name="password"
+                          id="password"
+                          placeholder=" Enter the new Password here"
+                          className="block w-full rounded-md border-0 py-1.5 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-blue-light-100 sm:text-sm sm:leading-6"
+                          required
+                        />
+                      </div>
+                      <ErrorMessage
+                        name="password"
+                        component="div"
+                        className="text-red-500 text-sm mt-1"
+                      />
+                      <label
+                        htmlFor="confirmpassword"
+                        className="block text-sm font-medium leading-6 text-gray-900"
+                      >
+                        Confirm Password
+                      </label>
+                      <div>
+                        <Field
+                          type="confirmpassword"
+                          name="confirmpassword"
+                          id="confirmpassword"
+                          placeholder=" Please confirm the password entered"
+                          className="block w-full rounded-md border-0 py-1.5 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-blue-light-100 sm:text-sm sm:leading-6"
+                          required
+                        />
+                      </div>
+                      <ErrorMessage
+                        name="otp"
+                        component="div"
+                        className="text-red-500 text-sm mt-1"
+                      />
+                      <div className="mt-4">
+                        {emailVerified ? (
+                          <button
+                            disabled={isLoading}
+                            type="submit"
+                            className="flex w-full justify-center rounded-md bg-mentorBlue px-3 py-1.5 text-sm font-semibold leading-6 text-white shadow-sm hover:bg-indigo-500 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-indigo-600"
+                          >
+                            Change Password
+                          </button>
+                        ) : null}
+                      </div>
+                      <p className="text-sm mt-6"></p>
+                      {/* </form> */}
+                    </Form>
+                  </Formik>
+                ) : null}
+
+                <Link to={routesFrontend.LogIN}>
+                  <p className="text-teal-700 font-normal underline">
+                    Back to login
+                  </p>
+                </Link>
               </div>
             </div>
           </div>
-          <h1>Hello</h1>{" "}
         </section>
       </div>
     </>

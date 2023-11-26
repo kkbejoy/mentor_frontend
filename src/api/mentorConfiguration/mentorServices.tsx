@@ -135,10 +135,50 @@ export const updateMentorProfile = async (updatedFields) => {
       updatedFields
     );
     console.log("Mentor Profile Updatation", response);
+    toast.success("Profile Updated successfully");
     return response;
   } catch (error) {
     console.log(error);
+    toast.error("Something went wrong ");
     throw error;
+  }
+};
+
+//API For Updating Mentor Skills
+
+export const addNewMentorSkill = async (newSkills) => {
+  try {
+    const mentorId = await getMentorIdFromLocalStorage();
+
+    const responseFromAPI = await mentorAxiosInstance.patch(
+      `${BASE_URL}${END_POINTS.MENTOR_Skills_Update}/${mentorId}`,
+      { newSkills }
+    );
+    console.log("Respon from skill updation", responseFromAPI);
+    toast.success("Skill Added");
+    return responseFromAPI;
+  } catch (error) {
+    console.log(error);
+    toast.error("Error");
+  }
+};
+
+// API To remove a  skill from Mentor SKill array
+
+export const removeAskillFromMentorSkillArray = async (skill) => {
+  try {
+    const mentorId = await getMentorIdFromLocalStorage();
+    const responseFromAPI = await mentorAxiosInstance.post(
+      `${BASE_URL}${END_POINTS.MENTOR_Skills_Update}/${mentorId}`,
+      { skill }
+    );
+    console.log("Response From skill removals", responseFromAPI);
+    toast.success("Skill Deleted succssfully");
+    return responseFromAPI;
+  } catch (error) {
+    toast.error("Delettion Failed");
+    console.log(error);
+    return error;
   }
 };
 //Api for sending messages
@@ -158,5 +198,34 @@ export const sentMessageFromMentor = async (message, conversationId) => {
   } catch (error) {
     console.log("Error from send massage api", error);
     toast.error("Something went Wrong from the Send API");
+  }
+};
+
+//Raise a New Ticket Form Mentor SIde
+
+export const raiseANewTicketFromMentorSide = async ({
+  accussedId,
+  subject,
+  content,
+}) => {
+  try {
+    const ticketObject = {
+      complaint: {
+        // complaintType: "mentor",
+        accusedId: accussedId,
+      },
+      content: content,
+    };
+    const { mentorId } = getUserIdAndToken("mentorAuth");
+    const responseFromApi = await mentorAxiosInstance.post(
+      `${BASE_URL}${END_POINTS.MENTOR_Tickets}/${mentorId}`,
+      { ticketObject }
+    );
+
+    console.log("Response from TIcket post API", responseFromApi);
+    return responseFromApi;
+  } catch (error) {
+    console.log(error);
+    toast.error("Something went wrong");
   }
 };

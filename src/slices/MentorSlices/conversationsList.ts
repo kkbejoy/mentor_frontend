@@ -20,7 +20,7 @@ export const fetchMentorConversations = createAsyncThunk(
         `${BASE_URL}${END_POINTS.MENTOR_Get_Conversations}`,
         { mentorId }
       );
-      // console.log("Mentor Side convo list", response.data);
+      console.log("Mentor Side convo list", response.data);
       return response.data;
     } catch (error) {
       console.log(error);

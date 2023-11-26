@@ -32,6 +32,7 @@ export const fetchMenteeConversations = createAsyncThunk(
   async () => {
     try {
       const menteeId = await getMenteeIdFromLocalStorage();
+      console.log("MenteeiD", menteeId);
       const response = await menteesAxiosInstance.post(
         `${BASE_URL}${END_POINTS.MENTEES_Get_Conversations}`,
         { menteeId }

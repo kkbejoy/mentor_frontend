@@ -19,10 +19,10 @@ export const fetchSubscribedMentorsList = createAsyncThunk(
       const response = await menteesAxiosInstance.get(
         `${BASE_URL}${END_POINTS.MENTEES_Subscribed_Mentors}/${menteeId}`
       );
-      console.log(
-        "Response from subscribed mentors list :",
-        response.data.allMentorsSubscribed
-      );
+      // console.log(
+      //   "Response from subscribed mentors list :",
+      //   response.data.allMentorsSubscribed
+      // );
 
       return response.data.allMentorsSubscribed;
     } catch (error) {

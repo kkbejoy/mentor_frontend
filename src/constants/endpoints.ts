@@ -19,6 +19,7 @@ const END_POINTS = {
   MENTEES_Notifications: "/api/mentees/notifications",
   MENTEE_Profile_Update: "/api/mentees/edit-profile",
   MENTEE_Booked_Time_SLots: "/api/mentees/booked-slots",
+  MENTEE_Tickets: "/api/mentees/raise-ticket",
 
   //Chat Routes
   MENTEES_Conversations_Read_Unread: "/api/chats/messages",
@@ -48,7 +49,14 @@ const END_POINTS = {
   MENTOR_CLOUDINARY_Upload:
     "https://api.cloudinary.com/v1_1/dlcsyyk7z/image/upload",
   MENTOR_Profile_Update: "/api/mentors/edit-profile",
+  MENTOR_Skills_Update: "/api/mentors/add-new-skill",
+
   MENTOR_SUBSCRIBED_Mentees: "/api/mentors/subscribed-mentees",
+  MENTOR_Tickets: "/api/mentors/raise-ticket",
+
+  //MENTOR HomePage
+  MENTOR_HOME_PAGE_LIVE_LIST: "/api/mentors/todays-live-slots",
+  MENTOR_HOME_PAGE_ENROLLMENT_DETAILS: "/api/mentors/daily-enrollment-object",
 
   //Moderator
   MODERATOR_LOGIN: "/api/moderator/login",
@@ -56,11 +64,16 @@ const END_POINTS = {
   MODERATOR_AccessTokenRegenerate: "/api/moderator/regenerate_access_token",
   MODERATOR_Mentees_List: "/api/moderator/mentees",
   MODERATOR_Mentors_List: "/api/moderator/mentors",
+  MODERATOR_Tickets: "/api/moderator/tickets",
+
   MODERATOR_Mentor_Applicants_List: "/api/moderator/mentor_requests",
   MODERATOR_Mentees_BlockUnBlock: "/api/moderator/mentees_status_change",
   MODERATOR_Mentors_BlockUnBlock: "/api/moderator/mentor_status_change",
   MODERATOR_Mentors_Applicant_Accept_Request:
     "/api/moderator/mentor_request_accept",
+  MODERATOR_HOMEPAGE_DAILY_ENROLLMENTDATA: "/api/moderator/daily-enrollments",
+  MODERATOR_HOMEPAGE_DAILY_MENTEE_REGISTRATION:
+    "/api/moderator/daily-new-mentees",
 };
 
 export default END_POINTS;

@@ -71,7 +71,10 @@ const Login: React.FC<LoginProps> = ({ role, setSuccess, isSuccess }) => {
     : routesFrontend.MentorForgotPassword;
 
   useEffect(() => {
+    console.log("Mentee AUthenericated", menteeAuthData);
+
     if (menteeAuthData.isMenteeAuthenticated) {
+      console.log("Mentee AUthenericated");
       navigate("/mentees");
     }
   }, [menteeAuthData, navigate]);

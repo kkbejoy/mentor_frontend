@@ -7,7 +7,7 @@ import {
   updateMenteeProfile,
 } from "../../../api/menteesConfiguration/menteeServices";
 
-const MenteeProfileImageUploader = () => {
+const MenteeProfileImageUploader = ({ image, reRenderFunction }) => {
   const [selectedImage, setSelectedImage] = useState("");
   const [isLoading, setLoading] = useState(false);
   const [isError, setError] = useState(false);
@@ -36,11 +36,12 @@ const MenteeProfileImageUploader = () => {
       updatedObject.profileImageUrl = uploadResponse.public_id;
       const apiResponse = await updateMenteeProfile(updatedObject);
       setLoading(false);
-      setSuccess(true);
+      reRenderFunction({ ...apiResponse });
+      // setSuccess(true);
     } catch (error) {
       console.log(error);
       setLoading(false);
-      setError(true);
+      // setError(true);
     }
   };
 
@@ -48,7 +49,17 @@ const MenteeProfileImageUploader = () => {
     <>
       {" "}
       <div className="grid px-5">
-        <h2>Profile Image Uploader</h2>
+        <h1 className="font-semibold">Existing Avatar</h1>
+        <img
+          src={
+            image
+              ? `https://res.cloudinary.com/dlcsyyk7z/image/upload/v1696240416/${image}`
+              : "https://res.cloudinary.com/dlcsyyk7z/image/upload/v1698818859/mentors/mentee/images_2_d4e6fp_siwirt_zyvigw.jpg"
+          }
+          className="w-32 h-fit"
+          alt=""
+        />
+        {/* <h2 className="font-semibold">Avatar</h2> */}
         <input
           type="file"
           accept="image/*"
@@ -58,7 +69,7 @@ const MenteeProfileImageUploader = () => {
         />
         {selectedImage && (
           <div>
-            <h3>Selected Image Preview:</h3>
+            <h3>Selected Avatar Preview</h3>
             <img
               src={URL.createObjectURL(selectedImage)}
               alt="Selected Profile"
@@ -72,7 +83,7 @@ const MenteeProfileImageUploader = () => {
             className="bg-mentorBlue hover:bg-blue-400 text-white font-bold py-2 px-4 mt-4 rounded"
             onClick={handleImageUpload}
           >
-            {isLoading ? "Loading" : "Upload"}
+            {isLoading ? "Loading" : "Submit New Avatar"}
           </button>
         </div>
       </div>

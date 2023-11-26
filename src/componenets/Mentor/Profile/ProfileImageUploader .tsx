@@ -7,7 +7,7 @@ import { generateUniqueNames } from "../../../utilities/reusableFunctions";
 import { ErrorModal } from "../../General/Modals/ErrorModal";
 import SuccessModal from "../../General/Modals/SuccessModal";
 
-const ProfileImageUploader = () => {
+const ProfileImageUploader = ({ profileImage }) => {
   const [selectedImage, setSelectedImage] = useState("");
   const [isLoading, setLoading] = useState(false);
   const [isError, setError] = useState(false);
@@ -45,8 +45,33 @@ const ProfileImageUploader = () => {
   return (
     <>
       {" "}
+      <div className="gap-y-6">
+        {/* <h3 className="block text-sm text-left font-medium leading-6 text-gray-900">
+          Existing Avatar
+        </h3> */}
+        <img
+          src={
+            profileImage
+              ? `https://res.cloudinary.com/dlcsyyk7z/image/upload/v1696240416/${profileImage}`
+              : "https://res.cloudinary.com/dlcsyyk7z/image/upload/v1698830239/mentors/mentor/images_2_d4e6fp_siwirt_a7fcrt.jpg"
+          }
+          alt="avatar"
+          style={{ maxWidth: "200px" }}
+          className="my-9"
+        />
+      </div>
+      {selectedImage && (
+        <div>
+          <h3>Selected Image </h3>
+          <img
+            src={URL.createObjectURL(selectedImage)}
+            alt="Selected Profile"
+            style={{ maxWidth: "200px" }}
+          />
+        </div>
+      )}
       <div className="grid px-5">
-        <h2>Profile Image Uploader</h2>
+        {/* <h2>Avatar</h2> */}
         <input
           type="file"
           accept="image/*"
@@ -54,36 +79,17 @@ const ProfileImageUploader = () => {
             setSelectedImage(e.target.files[0]);
           }}
         />
-        {selectedImage && (
-          <div>
-            <h3>Selected Image Preview:</h3>
-            <img
-              src={URL.createObjectURL(selectedImage)}
-              alt="Selected Profile"
-              style={{ maxWidth: "200px" }}
-            />
-          </div>
-        )}
+
         <div>
           {" "}
           <button
             className="bg-mentorBlue hover:bg-blue-400 text-white font-bold py-2 px-4 mt-4 rounded"
             onClick={handleImageUpload}
           >
-            {isLoading ? "Loading" : "Upload"}
+            {isLoading ? "Loading" : "Submit new Avatar"}
           </button>
         </div>
       </div>
-      <ErrorModal
-        isOpen={isError}
-        errorMessage={isError}
-        onRequestClose={setError}
-      />
-      <SuccessModal
-        isOpen={isSuccess}
-        // errorMessage={isError}
-        onRequestClose={setSuccess}
-      />
     </>
   );
 };

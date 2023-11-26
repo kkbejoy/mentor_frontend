@@ -1,14 +1,20 @@
 import { Mentor } from "../../App";
-import LandingPageMentor from "../../pages/Mentor/LandingPageMentees";
+import LandingPageMentor from "../../pages/Mentor/LandingPageMentors";
 import MentorAuthProvider from "./MentorAuthProvider";
 import SchedulerPage from "../../pages/Mentor/SchedulerPage";
 import MentorsProfile from "../../pages/Mentor/MentorsProfile";
-import MentorPricingCardShimmer from "../../componenets/Mentee/Shimmers/MentorPricingCardShimmer";
 import SubscribedMentees from "../../pages/Mentor/SubscribedMentees";
 
 import InboxPageMentor from "../../pages/Mentor/InboxPageMentor";
-import MentorHeaderShimmer from "../../componenets/Mentee/Shimmers/MentorHeaderShimmer";
 import ConfirmationModal from "../../componenets/General/Modals/CancelConfirmationModal";
+import VideoCallInterfaceMentorSidePage from "../../pages/Mentor/VideoCallInterface";
+import Example from "../../componenets/General/Trail/trail";
+import ProfileInformationEditComponent from "../../componenets/Mentor/Profile/ProfileInformationEditComponent";
+import TicketsMentorSidePage from "../../pages/Mentor/TicketsMentorSide";
+import RaiseANewTicketModal from "../../componenets/General/Modals/RaiseANewTicketModal";
+import HomePageTypewriter from "../../componenets/General/Typewriter/HomePageTypewriter";
+import HomePageMentorCards from "../../componenets/General/Cards/HomePageMentorCards";
+
 export const MentorRoutes = {
   path: "/mentors",
   element: (
@@ -42,15 +48,16 @@ export const MentorRoutes = {
       element: <InboxPageMentor />,
     },
     {
+      path: "connect/live/:conversationId?",
+      element: <VideoCallInterfaceMentorSidePage />,
+    },
+    {
+      path: "tickets",
+      element: <TicketsMentorSidePage />,
+    },
+    {
       path: "/mentors/trail",
-      element: (
-        <ConfirmationModal
-          isOpen={undefined}
-          onConfirm={undefined}
-          onCancel={undefined}
-          message={undefined}
-        />
-      ),
+      element: <HomePageMentorCards />,
     },
   ],
 };

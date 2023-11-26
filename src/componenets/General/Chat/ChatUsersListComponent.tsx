@@ -11,7 +11,7 @@ const ChatUsersListComponent = ({
   userType,
   conversationId,
 }) => {
-  console.log("Conversations list", conversationsList);
+  console.log("Conversations list1", conversationsList);
 
   return (
     <>
@@ -21,13 +21,12 @@ const ChatUsersListComponent = ({
         {/* profileCards */}
         {conversationsList
           ? conversationsList.map((profile) => {
-              // console.log("MentorProfile", profile);
+              console.log("MentorProfile", profile);
               const activeOrNot =
                 profile?._id === conversationId ? true : false;
-              console.log("MentorProfile", profile._id, conversationId);
-
               return (
                 <UserProfileComponent
+                  key={profile._id}
                   userType={userType}
                   profile={profile}
                   conversationId={conversationId}

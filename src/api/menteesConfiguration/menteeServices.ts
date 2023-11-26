@@ -27,9 +27,9 @@ export const menteeRegistration = async (values) => {
 export const menteeGoogleSignIn = async () => {
   try {
     console.log("axios");
-    const response = await axios.get(
-      "http://localhost:5000/api/mentees/google_auth_mentee"
-    );
+    const response = await axios.get(END_POINTS.MENTEE_GOOGLE_AUTH, {
+      withCredentials: true,
+    });
     // console.log("res", response);
     return response;
   } catch (error) {
@@ -253,9 +253,11 @@ export const updateMenteeProfile = async (updatedFields) => {
       `${BASE_URL}${END_POINTS.MENTEE_Profile_Update}/${menteeId}`,
       updatedFields
     );
+    toast.success("Updation success");
     console.log("menteeId Profile Updatation", response);
     return response;
   } catch (error) {
+    toast.error("Updation Failed");
     console.log(error);
     throw error;
   }
@@ -275,5 +277,34 @@ export const cancelABookedSlot = async (slotId) => {
   } catch (error) {
     console.log(error);
     toast.error("Somethign wetn wrong");
+  }
+};
+
+//Raise a New Ticket Form Mentee SIde
+
+export const raiseANewTicketFromMenteeSide = async ({
+  accussedId,
+  subject,
+  content,
+}) => {
+  try {
+    const ticketObject = {
+      complaint: {
+        // complaintType: "mentor",
+        accusedId: accussedId,
+      },
+      content: content,
+    };
+    const { menteeId } = getUserIdAndToken("menteeAuth");
+    const responseFromApi = await menteesAxiosInstance.post(
+      `${BASE_URL}${END_POINTS.MENTEE_Tickets}/${menteeId}`,
+      ticketObject
+    );
+
+    console.log("Response from TIcket post API", responseFromApi);
+    return responseFromApi;
+  } catch (error) {
+    console.log(error);
+    toast.error("Something went wrong");
   }
 };

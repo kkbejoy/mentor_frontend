@@ -12,10 +12,10 @@ import FooterComponent from "../../componenets/General/Footer/FooterComponent";
 const MentorProfilePage = () => {
   const dispatch = useDispatch();
   const mentorDetailsObject = useSelector(
-    (state) => state.mentorProfileData.data.mentorData
+    (state) => state?.mentorProfileData?.data?.mentorData
   );
   const isThisMentorSubscriptionActive = useSelector(
-    (state) => state.mentorProfileData.data.isEnrollmentActive
+    (state) => state?.mentorProfileData?.data?.isEnrollmentActive
   );
   console.log("mentor object from page:", mentorDetailsObject);
   const params = useParams();

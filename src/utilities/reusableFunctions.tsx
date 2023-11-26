@@ -30,7 +30,7 @@ export const checkAuthentication = () => {
 export const getMenteeIdFromLocalStorage = () => {
   try {
     const menteeDetails = JSON.parse(localStorage.getItem("menteeAuth"));
-    const menteeId = menteeDetails.menteeId;
+    const menteeId = menteeDetails?.menteeId;
     // console.log("Mentee Id from Local storage", menteeDetails);
     return menteeId;
   } catch (error) {

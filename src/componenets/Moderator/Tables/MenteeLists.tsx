@@ -9,7 +9,7 @@ const MenteeListsComponent = () => {
   const disptch = useDispatch();
 
   const menteesListArray = useSelector(
-    (state) => state.menteesList.data.mentees
+    (state) => state?.menteesList?.data?.mentees
   );
   console.log("Mentees List Array From Mentes-list page", menteesListArray);
   useEffect(() => {

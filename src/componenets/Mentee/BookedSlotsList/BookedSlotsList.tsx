@@ -1,6 +1,7 @@
 /* eslint-disable no-useless-catch */
 import React, { useState } from "react";
 import {
+  compareTimeWithCurrentTime,
   extractDateFromInput,
   extractTimeFromInput,
 } from "../../../utilities/timeManagementFunctions";
@@ -13,6 +14,15 @@ const BookedSlotsListComponenet = ({
   pageRerenderState,
 }) => {
   const [isModalOpen, setModalOpen] = useState(false);
+
+  const handleMenteeGoLive = async (slotId, menteeName) => {
+    try {
+      window.open(`http://localhost:5173/mentees/connect/live/${slotId}`);
+    } catch (error) {
+      console.log("error:", error);
+      toast.error("Please refresh the page..!!");
+    }
+  };
 
   const handleSlotCancelButton = async (slotId) => {
     try {
@@ -49,6 +59,8 @@ const BookedSlotsListComponenet = ({
           {BookeSotsList?.map((slots, index) => {
             const Date = extractDateFromInput(slots?.start);
             const time = extractTimeFromInput(slots?.start);
+            const difference = compareTimeWithCurrentTime(slots?.start);
+
             console.log("Slots", slots);
             return (
               <tr
@@ -64,9 +76,23 @@ const BookedSlotsListComponenet = ({
                 <td className="py-3 px-6 text-center">
                   <button
                     onClick={() => handleSlotCancelButton(slots._id)}
-                    className="bg-red-500 hover:bg-red-700 text-white font-normal py-2 px-4 rounded-full"
+                    className={`bg-red-500 hover:bg-red-700 text-white font-normal py-2 px-4 rounded-full ${
+                      difference ? "hidden" : null
+                    }`}
                   >
                     Cancel
+                  </button>
+                </td>
+                <td>
+                  <button
+                    onClick={() =>
+                      handleMenteeGoLive(slots?._id, slots?.menteeId?.firstName)
+                    }
+                    className={` bg-gradient-to-r from-green-700 to-green-500 animate-pulse text-white font-normal py-2 px-4 rounded-full transition-transform ${
+                      difference ? null : "hidden"
+                    } hover:bg-green-700 hover:scale-105`}
+                  >
+                    Go Live
                   </button>
                 </td>
               </tr>

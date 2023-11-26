@@ -12,6 +12,8 @@ import InboxPageMentee from "../../pages/Mentee/InboxPageMentee";
 import InboxEmptyPage from "../../pages/Mentee/InboxEmptyPage";
 import MenteeProfile from "../../pages/Mentee/MenteeProfile";
 import BookedSlotsList from "../../pages/Mentee/BookedSlotsList";
+import VideoCallInterfaceMenteeSidePage from "../../pages/Mentee/VideoCallInterface";
+import TicketsMenteePage from "../../pages/Mentee/TicketsMenteePage";
 export const MenteeRoute = {
   path: "/mentees",
   element: (
@@ -61,8 +63,16 @@ export const MenteeRoute = {
       element: <InboxPageMentee />,
     },
     {
+      path: "connect/live/:conversationId?",
+      element: <VideoCallInterfaceMenteeSidePage />,
+    },
+    {
       path: "booked-slots",
       element: <BookedSlotsList />,
+    },
+    {
+      path: "tickets",
+      element: <TicketsMenteePage />,
     },
   ],
 };

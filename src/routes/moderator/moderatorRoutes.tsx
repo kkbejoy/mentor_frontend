@@ -3,6 +3,7 @@ import LandingPageModerator from "../../pages/Moderator/LandingPageModerator";
 import MenteesListPage from "../../pages/Moderator/MenteesListPage";
 import MentroApplicantsPage from "../../pages/Moderator/MentorApplicants";
 import MentorsListPage from "../../pages/Moderator/MentorsList";
+import TicketsPage from "../../pages/Moderator/TicketsPage";
 import ModeratorAuthProvider from "./ModeratorAuthProvider";
 
 export const ModeratorRoutes = {
@@ -28,6 +29,10 @@ export const ModeratorRoutes = {
     {
       path: "mentor-applicants",
       element: <MentroApplicantsPage />,
+    },
+    {
+      path: "tickets",
+      element: <TicketsPage />,
     },
   ],
 };

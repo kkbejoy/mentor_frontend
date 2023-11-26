@@ -22,7 +22,7 @@ export const fetchSubscribedMenteesList = createAsyncThunk(
         `${BASE_URL}${END_POINTS.MENTOR_SUBSCRIBED_Mentees}/${mentorId}`
       );
       //   const data = await response.JSON();
-      console.log("List of subscribed Mentees :", response);
+      // console.log("List of subscribed Mentees :", response);
       return response.data.enrolledMentees;
     } catch (error) {
       console.log(error);

@@ -70,3 +70,18 @@ export const extractTimeFromInput = (time) => {
     console.log(error);
   }
 };
+
+//Compare time with the current Time and return true if the input time is past hte current time
+
+export const compareTimeWithCurrentTime = (time) => {
+  try {
+    const currentTime = new Date();
+    const inputTime = new Date(time);
+    const result = currentTime > inputTime;
+
+    console.log(result);
+    return result;
+  } catch (error) {
+    console.log(error);
+  }
+};

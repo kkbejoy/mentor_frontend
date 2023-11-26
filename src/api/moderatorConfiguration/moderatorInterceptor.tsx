@@ -78,9 +78,10 @@ moderatorAxiosInstance.interceptors.response.use(
         return moderatorAxiosInstance(originalRequest);
       } catch (error) {
         console.error("Token refresh unsuccessfull", error);
-        await deleteFromLocalStorage("mentorAuth");
+        await deleteFromLocalStorage("moderatorAuth");
       }
     }
+    return error;
   }
 );
 

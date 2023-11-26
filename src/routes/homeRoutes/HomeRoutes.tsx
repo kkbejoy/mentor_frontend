@@ -10,6 +10,7 @@ import { Home } from "../../App";
 import HeroSection from "../../componenets/General/Hero/HeroSection";
 import BrowseMentorPage from "../../pages/Mentee/BrowseMentorPage";
 import MentorProfilePage from "../../pages/Mentee/MentorProfilePage";
+import GoogleSuccessPage from "../../componenets/General/Login/GoogleAuth/GoogleSuccessPage";
 export const homeRoutes = {
   path: "/",
   element: <Home />,
@@ -49,6 +50,10 @@ export const homeRoutes = {
     {
       path: "/auth/mentee/forgotpassword",
       element: <EnterEmailIdPage />,
+    },
+    {
+      path: "/auth/mentee/googleauthsuccess/:data?",
+      element: <GoogleSuccessPage />,
     },
     {
       path: "*",

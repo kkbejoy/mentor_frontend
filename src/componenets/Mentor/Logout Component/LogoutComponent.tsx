@@ -31,7 +31,7 @@ const LogoutComponent = () => {
   return (
     <div>
       <button onClick={handleLogout}>
-        <p className="text-white">Logout</p>
+        <p className="text-black">Logout</p>
       </button>
     </div>
   );

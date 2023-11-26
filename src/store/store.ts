@@ -19,15 +19,26 @@ import { fetchMentorConversationsReducer } from "../slices/MentorSlices/conversa
 import { menteeNotificationsReducer } from "../slices/MenteeSlices/menteeNotificationSlice";
 import { socketReducer } from "../slices/socketSlice";
 import { menteeBookedTimeSlotReducer } from "../slices/MenteeSlices/bookedTimeSlots";
+import { mentorUpcomingLiveListReducer } from "../slices/MentorSlices/HomePageLiveList";
+import { fetchEnrolledMenteesCountReducer } from "../slices/MentorSlices/HomePageEnrollmentsGraph";
+import { mentorProfileDetailReducer } from "../slices/MentorSlices/MentorProfileSlice";
+import { menteeProfileDetailReducer } from "../slices/MenteeSlices/menteeProfileDetail";
+import { menteeSideTicketsListReducer } from "../slices/MenteeSlices/TicketsList";
+import { mentorSideTicketsReducer } from "../slices/MentorSlices/MentorTicketsSlice";
+import { moderatorSideTicketsListReducer } from "../slices/ModeratorSlices/ticketsListSlice";
+import { dailyEnrollmentDataReducer } from "../slices/ModeratorSlices/DailyEnrollmentdataSlice";
+import { dailyMenteeRegistrationReducer } from "../slices/ModeratorSlices/DailyMenteeRegistrationSlice";
 export const store = configureStore({
   reducer: {
     menteeAuth: menteeReducer,
+    menteeProfileDetails: menteeProfileDetailReducer,
     menteeSideTimeSlot: menteeSideTimeSlotReducer,
     menteeSideSubscribedMentorsList: subscibedMentorsListReducer,
     menteeNotifications: menteeNotificationsReducer,
     menteeConversations: menteeConversationsReducer,
     menteeMessage: menteeMessageReducer,
     menteeBookedTime: menteeBookedTimeSlotReducer,
+    menteeSideTicektsList: menteeSideTicketsListReducer,
     moderatorAuth: moderatorReducer,
     menteesList: menteesTableDetailsReducer,
     mentorsList: mentorsTableDetailsReducer,
@@ -39,7 +50,14 @@ export const store = configureStore({
     mentorMessage: mentorMessageReducer,
     mentorConversations: fetchMentorConversationsReducer,
     mentorTimeSlots: mentorTimeSlotReducer,
+    mentorHomePageTodaysLiveList: mentorUpcomingLiveListReducer,
+    mentorHomePageEnrolledMenteesForGraph: fetchEnrolledMenteesCountReducer,
+    mentorSideTickets: mentorSideTicketsReducer,
     subscribedMenteesList: subscibedMenteesListReducer,
+    mentorProfileDetailsState: mentorProfileDetailReducer,
+    moderatorSideTicketsList: moderatorSideTicketsListReducer,
+    moderatorDailyEnrollmentData: dailyEnrollmentDataReducer,
+    moderatorMenteeRegistrationData: dailyMenteeRegistrationReducer,
     socket: socketReducer,
   },
   middleware: (getDefaultMiddleware) =>

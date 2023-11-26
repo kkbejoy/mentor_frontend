@@ -13,13 +13,13 @@ const UserProfileComponent = ({
   // console.log("Conversations Isread Check", profile);
   const inputTime = profile?.latestMessage?.createdAt;
   const time = getTimeDifference(inputTime);
-  // console.log("Active or not", activeOrNot);
   if (userType === "mentee") {
     return (
       <div
         className={`${
           profile.isRead ? "bg-slate-50" : "bg-slate-200"
         } cursor-pointer  hover:bg-slate-300`}
+        key={profile._id}
       >
         <Link to={`/mentees/connect/inbox/${profile._id}`}>
           <div

@@ -28,3 +28,29 @@ export const deleteFromLocalStorage = async (user) => {
     toast.error("Something Went Wrong. Please Log out and Try again later");
   }
 };
+
+//Get mentee Name from Local Storage
+export const getMenteeNameFromLocalStorage = () => {
+  try {
+    const menteeDetails = JSON.parse(localStorage.getItem("menteeAuth"));
+    const menteeName = menteeDetails?.menteeName;
+    console.log("Mentee Id from Local storage", menteeDetails);
+    return menteeName;
+  } catch (error) {
+    console.log("Mentee id error", error);
+    throw error;
+  }
+};
+
+//Get Mentor Name from Local Storage
+export const getMentorNameFromLocalStorage = () => {
+  try {
+    const mentorDetails = JSON.parse(localStorage.getItem("mentorAuth"));
+    const mentorName = mentorDetails?.mentorName;
+    console.log("Mentee name from Local storage", mentorName);
+    return mentorName;
+  } catch (error) {
+    console.log("Mentor name error", error);
+    throw error;
+  }
+};

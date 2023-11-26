@@ -1,4 +1,39 @@
+import { HeroSectionWelcomeMessage } from "../../../constants/messageToFront";
+import HomePageMentorCards from "../Cards/HomePageMentorCards";
+import HomePageTypewriter from "../Typewriter/HomePageTypewriter";
+
+import Slider from "react-slick";
+
+import "slick-carousel/slick/slick.css";
+import "slick-carousel/slick/slick-theme.css";
+import { useEffect } from "react";
+import { useDispatch, useSelector } from "react-redux";
+import { fetchMentorsListUsingSearchInput } from "../../../slices/MenteeSlices/mentorSearchResultSlice";
 export default function HeroSection() {
+  const dispatch = useDispatch();
+  const mentorListForCards = useSelector(
+    (state) => state?.mentorSearchResult?.data?.mentorsSearchResult
+  );
+
+  const price = useSelector((state) => state.mentorSearchInput.priceRange);
+  const rating = useSelector((state) => state.mentorSearchInput.rating);
+  const search = useSelector((state) => state.mentorSearchInput.search);
+
+  console.log("Mentors", mentorListForCards);
+  useEffect(() => {
+    dispatch(fetchMentorsListUsingSearchInput({ search, price, rating }));
+  }, []);
+  const settings = {
+    dots: true,
+    infinite: true,
+    slidesToShow: 3,
+    slidesToScroll: 1,
+    autoplay: true,
+    speed: 2000,
+    autoplaySpeed: 1500,
+    cssEase: "linear",
+  };
+  const trailArray = [{}, {}, {}];
   return (
     <div className="bg-white">
       <div className="relative isolate px-6  lg:px-8">
@@ -25,13 +60,13 @@ export default function HeroSection() {
             </div>
           </div>
           <div className="text-center">
-            <h1 className="text-4xl font-bold tracking-tight text-gray-900 sm:text-6xl">
+            {/* <h1 className="text-4xl font-bold tracking-tight text-gray-900 sm:text-6xl">
               1-on-1 Start-up Mentorship
-            </h1>
+            </h1> */}
+
+            <HomePageTypewriter />
             <p className="mt-6 text-lg leading-8 text-gray-600">
-              Anim aute id magna aliqua ad ad non deserunt sunt. Qui irure qui
-              lorem cupidatat commodo. Elit sunt amet fugiat veniam occaecat
-              fugiat aliqua.
+              {HeroSectionWelcomeMessage}
             </p>
             <div className="mt-10 flex items-center justify-center "></div>
           </div>{" "}
@@ -48,6 +83,16 @@ export default function HeroSection() {
                 "polygon(74.1% 44.1%, 100% 61.6%, 97.5% 26.9%, 85.5% 0.1%, 80.7% 2%, 72.5% 32.5%, 60.2% 62.4%, 52.4% 68.1%, 47.5% 58.3%, 45.2% 34.5%, 27.5% 76.7%, 0.1% 64.9%, 17.9% 100%, 27.6% 76.8%, 76.1% 97.7%, 74.1% 44.1%)",
             }}
           />
+        </div>
+        <div className=" w-3/4 m-auto ">
+          <div className="mt-0 mb-10 transition-all">
+            {" "}
+            <Slider {...settings}>
+              {mentorListForCards?.slice(0, 4).map((mentor) => {
+                return <HomePageMentorCards profile={mentor} />;
+              })}
+            </Slider>
+          </div>
         </div>
       </div>
     </div>
