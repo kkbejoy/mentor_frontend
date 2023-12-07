@@ -11,6 +11,7 @@ export const fetchMessageMentorSide = createAsyncThunk(
   "data/fetchMessageMentorSide",
   async (conversationId) => {
     try {
+      if (!conversationId) throw new Error("No conversation Id");
       const messages = await mentorAxiosInstance.get(
         `${BASE_URL}${END_POINTS.MENTORS_Get_Messages}/${conversationId}`
       );
@@ -27,7 +28,7 @@ const mentorMessageSlice = createSlice({
   initialState: initialState,
   reducers: {
     addNewMessagMentorSide: (state, action) => {
-      state.data.push(action.payload);
+      state.data?.push(action?.payload);
     },
   },
   extraReducers: (builder) => {

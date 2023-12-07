@@ -1,4 +1,5 @@
 import { Mentee } from "../../App";
+import ErrorPage from "../../componenets/General/Fallback/ErrorPage";
 import LandingPageModerator from "../../pages/Moderator/LandingPageModerator";
 import MenteesListPage from "../../pages/Moderator/MenteesListPage";
 import MentroApplicantsPage from "../../pages/Moderator/MentorApplicants";
@@ -13,6 +14,7 @@ export const ModeratorRoutes = {
       <Mentee />
     </ModeratorAuthProvider>
   ),
+  errorElement: <ErrorPage />,
   children: [
     {
       path: "",

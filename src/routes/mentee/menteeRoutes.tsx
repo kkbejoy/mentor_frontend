@@ -14,6 +14,7 @@ import MenteeProfile from "../../pages/Mentee/MenteeProfile";
 import BookedSlotsList from "../../pages/Mentee/BookedSlotsList";
 import VideoCallInterfaceMenteeSidePage from "../../pages/Mentee/VideoCallInterface";
 import TicketsMenteePage from "../../pages/Mentee/TicketsMenteePage";
+import ErrorPage from "../../componenets/General/Fallback/ErrorPage";
 export const MenteeRoute = {
   path: "/mentees",
   element: (
@@ -21,6 +22,7 @@ export const MenteeRoute = {
       <Mentee />
     </MenteeAuthProvider>
   ),
+  errorElement: <ErrorPage />,
   children: [
     {
       path: "",

@@ -1,7 +1,7 @@
 import React from "react";
 import { Formik, Form } from "formik";
 
-const SearchBoxComponent = () => {
+const SearchBoxComponent = ({ searchName }) => {
   return (
     <div className="relative sticky top-0 z-0 ">
       {" "}
@@ -12,6 +12,7 @@ const SearchBoxComponent = () => {
           <Formik>
             <Form>
               <input
+                onChange={(e) => searchName(e.target.value)}
                 type="text"
                 placeholder="Search Mentor"
                 className="bg-white-300 w-[40vh] px-3 font-extralight rounded-full justify-center my-3 shadow-lg"

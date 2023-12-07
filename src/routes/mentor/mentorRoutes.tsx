@@ -14,6 +14,10 @@ import TicketsMentorSidePage from "../../pages/Mentor/TicketsMentorSide";
 import RaiseANewTicketModal from "../../componenets/General/Modals/RaiseANewTicketModal";
 import HomePageTypewriter from "../../componenets/General/Typewriter/HomePageTypewriter";
 import HomePageMentorCards from "../../componenets/General/Cards/HomePageMentorCards";
+import NotificationDot from "../../componenets/General/Notification/NotificationDot";
+import NotificationDropdown from "../../componenets/General/Notification/MenteeNotificationDropdown";
+import ErrorPage from "../../componenets/General/Fallback/ErrorPage";
+import EmojiPicketComponent from "../../componenets/General/Emoji Picker/EmojiPicketComponent";
 
 export const MentorRoutes = {
   path: "/mentors",
@@ -22,6 +26,7 @@ export const MentorRoutes = {
       <Mentor />
     </MentorAuthProvider>
   ),
+  errorElement: <ErrorPage />,
   children: [
     {
       path: "",
@@ -57,7 +62,7 @@ export const MentorRoutes = {
     },
     {
       path: "/mentors/trail",
-      element: <HomePageMentorCards />,
+      element: <EmojiPicketComponent />,
     },
   ],
 };

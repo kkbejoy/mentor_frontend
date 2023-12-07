@@ -28,6 +28,7 @@ export function Moderator() {
   );
 }
 
+// Mentor Side
 export function Mentee() {
   const dispatch = useDispatch();
   const messages = useSelector((state) => state.menteeMessage.data);
@@ -44,6 +45,9 @@ export function Mentee() {
       toast("New Notification");
     });
     socketBaseConnection?.on("scheduler", (scheduler) => {
+      dispatch(addMenteeNotification(scheduler));
+
+      console.log("schedulerChange", scheduler);
       toast("Schedule changed by mentor");
     });
 
@@ -63,7 +67,13 @@ export function Mentee() {
     });
 
     // const socketBaseConnection = setUpSocket(menteeId);
-  });
+
+    return () => {
+      socketBaseConnection?.off("notification");
+      socketBaseConnection?.off("scheduler");
+      socketBaseConnection?.off("messageReveived");
+    };
+  }, []);
   return (
     <>
       <Outlet />

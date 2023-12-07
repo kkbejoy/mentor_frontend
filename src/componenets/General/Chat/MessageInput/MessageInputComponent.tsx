@@ -2,8 +2,11 @@ import React, { useState } from "react";
 import { UilEnvelopeUpload } from "@iconscout/react-unicons";
 import { Formik, Form, Field } from "formik";
 import { toast } from "sonner";
+import EmojiPicker from "emoji-picker-react";
+
 import { addNewMessage } from "../../../../slices/MenteeSlices/messageSlice";
 import { useDispatch } from "react-redux";
+import EmojiPicketComponent from "../../Emoji Picker/EmojiPicketComponent";
 const MessageInputComponent = ({
   sentMessageAPI,
   conversationId,
@@ -17,9 +20,9 @@ const MessageInputComponent = ({
   const handleMessageSending = async (values, { resetForm }) => {
     try {
       const messageInput = values.messageInput;
-      console.log("Message input", values);
+      // console.log("Message input", values);
       if (values.messageInput.trim() === "") {
-        console.log("no inpu");
+        // console.log("no inpu");
         return;
       }
       const responseFromMessageSendAPI = await sentMessageAPI(
@@ -42,7 +45,7 @@ const MessageInputComponent = ({
   };
   const handleTyping = async (e) => {
     try {
-      console.log("Typing", e.target.value);
+      // console.log("Typing", e.target.value);
       setinputValue();
       return;
     } catch (error) {
@@ -66,9 +69,14 @@ const MessageInputComponent = ({
               placeholder="Please type your query or question here              "
               className=" text-end p-4 h-[7vh] bg-gray-100 rounded-md w-full mx-5 border-spacing-2 "
             />
-            <button className="w=2/5 mr-9">
+            <button className="w=2/5 mr-0 hover:bg-green-200 transition-colors px-2 rounded-md">
               <UilEnvelopeUpload color="mentorBlue" />
             </button>{" "}
+            <div className="absolute  inset-y-0 right-0 flex items-center pr-2 sm:static sm:inset-auto sm:ml-6 sm:pr-0">
+              <EmojiPicketComponent
+                onEmojiSelectionFunction={handleMessageSending}
+              />
+            </div>
           </div>
           <div className="flex justify-center text-center">
             <button
@@ -89,7 +97,7 @@ const MessageInputComponent = ({
             >
               👍🏻
             </button>
-          </div>
+          </div>{" "}
         </Form>
       </Formik>
     </div>

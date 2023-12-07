@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useEffect } from "react";
 import { Fragment } from "react";
 import { Disclosure, Menu, Transition } from "@headlessui/react";
 import { Bars3Icon, BellIcon, XMarkIcon } from "@heroicons/react/24/outline";
@@ -6,18 +6,31 @@ import { checkAuthentication } from "../../utilities/reusableFunctions";
 import LogoutComponent from "./Logout Component/LogoutComponent";
 import MentorDropDown from "./OptionsDropdown/MentorDropDown";
 import { Link } from "react-router-dom";
+import { useDispatch, useSelector } from "react-redux";
+import { fetchTheNumberOfUnreadMesagesMentorSide } from "../../slices/MentorSlices/unreadConversation";
 const NavbarMentor = () => {
+  const dispatch = useDispatch();
   const navigation = [
     { name: "Home", href: "/mentors" },
     // { name: "Profile", href: "/mentors/profile" },
     { name: "Scheduler", href: "/mentors/scheduler" },
     // { name: "Mentees", href: "/mentors/subscribed-mentees" },
-    { name: "Connect", href: "/mentors/connect/inbox/" },
+    { name: "Connect", href: "/mentors/connect/inbox/", notify: true },
     { name: "Raise a ticket", href: "/mentors/tickets" },
     // { name: "Mentors List", href: "#", current: false },
   ];
   const isAuthenticated = checkAuthentication();
   console.log("Authenticated", isAuthenticated);
+
+  useEffect(() => {
+    dispatch(fetchTheNumberOfUnreadMesagesMentorSide());
+  }, []);
+
+  const unreadConversationLength = useSelector(
+    (state) => state?.mentorSideUnreaMessageCount?.unreadCount
+  );
+
+  console.log("Unread Conversations:", unreadConversationLength);
   return (
     <Disclosure
       as="nav"
@@ -63,6 +76,13 @@ const NavbarMentor = () => {
                         aria-current={item.current ? "page" : undefined}
                       >
                         {item.name}
+                        {item.notify ? (
+                          <span className="text-red-400 ml-3 text-sm">
+                            {unreadConversationLength > 0
+                              ? unreadConversationLength
+                              : null}
+                          </span>
+                        ) : null}
                       </Link>
                     ))}
                   </div>

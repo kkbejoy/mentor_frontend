@@ -229,3 +229,18 @@ export const raiseANewTicketFromMentorSide = async ({
     toast.error("Something went wrong");
   }
 };
+
+// Function that Changes the message as Read
+
+export const markAsReadMessageFromMentorSide = async (conversationId) => {
+  try {
+    if (!conversationId) throw new Error("No conversation id");
+    const responseFromApi = await mentorAxiosInstance.patch(
+      `${BASE_URL}${END_POINTS.MENTOR_Get_Conversations}/${conversationId}`
+    );
+    console.log(responseFromApi);
+    return;
+  } catch (error) {
+    console.log(error);
+  }
+};

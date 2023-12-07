@@ -11,9 +11,11 @@ import HeroSection from "../../componenets/General/Hero/HeroSection";
 import BrowseMentorPage from "../../pages/Mentee/BrowseMentorPage";
 import MentorProfilePage from "../../pages/Mentee/MentorProfilePage";
 import GoogleSuccessPage from "../../componenets/General/Login/GoogleAuth/GoogleSuccessPage";
+import ErrorPage from "../../componenets/General/Fallback/ErrorPage";
 export const homeRoutes = {
   path: "/",
   element: <Home />,
+  errorElement: <ErrorPage />,
   children: [
     {
       path: "/",
@@ -55,9 +57,9 @@ export const homeRoutes = {
       path: "/auth/mentee/googleauthsuccess/:data?",
       element: <GoogleSuccessPage />,
     },
-    {
-      path: "*",
-      element: <NoMatchComponent />,
-    },
+    // {
+    //   path: "*",
+    //   element: <NoMatchComponent />,
+    // },
   ],
 };

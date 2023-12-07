@@ -43,7 +43,7 @@ const menteeNotificationsSlice = createSlice({
         (notification) => notification.someUniqueField !== action.payload
       );
     },
-    markAsRead: (state) => {
+    markAsRead: (state, action) => {
       state.isRead = true;
     },
   },

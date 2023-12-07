@@ -29,7 +29,7 @@ export const MentorSearchResultComponent = () => {
     return <h1>Loading</h1>;
   }
   return (
-    <main className="max-w-screen-x1 mx-auto ">
+    <main className="max-w-screen-x1 mx-auto min-h-screen">
       {mentorsListArray
         ? mentorsListArray.map((mentor) => <MentorCards mentor={mentor} />)
         : null}

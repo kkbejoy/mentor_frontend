@@ -42,7 +42,7 @@ export default function CalenderComponent({
 
   const handleSelectedEvent = async (id) => {
     // console.log("Id of Slot", id);
-    modalData = fetchAllotedSlotDetails(id);
+    modalData = await fetchAllotedSlotDetails(id);
     // console.log("Modal data", modalData);
     setUpdateModalData(modalData);
     setNewSlotModal(false);

@@ -28,6 +28,8 @@ import { mentorSideTicketsReducer } from "../slices/MentorSlices/MentorTicketsSl
 import { moderatorSideTicketsListReducer } from "../slices/ModeratorSlices/ticketsListSlice";
 import { dailyEnrollmentDataReducer } from "../slices/ModeratorSlices/DailyEnrollmentdataSlice";
 import { dailyMenteeRegistrationReducer } from "../slices/ModeratorSlices/DailyMenteeRegistrationSlice";
+import { unreadMessagesCountMenteeReducer } from "../slices/MenteeSlices/unreadMessagesCount";
+import { unreadMessagesCountMentorReducer } from "../slices/MentorSlices/unreadConversation";
 export const store = configureStore({
   reducer: {
     menteeAuth: menteeReducer,
@@ -38,6 +40,7 @@ export const store = configureStore({
     menteeConversations: menteeConversationsReducer,
     menteeMessage: menteeMessageReducer,
     menteeBookedTime: menteeBookedTimeSlotReducer,
+    MenteeSideunReadConversations: unreadMessagesCountMenteeReducer,
     menteeSideTicektsList: menteeSideTicketsListReducer,
     moderatorAuth: moderatorReducer,
     menteesList: menteesTableDetailsReducer,
@@ -51,6 +54,7 @@ export const store = configureStore({
     mentorConversations: fetchMentorConversationsReducer,
     mentorTimeSlots: mentorTimeSlotReducer,
     mentorHomePageTodaysLiveList: mentorUpcomingLiveListReducer,
+    mentorSideUnreaMessageCount: unreadMessagesCountMentorReducer,
     mentorHomePageEnrolledMenteesForGraph: fetchEnrolledMenteesCountReducer,
     mentorSideTickets: mentorSideTicketsReducer,
     subscribedMenteesList: subscibedMenteesListReducer,

@@ -18,16 +18,16 @@ const SlotUpdateForm = ({
   const [data, setData] = useState({});
   const [isDeleted, setDeleted] = useState(false);
   const mentorId = getMentorIdFromLocalStorage();
+  const socketInstance = setUpSocket(mentorId);
+  console.log("Slot object", SlotObject);
   useEffect(() => {
-    SlotObject.then((slot) => {
-      setData(slot.resonseFromDb);
-    });
+    // SlotObject.then((slot) => {
+    // socketInstance?.emit("scheduler", slot.resonseFromDb);
+    setData(SlotObject.resonseFromDb);
+    // });
   }, [SlotObject]);
 
-  // useEffect(() => {
-  //   const socketInstance = setUpSocket(mentorId);
-  //   socketInstance?.emit("scheduler", data);
-  // }, [data]);
+  useEffect(() => {}, [data]);
 
   const dateObject = convertTimeForMentorSlotViewModal(data.start, data.end);
 
@@ -37,8 +37,10 @@ const SlotUpdateForm = ({
       console.log("Delete Button Pressed");
 
       const res = await deleteSlot(data?._id);
-
+      console.log("Resinse from deletetion", res);
       const newRes = { ...renderState, ...res };
+      socketInstance?.emit("scheduler", res?.data?.notifyMentee);
+
       setData(true);
       setCalenderRerenderFunction(newRes);
       setLoading(false);

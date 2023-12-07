@@ -9,6 +9,7 @@ import { Toaster, toast } from "sonner";
 import mentorAxiosInstance from "../mentorConfiguration/mentorInterceptor";
 import { useDispatch } from "react-redux";
 import { addNewMessage } from "../../slices/MenteeSlices/messageSlice";
+import { menteeAsyncLogin } from "../../slices/menteesAuthSlice";
 
 //API For Mentee Registration
 export const menteeRegistration = async (values) => {
@@ -306,5 +307,52 @@ export const raiseANewTicketFromMenteeSide = async ({
   } catch (error) {
     console.log(error);
     toast.error("Something went wrong");
+  }
+};
+
+// Mark all the notification corresponding to this user as Read
+
+export const markNotificationsAsRead = async () => {
+  try {
+    const { menteeId } = getUserIdAndToken("menteeAuth");
+    const responseFromapi = await mentorAxiosInstance.patch(
+      `${BASE_URL}${END_POINTS.MENTEES_Notifications}/${menteeId}`
+    );
+
+    return responseFromapi;
+  } catch (error) {
+    console.log(error);
+    throw error;
+  }
+};
+
+//Fetch the number of Unread messages
+
+export const getTheNumberOfUnreadMessages = async () => {
+  try {
+    const { menteeId } = getUserIdAndToken("menteeAuth");
+
+    const responseFromAPI = await menteesAxiosInstance.get(
+      `${BASE_URL}${END_POINTS.MENTEES_Get_UNREAD_Conversations_COUNT}?menteId=${menteeId}`
+    );
+    console.log("Reswponse from fetching Unread Convo count", responseFromAPI);
+    return responseFromAPI?.data?.unreadConversations;
+  } catch (error) {
+    console.log(error);
+  }
+};
+
+// Function that Chanfes the message as Read
+
+export const markAsReadMessageFromMenteeSide = async (conversationId) => {
+  try {
+    console.log("Use call Bakc Working");
+    const responseFromApi = await menteesAxiosInstance.patch(
+      `${BASE_URL}${END_POINTS.MENTEES_Get_Conversations}/${conversationId}`
+    );
+    console.log(responseFromApi);
+    return;
+  } catch (error) {
+    console.log(error);
   }
 };

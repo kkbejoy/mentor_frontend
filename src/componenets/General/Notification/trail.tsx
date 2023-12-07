@@ -6,14 +6,8 @@ import { getTimeDifference } from "../../../utilities/timeManagementFunctions";
 import { useDispatch } from "react-redux";
 import { markAsRead } from "../../../slices/MenteeSlices/menteeNotificationSlice";
 import { Menu, Transition } from "@headlessui/react";
-import { toast } from "sonner";
 
-function NotificationDropdown({
-  notifications,
-  newNotification,
-  markNotificationAsReadFunction,
-  reRenderFunction,
-}) {
+function NotificationDropdown({ notifications, newNotification }) {
   // console.log("Notifications", notifications);
   const [isOpen, setIsOpen] = useState(false);
   const dispatch = useDispatch();
@@ -23,18 +17,8 @@ function NotificationDropdown({
     }
     setIsOpen(!isOpen);
   };
-
-  const handleMarkNotificationAsRead = async () => {
-    try {
-      const resposeFromDb = await markNotificationAsReadFunction();
-      reRenderFunction({ ...resposeFromDb });
-    } catch (error) {
-      console.log(error);
-      toast.error("Marking Notification as read Failed");
-    }
-  };
   return (
-    <div onClick={handleMarkNotificationAsRead} className=" top-16 text-right">
+    <div className=" top-16 text-right">
       <Menu as="div" className="relative inline-block text-left">
         {/* Trigger for the dropdown */}
         <Menu.Button className="inline-flex w-full justify-center rounded-md bg-black/20 px-4 py-2 text-sm font-medium text-white hover:bg-black/30 focus:outline-none focus-visible:ring-2 focus-visible:ring-white/75">
@@ -57,15 +41,13 @@ function NotificationDropdown({
             <div className="px-1 py-1 ">
               {notifications?.notifications.length !== 0 ? (
                 notifications?.notifications
-                  ?.map((notification, index) => {
+                  ?.map((notification) => {
                     if (notification?.type === "message") {
                       // console.log("Messssss", notification);
                       return (
-                        <Menu.Item key={index}>
+                        <Menu.Item>
                           <div
-                            className={`py-2 px-4 border-b ${
-                              notification.isRead ? null : "bg-red-100"
-                            }`}
+                            className="py-2 px-4 border-b"
                             key={notification?._id}
                           >
                             <Link

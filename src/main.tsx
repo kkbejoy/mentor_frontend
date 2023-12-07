@@ -7,6 +7,8 @@ import { store } from "./store/store.ts";
 import { RouterProvider } from "react-router-dom";
 import { ApplicationBaseRoutes } from "./routes/ApplicationRoutesBase.tsx";
 import "react-big-calendar/lib/css/react-big-calendar.css";
+import { ErrorBoundary } from "react-error-boundary";
+import ErrorPage from "./componenets/General/Fallback/ErrorPage.tsx";
 ReactDOM.createRoot(document.getElementById("root")!).render(
   <React.StrictMode>
     <Provider store={store}>

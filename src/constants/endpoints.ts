@@ -20,17 +20,20 @@ const END_POINTS = {
   MENTEE_Profile_Update: "/api/mentees/edit-profile",
   MENTEE_Booked_Time_SLots: "/api/mentees/booked-slots",
   MENTEE_Tickets: "/api/mentees/raise-ticket",
+  MENTEE_SEND_OTP: "/api/mentees/sent-otp",
+  MENTEE_NEW_PASSWORD_SUBMISSION: "/api/mentees/verify-otp",
 
   //Chat Routes
   MENTEES_Conversations_Read_Unread: "/api/chats/messages",
   MENTEES_GetMessagesBetweenMentorAndMentee: "/api/chats/messages",
-
   MENTEES_Send_Message: "/api/chats/mentee-messages",
   MENTEES_Get_Conversations: "/api/chats/mentee-messages",
+  MENTEES_Get_UNREAD_Conversations_COUNT: "/api/chats/mentee-messages",
   MENTEES_Get_Messages: "/api/chats/mentee-messages",
 
   MENTORS_Send_Message: "/api/chats/mentor-messages",
   MENTOR_Get_Conversations: "/api/chats/mentor-messages",
+  MENTOR_Get_UNREAD_Conversations_COUNT: "/api/chats/mentor-messages",
 
   MENTORS_Get_Messages: "/api/chats/mentor-messages",
 

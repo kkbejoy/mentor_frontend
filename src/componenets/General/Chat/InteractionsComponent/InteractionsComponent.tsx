@@ -31,6 +31,7 @@ const InteractionsComponent = ({
       <MessageTitleComponent
         senderName={profile?.name}
         senderImage={profile?.imageUrl}
+        senderId={profile?._id}
       />
       {/* messages */}
       <MessageContent messages={messages} userType={userType} />

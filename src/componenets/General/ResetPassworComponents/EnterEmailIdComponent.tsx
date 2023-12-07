@@ -1,39 +1,72 @@
 import React, { useState } from "react";
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import { routesFrontend } from "../../../constants/frontendRoutes";
 import { Formik, Form, ErrorMessage, Field } from "formik";
 import { toast } from "sonner";
+import {
+  confirmNewPassword,
+  sentOtp,
+} from "../../../api/generalConfiguration/generalServices";
 
 const EnterEmailIdComponent = () => {
   const [otpSend, setOtpSend] = useState(false);
   const [emailVerified, setEmailVerified] = useState(false);
   const [isLoading, setIsLoading] = useState(false);
-
+  const [newPasswordObject, setNewPasswordObject] = useState({});
+  const navigate = useNavigate();
   const initialValuesEmail = {
     email: "",
   };
+  //Sample New Password Objecr
 
+  // {
+  //   email:,
+  //   password:,
+  //   confirmPassword:,
+  //   otp:
+  // }
   const initialValuesPasswrod = {
     otp: "",
     password: "",
     confirmpassword: "",
   };
-  const handleSubmitEmail = async () => {
-    // e.preventDefault();
+  const handleSubmitEmail = async (values) => {
+    console.log("values", values);
     try {
-      setEmailVerified(true);
+      const resposeFromSendOTP = await sentOtp(values.email);
+      if (resposeFromSendOTP?.status === 200) {
+        setEmailVerified(true);
+        setNewPasswordObject({ email: emailVerified });
+      } else throw new Error("something went wrong");
+      console.log("res from Send otp", resposeFromSendOTP);
     } catch (error) {
       console.log(error);
+      toast.error("error");
     }
   };
 
-  const handleNewPasswordSubmission = async () => {
+  //Handle new password submission
+  const handleNewPasswordSubmission = async (values) => {
     try {
       setIsLoading(true);
-      toast.success("Successfully entered teh details");
+
+      const { otp, password, confirmpassword } = values;
+      console.log("entered vallues are", otp, password, confirmpassword);
+      const responseFromAPi = await confirmNewPassword({
+        emailVerified,
+        otp,
+        password,
+        confirmpassword,
+      });
+      toast.success("Password Changed Successfully..!! Please login again");
+      setIsLoading(false);
+
+      setTimeout(() => {
+        navigate("/auth/login");
+      }, 1000);
     } catch (error) {
       console.log(error);
-      toast.error("Error..!!!");
+      toast.error("Error..!!!", error?.response?.data?.message);
     }
   };
 

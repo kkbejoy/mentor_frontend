@@ -5,23 +5,44 @@ import NavbarHome from "../Navbar/navbar";
 import FooterComponent from "../Footer/FooterComponent";
 import { useDispatch } from "react-redux";
 import { FETCH_DATA } from "../../../constants/stateConstants";
+import { userTypes } from "../../../constants/constants";
+import { sortMessages } from "../../../utilities/chatUtilities";
 
 const ChatUsersListComponent = ({
   conversationsList,
   userType,
   conversationId,
 }) => {
-  console.log("Conversations list1", conversationsList);
+  const [searchString, setSearchString] = useState();
+  // console.log("Conversations list1", conversationsList);
+  const filteredConversationListMenteeSide = conversationsList?.filter(
+    (conversations) => {
+      return conversations?.participants[0]?.mentor?.firstName?.toLowerCase().includes(searchString?.toLowerCase());
+    }
+  );
+  const filteredConversationListMentorSide = conversationsList?.filter(
+    (conversations) => {
+      return conversations?.participants[0]?.mentee?.firstName?
+        .toLowerCase()
+        .includes(searchString?.toLowerCase())
+    }
+  );
+  const conversations = searchString
+    ? (userType === userTypes.MENTEE
+      ? filteredConversationListMenteeSide
+      : filteredConversationListMentorSide)
+    : conversationsList;
+  console.log("Conversations list1", conversations);
 
   return (
     <>
       <section className="bg-white h-[100vh] overflow-x-hidden overflow-y-visible w-1/4 ">
         {/* Search COmponent */}
-        <SearchBoxComponent />
+        <SearchBoxComponent searchName={setSearchString} />
         {/* profileCards */}
         {conversationsList
-          ? conversationsList.map((profile) => {
-              console.log("MentorProfile", profile);
+          ? conversations.map((profile) => {
+              // console.log("MentorProfile", profile);
               const activeOrNot =
                 profile?._id === conversationId ? true : false;
               return (

@@ -1,9 +1,12 @@
-import React, { useEffect, useState } from "react";
+import React, { useCallback, useEffect, useState } from "react";
 import NavbarMentee from "../../componenets/Mentee/NavbarMentee";
 import ChatUsersListComponent from "../../componenets/General/Chat/ChatUsersListComponent";
 import FooterComponent from "../../componenets/General/Footer/FooterComponent";
 import InteractionsComponent from "../../componenets/General/Chat/InteractionsComponent/InteractionsComponent";
-import { sentMessageFromMentee } from "../../api/menteesConfiguration/menteeServices";
+import {
+  markAsReadMessageFromMenteeSide,
+  sentMessageFromMentee,
+} from "../../api/menteesConfiguration/menteeServices";
 import { useDispatch, useSelector } from "react-redux";
 import {
   fetchMenteeConversations,
@@ -32,7 +35,7 @@ const InboxPageMentee = () => {
   const [socketConnected, setSocketConnection] = useState(false);
   const [messagesSocket, setSocketMessages] = useState(); //To manage realtime Messages
   const [newMessageFromSocket, setNewMessageFromSocket] = useState({}); //To manage realtime Messages
-
+  const [searchString, setSearchString] = useState("");
   const dispatch = useDispatch();
   const location = useParams();
   const menteeId = getMenteeIdFromLocalStorage();
@@ -40,15 +43,17 @@ const InboxPageMentee = () => {
   //Getting Chat Rooms for a Particular User From Redux
   const { conversationId } = location;
   // const socket = useSelector((state) => state.socket);
-  const menteeNotifications = useSelector((state) => state.menteeNotifications);
   const menteeConversations = useSelector(
     (state) => state.menteeConversations?.data?.conversations
   );
   //Getting Messages for a Particular Converstaion id From Redux
   const messages = useSelector((state) => state.menteeMessage.data);
 
-  //user Effect
-
+  //Mark as read
+  const markAsRead = useCallback(
+    markAsReadMessageFromMenteeSide(conversationId),
+    [conversationId]
+  );
   //Use Effect that excecute for every State change
   useEffect(() => {
     socketBaseConnection = setUpSocket(menteeId);
@@ -65,20 +70,25 @@ const InboxPageMentee = () => {
         setNewMessageFromSocket(newMessage);
       }
     });
+    return () => {
+      socketBaseConnection.off("messageReveived");
+    };
   }, []);
 
   //Message Emitting socket
   useEffect(() => {
     socketBaseConnection?.emit("new message", messagesSocket);
+    dispatch(fetchMenteeConversations(searchString));
   }, [messagesSocket]);
 
   //Changes the chat Room
   useEffect(() => {
-    dispatch(fetchMenteeConversations());
+    dispatch(fetchMenteeConversations(searchString));
     dispatch(fetchMessageWithConversationId(conversationId));
-    dispatch(markAsReadMenteeSide(conversationId));
+    // markAsRead();
+    // dispatch(markAsReadMenteeSide(conversationId));
     // socketBaseConnection?.emit("chat room", conversationId);
-  }, [conversationId, location]);
+  }, [conversationId, searchString]);
 
   //Received New Message From socket
   useEffect(() => {
@@ -88,6 +98,7 @@ const InboxPageMentee = () => {
       dispatch(addNewMessage(newMessageFromSocket));
       dispatch(addMenteeNotification(formattedMessage));
     }
+    dispatch(fetchMenteeConversations(searchString));
 
     // toast(
     //   `Receivedd a new message from ${newMessageFromSocket?.sender?.senderId?.firstName}`

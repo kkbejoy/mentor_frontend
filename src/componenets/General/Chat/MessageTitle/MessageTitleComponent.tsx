@@ -1,7 +1,8 @@
 import React from "react";
+import { Link } from "react-router-dom";
 
-const MessageTitleComponent = ({ senderName, senderImage }) => {
-  console.log("Image url", senderImage);
+const MessageTitleComponent = ({ senderName, senderImage, senderId }) => {
+  console.log("Image url", senderId);
   return (
     <div className="flex flex-col-2 bg-gray-100 ">
       <div className="h-20">
@@ -13,7 +14,9 @@ const MessageTitleComponent = ({ senderName, senderImage }) => {
       </div>
       <div className="h-[7vh]">
         {" "}
-        <h1 className="text-center font-semibold pl-3 pt-4">{senderName}</h1>
+        <Link to={`/browse/mentor/profile/${senderId}`} target="blank">
+          <h1 className="text-center font-semibold pl-3 pt-4">{senderName}</h1>
+        </Link>
         <h1 className=" font-xs text-left pl-4"></h1>
       </div>
     </div>

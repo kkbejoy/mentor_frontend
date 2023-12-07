@@ -13,14 +13,12 @@ export const markAsReadMenteeSide = createAsyncThunk(
   "data/markAsReadMenteeSide",
   async (conversationId) => {
     try {
-      console.log("Response from Read unread", conversationId);
-
       const responseFromAPI = await menteesAxiosInstance.patch(
         `${BASE_URL}${END_POINTS.MENTEES_Conversations_Read_Unread}`,
         { conversationId }
       );
       console.log("Response from Read unread", responseFromAPI);
-      return responseFromAPI;
+      // return responseFromAPI;
     } catch (error) {
       console.log(error);
     }
@@ -29,15 +27,14 @@ export const markAsReadMenteeSide = createAsyncThunk(
 //Async Thunk fucntion to fetch datas of mentees from backend
 export const fetchMenteeConversations = createAsyncThunk(
   "data/fetchMenteeConversations",
-  async () => {
+  async (mentorName) => {
     try {
       const menteeId = await getMenteeIdFromLocalStorage();
-      console.log("MenteeiD", menteeId);
       const response = await menteesAxiosInstance.post(
-        `${BASE_URL}${END_POINTS.MENTEES_Get_Conversations}`,
+        `${BASE_URL}${END_POINTS.MENTEES_Get_Conversations}?mentorName=hello`,
         { menteeId }
       );
-      // console.log("Conversations response", response.data);
+      console.log("Conversations response", response.data);
       return response.data;
     } catch (error) {
       console.log(error);

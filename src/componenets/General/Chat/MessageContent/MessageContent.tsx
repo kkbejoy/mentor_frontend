@@ -57,7 +57,7 @@ const MessageContent = ({ messages, userType }) => {
         // style={"overflow-y: auto"}
       >
         {messages
-          ? messages.map((text) => {
+          ? messages.map((text, index) => {
               if (text?.sender?.senderType === "mentee") {
                 const time = convertMessageCreatedTime(text?.createdAt);
                 return <ReceivedMessages text={text.content} time={time} />;
@@ -65,7 +65,7 @@ const MessageContent = ({ messages, userType }) => {
                 const time = convertMessageCreatedTime(text?.createdAt);
                 return (
                   <>
-                    <div className="flex justify-end ">
+                    <div key={index} className="flex justify-end  ">
                       <SendMessagesComponent text={text?.content} time={time} />
                     </div>
                   </>

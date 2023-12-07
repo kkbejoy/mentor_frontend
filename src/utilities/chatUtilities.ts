@@ -16,6 +16,7 @@ export const extractNameAndImageUrlForChat = (
         currentState._id === conversationId &&
         userType === userTypes.MENTEE
       ) {
+        profile._id = currentState._id;
         profile.name =
           currentState.participants[0]?.mentor.firstName +
           " " +
@@ -25,13 +26,15 @@ export const extractNameAndImageUrlForChat = (
         currentState._id === conversationId &&
         userType === userTypes.MENTOR
       ) {
+        profile._id = currentState._id;
+
         profile.name =
           currentState.participants[0]?.mentee.firstName +
           " " +
           currentState.participants[0]?.mentee.lastName;
         profile.imageUrl = currentState.participants[0]?.mentee.profileImageUrl;
       }
-      console.log("Conversation list", profile);
+      // console.log("Conversation list", profile);
       return profile;
     }, {});
     return profile;
@@ -85,5 +88,17 @@ export const setUpSocket = (userId) => {
     return socket;
   } catch (error) {
     console.log("Error from socket setup", error);
+  }
+};
+
+//Sorting messages
+
+export const sortMessages = (a, b) => {
+  try {
+    return (
+      new Date(a.latestMessage.updatedAt) - new Date(b.latestMessage.updatedAt)
+    );
+  } catch (error) {
+    console.log(error);
   }
 };

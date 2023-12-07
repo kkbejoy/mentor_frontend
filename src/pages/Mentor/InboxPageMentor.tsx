@@ -1,8 +1,11 @@
-import React, { useEffect, useState } from "react";
+import React, { useCallback, useEffect, useState } from "react";
 import NavbarMentor from "../../componenets/Mentor/NavbarMentor";
 import ChatUsersListComponent from "../../componenets/General/Chat/ChatUsersListComponent";
 import InteractionsComponent from "../../componenets/General/Chat/InteractionsComponent/InteractionsComponent";
-import { sentMessageFromMentor } from "../../api/mentorConfiguration/mentorServices";
+import {
+  markAsReadMessageFromMentorSide,
+  sentMessageFromMentor,
+} from "../../api/mentorConfiguration/mentorServices";
 import { useDispatch, useSelector } from "react-redux";
 import {
   addNewMessagMentorSide,
@@ -55,10 +58,17 @@ const InboxPageMentor = () => {
       setNewMessageFromSocket(newMessage);
     });
     socket.emit("chat room", conversationId);
+
+    return () => {
+      socket.off("connection");
+      socket.off("messageReveived");
+      socket.off("new message");
+    };
   }, []);
   useEffect(() => {
     dispatch(fetchMessageMentorSide(conversationId));
     dispatch(fetchMentorConversations());
+    markAsReadMessageFromMentorSide(conversationId);
     // socket.emit("chat room", conversationId);
   }, [conversationId]);
   // useEffect(() => {
@@ -76,9 +86,12 @@ const InboxPageMentor = () => {
 
       dispatch(addNewMessagMentorSide(newMessageFromSocket));
     }
+    dispatch(fetchMentorConversations());
   }, [newMessageFromSocket]);
   useEffect(() => {
     socket?.emit("new message", messagesSocket);
+    dispatch(fetchMentorConversations());
+
     // socket?.emit("notification", messagesSocket);
   }, [messagesSocket]);
   return (

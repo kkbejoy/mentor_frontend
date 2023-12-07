@@ -6,36 +6,51 @@ import LogoutComponent from "./Logout Component/LogoutComponent";
 import { checkAuthentication } from "../../utilities/reusableFunctions";
 import { routesFrontend } from "../../constants/frontendRoutes";
 import NotificationDropdown from "../General/Notification/MenteeNotificationDropdown";
-import { useSelector } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
 import MenteeDropDown from "./OptionsDropdown/MenteeDropdown";
 import { Link } from "react-router-dom";
+import {
+  getTheNumberOfUnreadMessages,
+  markNotificationsAsRead,
+} from "../../api/menteesConfiguration/menteeServices";
+import { getMenteeNotification } from "../../slices/MenteeSlices/menteeNotificationSlice";
+import { unReadNotifications } from "../../utilities/notificationsUtilities";
+import { fetchTheNumberOfUnreadMesages } from "../../slices/MenteeSlices/unreadMessagesCount";
 const NavbarMentee = () => {
   const [notifications, setNotifications] = useState([]); // Store new notifications
   const [previousNotifications, setPreviousNotifications] = useState([]);
+  const [reRender, setRerender] = useState({});
+  const dispatch = useDispatch();
   const notificationsFromApi = useSelector(
     (state) => state.menteeNotifications
   );
+  const isThereUnreadNotifications = unReadNotifications(
+    notificationsFromApi?.notifications
+  );
+  const unreadMessageCount = useSelector(
+    (state) => state.MenteeSideunReadConversations.unreadCount
+  );
 
-  // useEffect(() => {
-  //   setPreviousNotifications(notificationsFromApi);
-  //   setNotifications(notificationsFromApi);
-  // }, [notificationsFromApi]);
+  console.log("Notioficatiopns", unreadMessageCount);
+  // const isUnreadNotifications = async;
+  useEffect(() => {
+    dispatch(getMenteeNotification());
+    dispatch(fetchTheNumberOfUnreadMesages());
+  }, [reRender]);
 
-  // const newNotifications = notifications.filter(
-  //   (notification) =>
-  //     !previousNotifications.some(
-  //       (prevNotification) => prevNotification.id === notification.id
-  //     )
-  // );
   const navigation = [
     { name: "Home", href: "/mentees" },
-    { name: "Subscriptions", href: "/mentees/subscribed-mentors" },
-    { name: "Schedules", href: "/mentees/schedules" },
     {
       name: "Browse Mentors",
       href: routesFrontend.MentorBrowsePage,
     },
-    { name: "Connect", href: "/mentees/connect/inbox/" },
+    { name: "Subscriptions", href: "/mentees/subscribed-mentors" },
+    { name: "Schedules", href: "/mentees/schedules" },
+    {
+      name: "Raise a Ticket",
+      href: "/mentees/tickets",
+    },
+    { name: "Connect", href: "/mentees/connect/inbox/", notify: true },
     // { name: "Applicants", href: "#", current: false },
     // { name: "Mentors List", href: "#", current: false },
   ];
@@ -87,6 +102,13 @@ const NavbarMentee = () => {
                         aria-current={item.current ? "page" : undefined}
                       >
                         {item.name}
+                        <span className="text-red-400 ml-3 text-sm">
+                          {item.notify
+                            ? unreadMessageCount > 0
+                              ? unreadMessageCount
+                              : null
+                            : null}
+                        </span>
                       </Link>
                     ))}
                   </div>
@@ -94,18 +116,13 @@ const NavbarMentee = () => {
               </div>
 
               <div className="absolute inset-y-0 right-0 flex items-center pr-2 sm:static sm:inset-auto sm:ml-6 sm:pr-0">
-                <button
-                  type="button"
-                  className="relative rounded-full bg-gray-800 p-1 text-gray-400  focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-offset-gray-800"
-                >
-                  <span className="absolute -inset-1.5" />
-                  <span className="sr-only">View notifications</span>
-                  {/* <BellIcon className="h-6 w-6" aria-hidden="true" /> */}
-                  <NotificationDropdown
-                    notifications={notificationsFromApi}
-                    newNotification={true}
-                  />
-                </button>
+                <NotificationDropdown
+                  notifications={notificationsFromApi}
+                  newNotification={isThereUnreadNotifications}
+                  markNotificationAsReadFunction={markNotificationsAsRead}
+                  reRenderFunction={setRerender}
+                />
+
                 {/* Profile dropdown */}
                 <Menu as="div" className="relative ml-3">
                   {isAuthenticated && <MenteeDropDown />}
