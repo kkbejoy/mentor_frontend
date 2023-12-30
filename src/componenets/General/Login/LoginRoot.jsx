@@ -2,8 +2,10 @@ import React, { useState } from "react";
 import Login from "./Login";
 // ... (imports and constants)
 
-const Logintrail = ({ setSuccess, isSuccess }) => {
-  const [selectedRole, setSelectedRole] = useState("mentees"); // Default role is 'user'
+const Logintrail = ({ setSuccess, isSuccess, userType }) => {
+  const [selectedRole, setSelectedRole] = useState(
+    userType ? userType : "mentees"
+  ); // Default role is 'user'
   const handleRoleSelection = (role) => {
     setSelectedRole(role);
     // console.log(role);

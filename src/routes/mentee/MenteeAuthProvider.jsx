@@ -1,6 +1,7 @@
 import { useSelector } from "react-redux";
 import { LoginPage } from "../../pages/LoginPage";
 import { ReactNode } from "react";
+import { Navigate } from "react-router-dom";
 // import { RootState } from "../../state/rooState";
 
 // interface MenteeAuthProviderProps {
@@ -16,7 +17,13 @@ const MenteeAuthProvider = ({ children }) => {
 
   console.log("Mentee Auth", isMenteeAuthenticated);
 
-  return <>{isMenteeAuthenticated ? children : <LoginPage />}</>;
+  // return <>{isMenteeAuthenticated ? children : <LoginPage />}</>;
+  if (menteeAuthData) return children;
+  return (
+    <>
+      <Navigate to={"/auth/login?mentees"}></Navigate>
+    </>
+  );
 };
 
 export default MenteeAuthProvider;

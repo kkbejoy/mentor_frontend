@@ -18,6 +18,8 @@ import BookedSlotsList from "../../pages/Mentee/BookedSlotsList";
 import VideoCallInterfaceMenteeSidePage from "../../pages/Mentee/VideoCallInterface";
 import TicketsMenteePage from "../../pages/Mentee/TicketsMenteePage";
 import ErrorPage from "../../componenets/General/Fallback/ErrorPage";
+
+// const InboxPageMentee =React.lazy(import("../../pages/Mentee/InboxPageMentee"))
 export const MenteeRoute = {
   path: "/mentees",
   element: (

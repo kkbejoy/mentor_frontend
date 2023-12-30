@@ -1,6 +1,7 @@
 import { useSelector } from "react-redux";
 import { LoginPage } from "../../pages/LoginPage";
 import { ReactNode } from "react";
+import { Navigate } from "react-router-dom";
 // import { RootState } from "../../state/rooState";
 
 // interface ModeratorAuthProviderProps {
@@ -17,7 +18,13 @@ const ModeratorAuthProvider = ({ children }) => {
 
   console.log("Mentee Auth", isModeratorAuthenticated);
 
-  return <>{isModeratorAuthenticated ? children : <LoginPage />}</>;
+  // return <>{isModeratorAuthenticated ? children : <LoginPage />}</>;
+  if (isModeratorAuthenticated) return children;
+  return (
+    <>
+      <Navigate to={"/auth/login?modarators"}></Navigate>
+    </>
+  );
 };
 
 export default ModeratorAuthProvider;

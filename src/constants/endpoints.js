@@ -1,4 +1,4 @@
-export const BASE_URL = "http://localhost:5000";
+export const BASE_URL = "http://server.mentornudge.online";
 
 const END_POINTS = {
   //Mentee Or General Routes
@@ -79,4 +79,6 @@ const END_POINTS = {
     "/api/moderator/daily-new-mentees",
 };
 
+export const logoThumbnail =
+  "https://res.cloudinary.com/dlcsyyk7z/image/upload/v1702289419/mentors/_51de1e0b-0b1c-43c2-bfce-76456422ecdb_ziz1z3.jpg";
 export default END_POINTS;

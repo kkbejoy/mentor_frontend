@@ -4,6 +4,7 @@ import { Bars3Icon, BellIcon, XMarkIcon } from "@heroicons/react/24/outline";
 import { routesFrontend } from "../../../constants/frontendRoutes";
 import { Link } from "react-router-dom";
 import { checkAuthentication } from "../../../utilities/reusableFunctions";
+import { logoThumbnail } from "../../../constants/endpoints";
 const navigation = [
   {
     name: "Become a Mentor",
@@ -37,6 +38,14 @@ export default function NavbarHome() {
         <>
           <div className="mx-auto w-4/5 px-2 sm:px-6 lg:px-8">
             <div className="relative flex h-16 items-center justify-between">
+              <Link to={"/"}>
+                {" "}
+                <img
+                  className="h-14 w-14 rounded-full shadow-lg  transition-transform hover:animate-none p-2 "
+                  src={logoThumbnail}
+                  alt=""
+                />
+              </Link>
               <div className="absolute inset-y-0 left-0 flex items-center sm:hidden">
                 {/* Mobile menu button*/}
                 {/* <Disclosure.Button className="relative inline-flex items-center justify-center rounded-md p-2 text-gray-400 hover:bg-gray-700 hover:text-white focus:outline-none focus:ring-2 focus:ring-inset focus:ring-white">

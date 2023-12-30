@@ -11,19 +11,26 @@ export const MentorSearchResultComponent = () => {
 
   //Data From Redux Store
   const search =
-    useSelector((state) => state.mentorSearchInput.searchText) || null;
+    useSelector((state) => state?.mentorSearchInput?.searchText) || null;
   const mentorsListArray = useSelector(
-    (state) => state.mentorSearchResult.data.mentorsSearchResult
+    (state) => state?.mentorSearchResult?.data?.mentorsSearchResult
   );
 
-  const price = useSelector((state) => state.mentorSearchInput.priceRange);
-  const rating = useSelector((state) => state.mentorSearchInput.rating);
+  const price = useSelector((state) => state?.mentorSearchInput?.priceRange);
+  const rating = useSelector((state) => state?.mentorSearchInput?.rating);
   const isMentorListLoading = useSelector((state) => {
-    state.mentorSearchResult.isLoading;
+    state?.mentorSearchResult?.isLoading;
   });
   useEffect(() => {
-    console.log("Input values", search, price, rating);
-    dispatch(fetchMentorsListUsingSearchInput({ search, price, rating }));
+    const controller = new AbortController();
+    const { signal } = controller;
+    // console.log("Input values", search, price, rating);
+    dispatch(
+      fetchMentorsListUsingSearchInput({ search, price, rating, signal })
+    );
+    return () => {
+      controller.abort();
+    };
   }, [search, price, rating]);
   if (!mentorsListArray) {
     return <h1>Loading</h1>;
@@ -31,7 +38,7 @@ export const MentorSearchResultComponent = () => {
   return (
     <main className="max-w-screen-x1 mx-auto min-h-screen">
       {mentorsListArray
-        ? mentorsListArray.map((mentor) => <MentorCards mentor={mentor} />)
+        ? mentorsListArray?.map((mentor) => <MentorCards mentor={mentor} />)
         : null}
     </main>
   );
