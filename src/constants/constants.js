@@ -1,4 +1,4 @@
-export const BASE_URL = "http://server.mentornudge.online";
+export const BASE_URL = "https://server.mentornudge.online";
 
 export const userTypes = {
   MENTOR: "mentor",
