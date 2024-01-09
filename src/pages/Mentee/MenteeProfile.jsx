@@ -11,7 +11,6 @@ const MenteeProfile = () => {
   const menteeProfileData = useSelector(
     (state) => state?.menteeProfileDetails?.data
   );
-  console.log("Mentee Proifle deails", menteeProfileData);
   useEffect(() => {
     dispatch(fetchMenteeProfileData());
   }, [reRender]);

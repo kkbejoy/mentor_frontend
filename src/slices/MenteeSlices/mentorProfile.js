@@ -18,7 +18,7 @@ export const mentorProfileDetails = createAsyncThunk(
       const response = await menteesAxiosInstance.get(
         `${BASE_URL}${END_POINTS.MENTEE_MENTOR_Profile}/${mentorId}`
       );
-      console.log("Mentor Details", response.data);
+      console.log("Mentor Profile Details", response.data);
       return response.data;
     } catch (error) {
       console.log(error);

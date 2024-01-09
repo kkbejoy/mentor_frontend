@@ -3,7 +3,7 @@ import MenteeRegisterComponent from "../componenets/General/Register/MenteesRegi
 import { SideBanner } from "../componenets/General/LeftSideBanner/SideBanner.jsx";
 const MenteeRegisterPage = () => {
   return (
-    <div className="flex h-full flex-1 flex-col lg:flex-row lg:mx-auto lg:px-0">
+    <div className="flex h-full flex-1 flex-col lg:flex-row lg:mx-auto lg:px-0 ">
       <SideBanner />
       <MenteeRegisterComponent />
     </div>

@@ -1,17 +1,14 @@
 import React from "react";
 import BorderLine from "../BorderLine/VerticalBorderLine";
-
-import VerticalLine from "../BorderLine/VerticalBorderLine";
 import ButtonComponenet from "../Buttons/Button";
 import { UilBookmarkFull } from "@iconscout/react-unicons";
-import { useSelector } from "react-redux";
 import { Link } from "react-router-dom";
+
 const MentorCards = ({ mentor }) => {
-  console.log("Mentor Cardsssss", mentor);
   return (
-    <div className="mt-5">
+    <div className="mt-10 mb-10  ">
       {" "}
-      <div className="max-w-3xl mx-auto bg-white rounded-xl overflow-hidden shadow-lg flex">
+      <div className="max-w-3xl max-h-30 min-h-25 mx-auto bg-white rounded-xl overflow-hidden shadow-2xl flex hover:shadow-stone-500">
         <div className="w-1/3 my-auto px-2">
           <img
             className=" w-30 h-30 mx-auto px-1 object-cover align-center rounded-full shadow-sm"
@@ -24,16 +21,18 @@ const MentorCards = ({ mentor }) => {
           />
         </div>
         {/* <VerticalLine /> */}
-        <div className="p-6 w-2/3">
-          <div className="font-bold text-xl mb-2">
+        <div className="p-6 w-2/3 min-h-[25vh]">
+          <div className="font-bold text-2xl mb-2 truncate">
             {mentor.firstName} {mentor.lastName}
           </div>
-          <div className="text-gray-600 text-sm">
+          <div className="text-gray-600 text-sm truncate">
             {mentor?.jobTitle} @ {mentor?.firmName}
           </div>
 
-          <p className="text-gray-700 text-base">{mentor.shortBio}</p>
-          <div className="text-gray-600 text-sm">{mentor?.location}</div>
+          <p className="text-gray-700 text-base  ">{mentor.shortBio}</p>
+          <div className="text-gray-600 text-sm truncate">
+            {mentor?.location}
+          </div>
           <div className="text-gray-700 text-base">
             <span className="text-yellow-500">5.0</span> (27 reviews)
           </div>
@@ -43,13 +42,15 @@ const MentorCards = ({ mentor }) => {
           </div> */}
           {/* <BorderLine /> */}
           {/* <ButtonComponenet ButtonName={"Save"} /> */}
-          <UilBookmarkFull />
+          <div className="flex ">
+            <UilBookmarkFull color="orange" />
+          </div>
         </div>
         <div className="p-6 w-1/3">
           <div className="text-gray-700 font-semibold">Skills</div>{" "}
           <BorderLine />
           <ul className="list-disc pl-4">
-            {mentor?.expertise?.map((skill) => {
+            {mentor?.expertise?.slice(0, 3).map((skill) => {
               return <li>{skill}</li>;
             })}
           </ul>
@@ -65,6 +66,7 @@ const MentorCards = ({ mentor }) => {
             <ButtonComponenet
               ButtonName={"Profile"}
               handleButtonClcik={undefined}
+              BackgroundColor={"red-500"}
             />
           </Link>
         </div>

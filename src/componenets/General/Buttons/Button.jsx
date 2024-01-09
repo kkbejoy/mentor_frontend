@@ -11,7 +11,9 @@ const ButtonComponenet = ({
         onClick={(e) => handleButtonClcik()}
         className={`mt-4 bg-${
           BackgroundColor ? BackgroundColor : "mentorBlue"
-        } hover:bg-blue-900 text-white font-bold py-2 px-4 rounded`}
+        } hover:${
+          BackgroundColor ? "bg-" + BackgroundColor + "-100" : "bg-blue-900"
+        } text-white font-bold py-2 px-4 rounded`}
       >
         {ButtonName}
       </button>

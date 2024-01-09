@@ -63,7 +63,7 @@ const FilterComponent = ({ applyFilter }) => {
   ];
 
   return (
-    <div className="inline-flex w-full p-4 bg-whi">
+    <div className="inline-flex w-full p-4 bg-white">
       <div className="items-center space-x-4 w-1/2">
         <label className="block text-sm font-medium text-gray-700 mb-2">
           Price:

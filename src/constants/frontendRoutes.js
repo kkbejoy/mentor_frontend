@@ -14,7 +14,7 @@ export const routesFrontend = {
   MentorForgotPassword: "/auth/mentor/forgotpassword",
 
   //Mentees
-  MentorBrowsePage: "/mentees/browse/mentor/search",
+  MentorBrowsePage: "/browse/mentor/search",
 
   //Moderator ("/moderator/")
   ModeratorHome: "/moderator",

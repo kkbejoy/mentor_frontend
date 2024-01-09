@@ -30,7 +30,7 @@ const SubscribedMentorsPage = () => {
     <div className="">
       <NavbarMentee />
       <HorizontalDivider title={"Subscibed Mentors"} />
-      <div className="grid ml-5 py-4 md:grid-cols-5 items-center px-10">
+      <div className="grid ml-5 py-4 md:grid-cols-5 items-center px-10 h-screen">
         {subscribedMentorsList
           ? subscribedMentorsList.data.map((enrollment) => {
               console.log("From map:,", enrollment);

@@ -34,7 +34,6 @@ const UserProfileComponent = ({
             }`}
           >
             <div className="text-center  w-1/4">
-              {" "}
               <img
                 className="ml-2 h-1/2 rounded-full object-cover mt-5"
                 src={`https://res.cloudinary.com/dlcsyyk7z/image/upload/v1696240416/${profile?.participants[0]?.mentor?.profileImageUrl}`}
@@ -53,7 +52,7 @@ const UserProfileComponent = ({
                     {profile?.latestMessage?.content}
                   </p>
                 </div>
-                <div className="text-end justify-end my-5">
+                <div className="text-end justify-end my-5 mr-3">
                   {" "}
                   <h1 className="text-xs font-extralight mr-1"> {time}</h1>
                 </div>

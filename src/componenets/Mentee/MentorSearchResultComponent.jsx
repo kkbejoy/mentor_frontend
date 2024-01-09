@@ -33,7 +33,11 @@ export const MentorSearchResultComponent = () => {
     };
   }, [search, price, rating]);
   if (!mentorsListArray) {
-    return <h1>Loading</h1>;
+    return (
+      <div className="h-screen flex place-content-center">
+        <h1 className="text-lg text-center font-semibold">Loading</h1>
+      </div>
+    );
   }
   return (
     <main className="max-w-screen-x1 mx-auto min-h-screen">

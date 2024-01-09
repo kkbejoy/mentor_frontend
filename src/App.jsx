@@ -10,12 +10,14 @@ import {
 import NavbarModerator from "./componenets/Moderator/NavbarModerator";
 import { useDispatch, useSelector } from "react-redux";
 import { addNewMessagMentorSide } from "./slices/MentorSlices/messageSlice";
+import { ScrollRestoration } from "react-router-dom";
 
 export function Home() {
   return (
     <>
       {/* <NavbarMentee /> */}
-      <Outlet /> <Toaster />
+      <Outlet /> <ScrollRestoration />
+      <Toaster />
     </>
   );
 }
