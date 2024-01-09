@@ -67,7 +67,7 @@ const MessageInputComponent = ({
               autoComplete="off"
               // onChange={(e) => handleTyping(e)}
               placeholder="Please type your query or question here              "
-              className=" text-end p-4 h-[7vh] bg-gray-100 rounded-md w-full mx-5 border-spacing-2 "
+              className=" text-end p-4 h-[7vh] bg-red-50 rounded-md w-full mx-5 border-spacing-2 "
             />
             <button className="w=2/5 mr-0 hover:bg-green-200 transition-colors px-2 rounded-md">
               <UilEnvelopeUpload color="mentorBlue" />

@@ -7,23 +7,17 @@ import { useDispatch } from "react-redux";
 import { markAsRead } from "../../../slices/MenteeSlices/menteeNotificationSlice";
 import { Menu, Transition } from "@headlessui/react";
 import { toast } from "sonner";
-
+import { unReadNotifications } from "../../../utilities/notificationsUtilities";
 function NotificationDropdown({
   notifications,
   newNotification,
   markNotificationAsReadFunction,
   reRenderFunction,
 }) {
-  // console.log("Notifications", notifications);
-  const [isOpen, setIsOpen] = useState(false);
-  const dispatch = useDispatch();
-  const toggleDropdown = () => {
-    if (!isOpen) {
-      dispatch(markAsRead());
-    }
-    setIsOpen(!isOpen);
-  };
-
+  console.log("Notifications from noification dot", notifications);
+  const isUnreadNotifications = unReadNotifications(notifications);
+  console.log("UNread notificationns:", isUnreadNotifications);
+  //Mark Notifications as Read Function
   const handleMarkNotificationAsRead = async () => {
     try {
       const resposeFromDb = await markNotificationAsReadFunction();
@@ -39,7 +33,7 @@ function NotificationDropdown({
         {/* Trigger for the dropdown */}
         <Menu.Button className="inline-flex w-full justify-center rounded-md bg-black/20 px-4 py-2 text-sm font-medium text-white hover:bg-black/30 focus:outline-none focus-visible:ring-2 focus-visible:ring-white/75">
           <BellIcon className="h-6 w-6" aria-hidden="true" />
-          {notifications.isRead ? null : <NotificationDot />}
+          {isUnreadNotifications ? <NotificationDot /> : null}
         </Menu.Button>
 
         {/* Notification dropdown */}

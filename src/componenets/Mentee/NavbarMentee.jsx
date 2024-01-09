@@ -1,8 +1,7 @@
 import React, { useEffect, useState } from "react";
 import { Fragment } from "react";
 import { Disclosure, Menu, Transition } from "@headlessui/react";
-import { Bars3Icon, BellIcon, XMarkIcon } from "@heroicons/react/24/outline";
-import LogoutComponent from "./Logout Component/LogoutComponent";
+import { Bars3Icon, XMarkIcon } from "@heroicons/react/24/outline";
 import { logoThumbnail } from "../../constants/endpoints";
 import { checkAuthentication } from "../../utilities/reusableFunctions";
 import { routesFrontend } from "../../constants/frontendRoutes";
@@ -10,16 +9,11 @@ import NotificationDropdown from "../General/Notification/MenteeNotificationDrop
 import { useDispatch, useSelector } from "react-redux";
 import MenteeDropDown from "./OptionsDropdown/MenteeDropdown";
 import { Link } from "react-router-dom";
-import {
-  getTheNumberOfUnreadMessages,
-  markNotificationsAsRead,
-} from "../../api/menteesConfiguration/menteeServices";
+import { markNotificationsAsRead } from "../../api/menteesConfiguration/menteeServices";
 import { getMenteeNotification } from "../../slices/MenteeSlices/menteeNotificationSlice";
 import { unReadNotifications } from "../../utilities/notificationsUtilities";
 import { fetchTheNumberOfUnreadMesages } from "../../slices/MenteeSlices/unreadMessagesCount";
 const NavbarMentee = () => {
-  const [notifications, setNotifications] = useState([]); // Store new notifications
-  const [previousNotifications, setPreviousNotifications] = useState([]);
   const [reRender, setRerender] = useState({});
   const dispatch = useDispatch();
   const notificationsFromApi = useSelector(
@@ -32,7 +26,7 @@ const NavbarMentee = () => {
     (state) => state.MenteeSideunReadConversations.unreadCount
   );
 
-  console.log("Notioficatiopns", unreadMessageCount);
+  console.log("Unread Notification count", unreadMessageCount);
   // const isUnreadNotifications = async;
   useEffect(() => {
     dispatch(getMenteeNotification());
@@ -56,7 +50,6 @@ const NavbarMentee = () => {
     // { name: "Mentors List", href: "#", current: false },
   ];
   const isAuthenticated = checkAuthentication();
-  // console.log("Authenticated", isAuthenticated);
 
   return (
     <Disclosure
@@ -103,12 +96,12 @@ const NavbarMentee = () => {
                         to={item.href}
                         key={item.name}
                         // href={item.href}
-                        // className={classNames(
-                        //   item.current
-                        //     ? "bg-gray-900 text-white"
-                        //     : "text-gray-300 hover:bg-gray-700 hover:text-white",
-                        //   "rounded-md px-3 py-2 text-sm font-medium"
-                        // )}
+                        className={
+                          (item.current
+                            ? "bg-gray-900 text-white hover:text-red-400"
+                            : "text-gray-300 hover:bg-gray-700 hover:text-gray-100",
+                          "rounded-md px-3 py-2 text-sm font-medium hover:bg-gray-800")
+                        }
                         aria-current={item.current ? "page" : undefined}
                       >
                         {item.name}

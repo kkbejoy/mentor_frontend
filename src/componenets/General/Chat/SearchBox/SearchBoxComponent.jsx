@@ -3,7 +3,7 @@ import { Formik, Form } from "formik";
 
 const SearchBoxComponent = ({ searchName }) => {
   return (
-    <div className="relative sticky top-0 z-0 ">
+    <div className=" sticky top-0 z-0 ">
       {" "}
       <div className="bg-white ">
         <h1 className="text-center text-black pt-3">Messages </h1>
@@ -14,8 +14,8 @@ const SearchBoxComponent = ({ searchName }) => {
               <input
                 onChange={(e) => searchName(e.target.value)}
                 type="text"
-                placeholder="Search Mentor"
-                className="bg-white-300 w-[40vh] px-3 font-extralight rounded-full justify-center my-3 shadow-lg"
+                placeholder="Search Conversations"
+                className="bg-red-50 w-[40vh] px-3 text-center font-extralight rounded-lg justify-center my-3 shadow-inner"
               />
             </Form>
           </Formik>

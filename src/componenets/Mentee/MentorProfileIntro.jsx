@@ -78,8 +78,8 @@ const MentorProfileIntro = ({ mentorDetailsObject, subscriptionStatus }) => {
                   Areas of Interests
                 </h3>
               </div>
-              <div className="flex space-x-2">
-                {mentorDetailsObject?.expertise?.map((skill) => {
+              <div className="flex space-x-2 text-center justify-center">
+                {mentorDetailsObject?.expertise?.slice(0, 4).map((skill) => {
                   return (
                     <span className="bg-blue-900 text-white text-center px-3 py-1 rounded text-xs hover:bg-blue-800 transition-transform">
                       {skill}
