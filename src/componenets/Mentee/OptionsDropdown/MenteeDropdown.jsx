@@ -22,7 +22,7 @@ export default function MenteeDropDown() {
         <div>
           <Menu.Button className="inline-flex w-full justify-center rounded-md bg-black/20 px-4 py-2 text-sm font-medium text-white hover:bg-black/30 focus:outline-none focus-visible:ring-2 focus-visible:ring-white/75">
             <img
-              className="rounded-t-lg h-8 w-8 mr-3"
+              className="rounded-t-lg h-7 w-7 mr-3"
               src={
                 profileImageURL
                   ? profileImageURL
