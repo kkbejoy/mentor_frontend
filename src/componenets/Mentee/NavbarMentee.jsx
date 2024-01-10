@@ -26,8 +26,6 @@ const NavbarMentee = () => {
     (state) => state.MenteeSideunReadConversations.unreadCount
   );
 
-  console.log("Unread Notification count", unreadMessageCount);
-  // const isUnreadNotifications = async;
   useEffect(() => {
     dispatch(getMenteeNotification());
     dispatch(fetchTheNumberOfUnreadMesages());

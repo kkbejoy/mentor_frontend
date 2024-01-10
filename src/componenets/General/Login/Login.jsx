@@ -108,6 +108,7 @@ const Login = ({ role, setSuccess, isSuccess }) => {
                 menteeName,
                 message,
                 refreshToken,
+                profileImageUrl,
               } = res.payload;
               const menteeAuthData = {
                 isMenteeAuthenticated: true,
@@ -115,9 +116,10 @@ const Login = ({ role, setSuccess, isSuccess }) => {
                 menteeId,
                 menteeName,
                 message,
+                profileImageUrl,
                 refreshToken,
               };
-              console.log("mentee", res);
+              console.log("mentee login Res Data", menteeAuthData);
               setMenteeAuth(menteeAuthData);
               setLoading(false);
               setSuccess(!isSuccess);

@@ -15,8 +15,8 @@ const SubscibedMentorsList = ({ enrollment, index }) => {
     }
   };
   return (
-    <div className="p-3 h-full w-full md:w-full  overflow-hidden text-center  rounded-lg transform-gpu transition-transform hover:scale-105 cursor-pointer">
-      <div className="block rounded-lg bg-white shadow-[0_2px_15px_-3px_rgba(0,0,0,0.07),0_10px_20px_-2px_rgba(0,0,0,0.04)] dark:bg-neutral-200">
+    <div className="p-3 h-full w-full md:w-full  overflow-hidden text-center  rounded-lg transform-gpu transition-transform ">
+      <div className="block rounded-lg bg-white shadow-[0_2px_15px_-3px_rgba(0,0,0,0.07),0_10px_20px_-2px_rgba(0,0,0,0.04)] dark:bg-neutral-200 hover:shadow-stone-500">
         <div
           className="relative overflow-hidden bg-cover bg-no-repeat "
           data-te-ripple-init

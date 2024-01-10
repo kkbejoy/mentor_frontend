@@ -41,6 +41,15 @@ export const getMenteeNameFromLocalStorage = () => {
     throw error;
   }
 };
+export const getMenteeProfileImageUrl = () => {
+  try {
+    const menteeDetails = JSON.parse(localStorage.getItem("menteeAuth"));
+    const profileImageUrl = menteeDetails?.profileImageUrl;
+    return profileImageUrl;
+  } catch (error) {
+    console.log(error);
+  }
+};
 
 //Get Mentor Name from Local Storage
 export const getMentorNameFromLocalStorage = () => {
