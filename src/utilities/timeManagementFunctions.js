@@ -7,7 +7,7 @@ export const convertTimeToISoFormat = (inputTime) => {
       "ddd MMM DD YYYY HH:mm:ss [GMT]ZZ (z)"
     );
     const isoFormattedDateTime = parsedDateTime.format("YYYY-MM-DDTHH:mm");
-    // console.log("Iso Formatted TIme", isoFormattedDateTime);
+    console.log("Iso Formatted TIme", isoFormattedDateTime);
     return isoFormattedDateTime;
   } catch (error) {
     console.log(error);
@@ -26,6 +26,18 @@ export const addOneHour = (inputTime) => {
 
   // console.log(updatedDateTime);
   return updatedDateTime;
+};
+
+//ADD ONe HOur WITH GMT
+
+export const addOneHourWithGMT = (inputTIme) => {
+  try {
+    let date = new Date(inputTIme);
+    date.setHours(date.getHours() + 1);
+    return date;
+  } catch (error) {
+    console.log(error);
+  }
 };
 
 export const getTimeDifference = (time) => {

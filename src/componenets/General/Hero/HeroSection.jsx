@@ -85,13 +85,11 @@ export default function HeroSection() {
           />
         </div>
         <div className=" w-3/4 m-auto ">
-          <div className="mt-0 mb-10 transition-all">
+          <div className="mt-0 mb-10 transition-all flex">
             {" "}
-            <Slider {...settings}>
-              {mentorListForCards?.slice(0, 4).map((mentor) => {
-                return <HomePageMentorCards profile={mentor} />;
-              })}
-            </Slider>
+            {mentorListForCards?.slice(0, 4).map((mentor, index) => {
+              return <HomePageMentorCards profile={mentor} index={index} />;
+            })}
           </div>
         </div>
       </div>

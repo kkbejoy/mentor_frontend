@@ -11,7 +11,7 @@ Modal.setAppElement("#root");
 import { Toaster, toast } from "sonner";
 import { fetchMentorTimeSlots } from "../../../slices/MentorSlices/AvailableTimeSlotsSlice";
 import { getUserIdAndToken } from "../../../utilities/reusableFunctions";
-
+import { addOneHourWithGMT } from "../../../utilities/timeManagementFunctions";
 const MentorFormModalComponent = ({
   newSlotModalOpen,
   setNewSlotModal,
@@ -25,13 +25,14 @@ const MentorFormModalComponent = ({
 
   const formattedTime = convertTimeToISoFormat(startTime);
   const endTime = addOneHour(formattedTime);
-
+  const endTimeInGMT = addOneHourWithGMT(startTime);
   const initialValues = {
     start: formattedTime,
     end: endTime,
     type: "available",
     mentorPreferences: "",
   };
+  console.log("Start time", startTime);
 
   const handleNewScheduleSubmission = async (
     values,
@@ -39,7 +40,13 @@ const MentorFormModalComponent = ({
   ) => {
     try {
       setLoading(true);
-      const respose = mentorNewTimeSlotApi(values);
+      const SlotBookingObject = {
+        start: startTime,
+        end: endTimeInGMT,
+        type: "available",
+      };
+      console.log("Time:", SlotBookingObject);
+      const respose = mentorNewTimeSlotApi(SlotBookingObject);
       respose.then((res) => {
         const newRes = { ...renderState, ...res };
         setLoading(false);

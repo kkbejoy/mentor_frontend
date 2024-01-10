@@ -32,12 +32,13 @@ const SubscribedMentorsPage = () => {
       <HorizontalDivider title={"Subscibed Mentors"} />
       <div className="grid ml-5 py-4 md:grid-cols-5 items-center px-10 h-screen">
         {subscribedMentorsList
-          ? subscribedMentorsList.data.map((enrollment) => {
+          ? subscribedMentorsList.data.map((enrollment, index) => {
               console.log("From map:,", enrollment);
               return (
                 <SubscibedMentorsList
                   key={enrollment._id}
                   enrollment={enrollment}
+                  index={index}
                 />
               );
             })
