@@ -7,7 +7,7 @@ import { generateUniqueNames } from "../../../utilities/reusableFunctions";
 // import { ErrorModal } from "../../General/Modals/ErrorModal";
 // import SuccessModal from "../../General/Modals/SuccessModal";
 
-const ProfileImageUploader = ({ profileImage }) => {
+const ProfileImageUploader = ({ profileImage, setRerender }) => {
   const [selectedImage, setSelectedImage] = useState("");
   const [isLoading, setLoading] = useState(false);
   const [isError, setError] = useState(false);
@@ -33,6 +33,7 @@ const ProfileImageUploader = ({ profileImage }) => {
       console.log("Updated Response", uploadResponse);
       updatedObject.profileImageUrl = uploadResponse.public_id;
       const apiResponse = await updateMentorProfile(updatedObject);
+      setRerender({ ...apiResponse });
       setLoading(false);
       setSuccess(true);
     } catch (error) {
@@ -49,7 +50,7 @@ const ProfileImageUploader = ({ profileImage }) => {
         {/* <h3 className="block text-sm text-left font-medium leading-6 text-gray-900">
           Existing Avatar
         </h3> */}
-        <img
+        {/* <img
           src={
             profileImage
               ? `https://res.cloudinary.com/dlcsyyk7z/image/upload/v1696240416/${profileImage}`
@@ -57,8 +58,8 @@ const ProfileImageUploader = ({ profileImage }) => {
           }
           alt="avatar"
           style={{ maxWidth: "200px" }}
-          className="my-9"
-        />
+          className="my-9 rounded-xl shadow-2xl"
+        /> */}
       </div>
       {selectedImage && (
         <div>

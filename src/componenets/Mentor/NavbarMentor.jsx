@@ -77,13 +77,13 @@ const NavbarMentor = () => {
                       <Link
                         to={item.href}
                         key={item.name}
-                        // href={item.href}
-                        // className={classNames(
-                        //   item.current
-                        //     ? "bg-gray-900 text-white"
-                        //     : "text-gray-300 hover:bg-gray-700 hover:text-white",
-                        //   "rounded-md px-3 py-2 text-sm font-medium"
-                        // )}
+                        href={item.href}
+                        className={
+                          (item.current
+                            ? "bg-gray-900 text-white hover:text-red-400"
+                            : "text-gray-300 hover:bg-gray-700 hover:text-gray-100",
+                          "rounded-md px-3 py-2 text-sm font-medium hover:bg-gray-800")
+                        }
                         aria-current={item.current ? "page" : undefined}
                       >
                         {item.name}

@@ -13,7 +13,7 @@ import { fetchMentorProfileData } from "../../../slices/MentorSlices/MentorProfi
 import { UilPlus } from "@iconscout/react-unicons";
 import ProfileImageUploader from "./ProfileImageUploader ";
 import SkillMoldal from "./SkillMoldal";
-const ProfileInformationEditComponent = ({ setRerender }) => {
+const ProfileInformationEditComponent = ({ setRerender, reRenderState }) => {
   const [isPageLoading, setIsPageLoading] = useState(false);
   const [selectedImage, setSelectedImage] = useState("");
   const [isError, setError] = useState(false);
@@ -52,6 +52,7 @@ const ProfileInformationEditComponent = ({ setRerender }) => {
       console.log("Form data", formData);
       //Uplloading image to cloudinary
       const uploadResponse = await imageUploadToCloudinary(formData);
+      reRenderState({ ...uploadResponse });
       setLoading(false);
 
       return uploadResponse;
@@ -91,13 +92,14 @@ const ProfileInformationEditComponent = ({ setRerender }) => {
       e.preventDefault();
       console.log("Skill to delete", skill);
       const res = await removeAskillFromMentorSkillArray(skill);
+      setRerender({ ...res });
     } catch (error) {
       console.log(error);
     }
   };
   useEffect(() => {
     dispatch(fetchMentorProfileData());
-  }, []);
+  }, [reRenderState]);
   return (
     <div className="flex w-auto p-12 ml-10 justify-between mt-10 ">
       {" "}
@@ -107,10 +109,29 @@ const ProfileInformationEditComponent = ({ setRerender }) => {
       />
       {/* Skills */}
       <div className="mx-3  ">
+        <div className="gap-y-6">
+          {/* <h3 className="block text-sm text-left font-medium leading-6 text-gray-900">
+          Existing Avatar
+        </h3> */}
+          <img
+            src={
+              mentorProfileDetails.profileImageUrl
+                ? `https://res.cloudinary.com/dlcsyyk7z/image/upload/v1696240416/${mentorProfileDetails.profileImageUrl}`
+                : "https://res.cloudinary.com/dlcsyyk7z/image/upload/v1698830239/mentors/mentor/images_2_d4e6fp_siwirt_a7fcrt.jpg"
+            }
+            alt="avatar"
+            style={{ maxWidth: "200px" }}
+            className="my-9 rounded-xl shadow-2xl"
+          />
+        </div>
+        <h1 className="text-2xl font-bold mb-2">
+          {mentorProfileDetails.firstName + " " + mentorProfileDetails.lastName}
+        </h1>
+        <h1 className="text-lg font-bold mb-5">{mentorProfileDetails.email}</h1>
         <h1 className="text-lg font-semibold mb-5">Skills/Expertise</h1>
         <div
           onClick={() => setSkillModal(true)}
-          className="flex gap-2 justify-center hover:bg-green-200 rounded-md rounded-md"
+          className="flex gap-2 justify-center hover:bg-green-200 rounded-md "
         >
           <h1 className="text-sm"> Add new Skill </h1>
           <UilPlus color="green" />
@@ -130,7 +151,7 @@ const ProfileInformationEditComponent = ({ setRerender }) => {
           })}
         </div>
 
-        {skillModal ? (
+        {/* {skillModal ? (
           <div className="bg-green-300">
             <input
               type="text"
@@ -138,7 +159,7 @@ const ProfileInformationEditComponent = ({ setRerender }) => {
               className="bg-gray-400 w-full rounded-md placeholder:bg-white text-black"
             />
           </div>
-        ) : null}
+        ) : null} */}
       </div>
       {/* //Profile */}
       <div className=" mt-10  mx-auto ">
@@ -435,12 +456,13 @@ const ProfileInformationEditComponent = ({ setRerender }) => {
         </Formik>
       </div>
       <div className="">
-        <h1 className="block text-sm text-left font-medium leading-6 text-gray-900">
-          Avatar
+        <h1 className="block text-sm text-left font-medium leading-6 text-gray-900 mb-5">
+          Change Avatar
         </h1>
 
         <ProfileImageUploader
           profileImage={mentorProfileDetails?.profileImageUrl}
+          setRerender={setRerender}
         />
       </div>
     </div>

@@ -32,14 +32,14 @@ const SkillMoldal = ({ modalOpen, onRequestCloseFunction }) => {
             Add New Skills
           </h1>
         </div>
-        <div className="grid gap-y-5 p-6">
+        <div className="grid gap-y-2 p-6 text-center">
           <label className="text-lg font-semibold" htmlFor="">
-            Enter new skills{" "}
+            Enter new skills
             <span className="text-sm font-thin">(Seperate with comma)</span>
           </label>
           <input
             onChange={(e) => setNewSkill(e.target.value)}
-            className="shadow-sm w-2/3 items-center rounded-md shadow-black placeholder:px-3 h-16 mx-auto"
+            className="border-2 w-2/3 items-center rounded-md shadow-black placeholder:px-3 h-16 mx-auto"
             type="text"
           />
           <button
