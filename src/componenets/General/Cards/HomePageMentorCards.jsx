@@ -6,7 +6,7 @@ const HomePageMentorCards = ({ profile, index }) => {
   const navigate = useNavigate();
   const handleNavigation = async () => {
     try {
-      navigate(`/browse/mentor/profile/${profile._id}`);
+      navigate(`/mentees/browse/mentor/profile/${profile._id}`);
     } catch (error) {
       console.log(error);
     }
