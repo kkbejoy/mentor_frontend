@@ -13,10 +13,10 @@ const SearchComponent = () => {
   // useEffect(() => {});
   return (
     <>
-      <form className=" mx-14 my-14 drop-shadow-lg text-center hover:shadow-yellow-100 ">
+      <form className="mx-0 md:mx-14 my-14 drop-shadow-lg text-center hover:shadow-yellow-100 ">
         <input
           onChange={handleSearchInput}
-          className=" py-3 px-4 text-center text-lg w-2/5 pr-10 sm:text-sm  rounded-md focus:text-left focus:border-collapse"
+          className=" py-3 px-4 text-center text-lg w-4/5 md:w-2/5 pr-10 sm:text-sm  rounded-md focus:text-left focus:border-collapse"
           type="search"
           placeholder="Search Skills and Mentors"
           autoComplete="off"

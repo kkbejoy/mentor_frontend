@@ -62,7 +62,7 @@ const NavbarMentee = () => {
               <Link to={"/mentees"}>
                 {" "}
                 <img
-                  className="h-14 w-14 rounded-full shadow-lg transition-transform hover:animate-none p-2 "
+                  className="hidden sm:block h-14 w-14 rounded-full shadow-lg transition-transform hover:animate-none p-2 "
                   src={logoThumbnail}
                   alt=""
                 />
@@ -88,7 +88,7 @@ const NavbarMentee = () => {
                   /> */}
                 </div>
                 <div className="hidden sm:ml-6 sm:block">
-                  <div className="flex space-x-14 text-white">
+                  <div className="flex text-white text-center">
                     {navigation.map((item) => (
                       <Link
                         to={item.href}
@@ -194,18 +194,18 @@ const NavbarMentee = () => {
           </div>
 
           <Disclosure.Panel className="sm:hidden">
-            <div className="space-x-3 px-2 pb-3 pt-2 text-white">
+            <div className="space-x-3 px-2 pb-3 pt-2  text-white">
               {navigation.map((item) => (
                 <Disclosure.Button
                   key={item.name}
                   as="a"
                   href={item.href}
-                  //   className={classNames(
-                  //     item.current
-                  //       ? "bg-gray-900 text-white"
-                  //       : "text-gray-300 hover:bg-gray-700 hover:text-white",
-                  //     "block rounded-md px-3 py-2 text-base font-medium"
-                  //   )}
+                  className={
+                    (item.current
+                      ? "bg-gray-900 text-white"
+                      : "text-gray-300 hover:bg-gray-700 hover:text-white",
+                    "block rounded-md px-3 py-2 text-base font-medium hover:bg-gray-700")
+                  }
                   aria-current={item.current ? "page" : undefined}
                 >
                   {item.name}

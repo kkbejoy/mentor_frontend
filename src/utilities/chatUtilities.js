@@ -14,7 +14,8 @@ export const extractNameAndImageUrlForChat = (
         currentState._id === conversationId &&
         userType === userTypes.MENTEE
       ) {
-        profile._id = currentState._id;
+        console.log("Profike id,", currentState);
+        profile._id = currentState.participants[0]?.mentor._id;
         profile.name =
           currentState.participants[0]?.mentor.firstName +
           " " +
@@ -32,7 +33,7 @@ export const extractNameAndImageUrlForChat = (
           currentState.participants[0]?.mentee.lastName;
         profile.imageUrl = currentState.participants[0]?.mentee.profileImageUrl;
       }
-      // console.log("Conversation list", profile);
+      console.log("Conversation list", profile);
       return profile;
     }, {});
     return profile;

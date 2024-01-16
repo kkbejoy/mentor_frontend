@@ -17,7 +17,7 @@ const MessageContent = ({ messages, userType }) => {
     // console.log("Mentee Message", messages[0]);
     return (
       <div
-        className=" chat-container h-[68vh] bg-white border-x-2  overflow-x-hidden border-gray-100"
+        className=" chat-container h-[64vh] bg-white border-x-2  overflow-x-hidden border-gray-100"
         ref={chatContainerRef}
         // style={"overflow-y: auto"}
       >
@@ -52,7 +52,7 @@ const MessageContent = ({ messages, userType }) => {
   } else {
     return (
       <div
-        className=" chat-container h-[68vh] bg-white border-x-2  overflow-x-hidden border-gray-100"
+        className=" chat-container h-[64vh] bg-white border-x-2  overflow-x-hidden border-gray-100"
         ref={chatContainerRef}
         // style={"overflow-y: auto"}
       >

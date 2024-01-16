@@ -63,8 +63,8 @@ const FilterComponent = ({ applyFilter }) => {
   ];
 
   return (
-    <div className="inline-flex w-full p-4 bg-white">
-      <div className="items-center space-x-4 w-1/2">
+    <div className="block md:inline-flex w-full p-4 bg-white">
+      <div className="ml-2 items-center space-x-4 w-1/2">
         <label className="block text-sm font-medium text-gray-700 mb-2">
           Price:
         </label>
@@ -86,7 +86,7 @@ const FilterComponent = ({ applyFilter }) => {
                         e.target.checked ? priceRange?.value : "a"
                       )
                     }
-                    className="peer h-5 w-5 cursor-pointer appearance-none rounded-md border border-blue-gray-200 transition-all checked:border-black checked:bg-mentorBlue"
+                    className="peer h-5 w-5 cursor-pointer appearance-none rounded-md border border-blue-gray-200 transition-all checked:border-black checked:bg-blue-700 checked:border-0"
                   />
                   <label
                     htmlFor={`price-${priceRange.value}`}
@@ -101,7 +101,7 @@ const FilterComponent = ({ applyFilter }) => {
         </div>
       </div>
 
-      <div className="items-end  space-x-4 w-1/2 ">
+      <div className="ml-2 items-end  space-x-4 w-1/2 ">
         <label className="block text-sm font-medium text-gray-700 mb-2">
           Rating:
         </label>
@@ -121,7 +121,7 @@ const FilterComponent = ({ applyFilter }) => {
                     onChange={(e) =>
                       setSelectedRating(e.target.checked ? ratings.value : a)
                     }
-                    className="peer h-5 w-5 cursor-pointer appearance-none rounded-md border border-blue-gray-200 transition-all checked:border-black checked:bg-mentorBlue"
+                    className="peer h-5 w-5 cursor-pointer appearance-none rounded-md border border-blue-gray-200 transition-all checked:border-black checked:bg-yellow-300 checked:border-0"
                   />
                   <label
                     htmlFor={`reviews-${ratings.value}`}

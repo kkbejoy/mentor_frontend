@@ -21,7 +21,7 @@ export const namesTitlesAndContents = {
 
 export const HeroSectionTypewriterWords = [
   "Unlock Your Potential: Personalized 1-on-1 Mentorship for Growth.",
-  "Connecting Aspirations Worldwide:",
+  "Connecting Aspirations Worldwide",
   "MentorNudge - Where Guidance Knows No Boundaries.",
   "Empower Your Journey: Discover Tailored Mentorship at Your Fingertips.",
 ];

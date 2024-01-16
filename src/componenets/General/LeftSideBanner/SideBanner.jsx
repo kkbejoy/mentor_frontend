@@ -4,7 +4,7 @@ import { logoThumbnail } from "../../../constants/endpoints";
 import { HeroSectionTypewriterWords } from "../../../constants/messageToFront";
 export const SideBanner = () => {
   return (
-    <div className="sticky top-0 w-full h-screen lg:w-2/5 p-4 bg-mentorBlue flex flex-col items-center justify-center ">
+    <div className="hidden md:sticky top-0 w-full h-screen lg:w-2/5 p-4 bg-mentorBlue md:flex flex-col items-center justify-center ">
       <p className="text-white text-center">
         <Link to={"/"}>
           {" "}

@@ -23,7 +23,7 @@ const InteractionsComponent = ({
     conversationId,
     userType
   );
-  // console.log("Chat box Profile", profile);
+  console.log("Chat box Profile", profile);
 
   return (
     <aside className=" h-screen w-3/4 mx-auto">
@@ -32,6 +32,7 @@ const InteractionsComponent = ({
         senderName={profile?.name}
         senderImage={profile?.imageUrl}
         senderId={profile?._id}
+        userType={userType}
       />
       {/* messages */}
       <MessageContent messages={messages} userType={userType} />

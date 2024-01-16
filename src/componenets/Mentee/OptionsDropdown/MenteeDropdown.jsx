@@ -25,7 +25,7 @@ export default function MenteeDropDown() {
               className="rounded-t-lg h-7 w-7 mr-3"
               src={
                 profileImageURL
-                  ? profileImageURL
+                  ? `https://res.cloudinary.com/dlcsyyk7z/image/upload/v1698830239/${profileImageURL}`
                   : `https://res.cloudinary.com/dlcsyyk7z/image/upload/v1698830239/mentors/mentor/images_2_d4e6fp_siwirt_a7fcrt.jpg`
               }
               alt=""

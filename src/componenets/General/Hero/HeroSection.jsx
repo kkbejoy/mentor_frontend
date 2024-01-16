@@ -49,7 +49,7 @@ export default function HeroSection() {
           }}
         /> */}
         {/* </div> */}
-        <div className="mx-auto max-w-xl py-32 sm:py-48 lg:my-auto">
+        <div className="mx-auto max-w-xl py-32 sm:py-14 lg:my-auto">
           <div className="hidden sm:mb-8 sm:flex sm:justify-center">
             <div className="relative rounded-full px-3 py-1 text-sm leading-6 text-gray-600 ring-1  ring-gray-900/10 hover:ring-gray-900/20">
               Learn a new skill, launch a project, land your dream career.
@@ -85,7 +85,7 @@ export default function HeroSection() {
           />
         </div>
         <div className=" w-3/4 m-auto ">
-          <div className="mt-0 mb-10 transition-all flex">
+          <div className="block sm:flex mt-0 mb-10 transition-all ">
             {" "}
             {mentorListForCards?.slice(0, 4).map((mentor, index) => {
               return <HomePageMentorCards profile={mentor} index={index} />;
