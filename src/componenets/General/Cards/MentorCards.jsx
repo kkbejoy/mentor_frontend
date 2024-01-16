@@ -6,7 +6,7 @@ import { Link } from "react-router-dom";
 
 const MentorCards = ({ mentor }) => {
   return (
-    <div className="mt-10 mb-10  ">
+    <div className="mt-10 mb-10 mx-2 ">
       {" "}
       <div className="max-w-3xl max-h-30 min-h-25 mx-auto bg-white rounded-xl overflow-hidden shadow-2xl flex hover:shadow-stone-500">
         <div className="w-1/3 my-auto px-2">
