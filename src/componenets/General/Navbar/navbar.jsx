@@ -23,11 +23,11 @@ export default function NavbarHome() {
     // <nav className="  sticky  top-0 z-10 w-full bg-white shadow dark:bg-neutral-800">
     <Disclosure
       as="nav"
-      className="relative shadow-lg  shadow-stone-500/40 sticky top-0 z-10 w-full flex h-[58px] item-center justify-between bg-mentorBlue "
+      className=" shadow-lg  shadow-stone-500/40 sticky top-0 z-10 w-full flex h-[58px] item-center justify-between bg-mentorBlue "
     >
       {({ open }) => (
         <>
-          <div className="mx-auto w-4/5 px-2 sm:px-6 lg:px-8">
+          <div className="mx-auto w-full px-2 sm:px-6 lg:px-8">
             <div className="relative flex h-16 items-center justify-between">
               <Link to={"/"}>
                 {" "}
@@ -58,17 +58,17 @@ export default function NavbarHome() {
                   /> */}
                 {/* </div> */}
                 {/* <div className="hidden sm:ml-6 sm:block"> */}
-                <div className="mx-auto flex flex-1 space-x-14 text-white ">
+                <div className="mx-auto flex flex-1 sm:space-x-6  text-white ">
                   {navigation.map((item) => (
                     <Link
                       key={item.name}
                       to={item.href}
-                      // className={classNames(
-                      //   item.current
-                      //     ? "bg-gray-900 text-white"
-                      //     : "text-gray-300 hover:bg-gray-700 hover:text-white",
-                      //   "rounded-md px-3 py-2 text-sm font-medium"
-                      // )}
+                      className={
+                        (item.current
+                          ? "bg-gray-900 text-white"
+                          : "text-gray-300 hover:bg-gray-700 hover:text-white",
+                        "rounded-md px-3 py-2 text-sm font-medium")
+                      }
                       aria-current={item.current ? "page" : undefined}
                     >
                       {item.name}
@@ -81,7 +81,7 @@ export default function NavbarHome() {
                 {/* Profile dropdown */}
 
                 <Menu as="div" className="relative ml-3">
-                  <div className="text-centre text-white ">
+                  <div className="text-centre text-white ml-3 ">
                     {/* {isAuthenticated ? (
                       "Logout"
                     ) : ( */}
