@@ -45,10 +45,10 @@ const NavbarModerator = () => {
         <>
           <div className="mx-auto max-w-7xl px-2 sm:px-6 lg:px-8">
             <div className="relative flex h-16 items-center justify-between">
-              <Link to={"/moderators"}>
+              <Link to={"/moderator"}>
                 {" "}
                 <img
-                  className="h-14 w-14 rounded-full shadow-lg  transition-transform hover:animate-none p-2"
+                  className="hidden sm:block h-14 w-14 rounded-full shadow-lg  transition-transform hover:animate-none p-2"
                   src={logoThumbnail}
                   alt=""
                 />
@@ -79,14 +79,14 @@ const NavbarModerator = () => {
                       <Link
                         to={item.href}
                         key={item.name}
-                        // href={item.href}
-                        // className={classNames(
-                        //   item.current
-                        //     ? "bg-gray-900 text-white"
-                        //     : "text-gray-300 hover:bg-gray-700 hover:text-white",
-                        //   "rounded-md px-3 py-2 text-sm font-medium"
-                        // )}
-                        // aria-current={item.current ? "page" : undefined}
+                        href={item.href}
+                        className={
+                          (item.current
+                            ? "bg-gray-900 text-white"
+                            : "text-gray-300 hover:bg-gray-700 hover:text-white",
+                          "rounded-md px-3 py-2 text-sm font-medium")
+                        }
+                        aria-current={item.current ? "page" : undefined}
                       >
                         {item.name}
                       </Link>
@@ -180,12 +180,12 @@ const NavbarModerator = () => {
                   key={item.name}
                   as="a"
                   href={item.href}
-                  //   className={classNames(
-                  //     item.current
-                  //       ? "bg-gray-900 text-white"
-                  //       : "text-gray-300 hover:bg-gray-700 hover:text-white",
-                  //     "block rounded-md px-3 py-2 text-base font-medium"
-                  //   )}
+                  className={
+                    (item.current
+                      ? "bg-gray-900 text-white"
+                      : "text-gray-300 hover:bg-gray-700 hover:text-white",
+                    "block rounded-md px-3 py-2 text-base font-medium")
+                  }
                   aria-current={item.current ? "page" : undefined}
                 >
                   {item.name}

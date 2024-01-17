@@ -32,11 +32,11 @@ export const MentorRoutes = {
       element: <SchedulerPage />,
     },
     {
-      path: "/mentors/profile",
+      path: "profile",
       element: <MentorsProfile />,
     },
     {
-      path: "/mentors/subscribed-mentees",
+      path: "subscribed-mentees",
       element: <SubscribedMentees />,
     },
     {
