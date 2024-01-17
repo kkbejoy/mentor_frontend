@@ -25,45 +25,45 @@ const UserProfileComponent = ({
         } cursor-pointer gap-2 border-2 shadow-xl hover:bg-slate-300 max-h-24 min-h-20 max-w-sm min-w-sm`}
         key={profile._id}
       >
-        {/* <Link to={`/mentees/connect/inbox/${profile._id}`}> */}
-        <div
-          className={`flex flex-col-2 justify-between ${
-            activeOrNot
-              ? "bg-blue-50 shadow-inner transition-colors"
-              : "bg-none transition-colors"
-          }`}
-        >
-          <div className="hidden sm:block max-w-md text-center w-1/4 rounded-full">
-            <img
-              className="ml-2 h-1/2 rounded-full object-cover mt-5"
-              src={
-                profile?.participants[0]?.mentor?.profileImageUrl
-                  ? `https://res.cloudinary.com/dlcsyyk7z/image/upload/v1696240416/${profile?.participants[0]?.mentor?.profileImageUrl}`
-                  : `https://res.cloudinary.com/dlcsyyk7z/image/upload/v1698830239/mentors/mentor/images_2_d4e6fp_siwirt_a7fcrt.jpg`
-              }
-              alt=""
-            />
-          </div>
-          <div className="flex flex-col-2 justify-start  w-3/4 ">
-            <div className="flex flex-col-2 ">
-              <div className="  my-5 w-[26vh]">
-                <h1 className="text-xl focus:scale-105 px-2 ">
+        <Link to={`/mentees/connect/inbox/${profile._id}`}>
+          <div
+            className={`flex flex-col-2 justify-between ${
+              activeOrNot
+                ? "bg-blue-50 shadow-inner transition-colors"
+                : "bg-none transition-colors"
+            }`}
+          >
+            <div className="hidden sm:block max-w-md text-center w-1/4 rounded-full">
+              <img
+                className="ml-2 h-1/2 rounded-full object-cover mt-5"
+                src={
+                  profile?.participants[0]?.mentor?.profileImageUrl
+                    ? `https://res.cloudinary.com/dlcsyyk7z/image/upload/v1696240416/${profile?.participants[0]?.mentor?.profileImageUrl}`
+                    : `https://res.cloudinary.com/dlcsyyk7z/image/upload/v1698830239/mentors/mentor/images_2_d4e6fp_siwirt_a7fcrt.jpg`
+                }
+                alt=""
+              />
+            </div>
+            <div className="flex flex-col-2 justify-start  w-3/4 ">
+              <div className="flex flex-col-2 ">
+                <div className="  my-5 w-[26vh]">
+                  <h1 className="text-xl focus:scale-105 px-2 ">
+                    {" "}
+                    {profile?.participants[0]?.mentor?.firstName}{" "}
+                    {profile?.participants[0]?.mentor?.lastName}
+                  </h1>
+                  <p className="text-xs mb-2 flex justify-between  px-2">
+                    {profile?.latestMessage?.content}
+                  </p>
+                </div>
+                <div className="text-end justify-end my-5 mr-3">
                   {" "}
-                  {profile?.participants[0]?.mentor?.firstName}{" "}
-                  {profile?.participants[0]?.mentor?.lastName}
-                </h1>
-                <p className="text-xs mb-2 flex justify-between  px-2">
-                  {profile?.latestMessage?.content}
-                </p>
-              </div>
-              <div className="text-end justify-end my-5 mr-3">
-                {" "}
-                <h1 className="text-xs font-extralight mr-1"> {time}</h1>
-              </div>
-            </div>{" "}
-          </div>
-        </div>{" "}
-        {/* </Link> */}
+                  <h1 className="text-xs font-extralight mr-1"> {time}</h1>
+                </div>
+              </div>{" "}
+            </div>
+          </div>{" "}
+        </Link>
       </div>
     );
   } else if (userType === "mentor") {

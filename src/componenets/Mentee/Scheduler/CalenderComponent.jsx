@@ -141,7 +141,7 @@ export default function CalenderComponent({
           )
         }
         components={components}
-        min={"Fri Oct 06 2023 05:00:00 GMT+0530"}
+        min={"Fri Oct 06 2023 00:00:00"}
       />
     </>
   );

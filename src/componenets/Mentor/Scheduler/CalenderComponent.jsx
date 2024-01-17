@@ -121,7 +121,7 @@ export default function CalenderComponent({
         style={{ height: 1200 }}
         onSelectSlot={({ start, end }) => handleSelect(start, end)}
         onSelectEvent={({ _id }) => handleSelectedEvent(_id)}
-        min={"Fri Oct 06 2023 05:00:00 GMT+0530"}
+        min={"Fri Oct 06 2023 05:00:00"}
         // max={"Fri Oct 06 2023 24:00:00 GMT+0530"}
         components={components}
       />
