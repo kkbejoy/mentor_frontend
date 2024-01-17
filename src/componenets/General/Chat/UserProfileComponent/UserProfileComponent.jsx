@@ -35,7 +35,7 @@ const UserProfileComponent = ({
           >
             <div className="hidden sm:block max-w-md text-center w-1/4 rounded-full">
               <img
-                className="ml-2 h-1/2 rounded-full object-cover mt-5"
+                className="ml-2 h-1/2 w-1/2 rounded-full object-cover mt-5"
                 src={
                   profile?.participants[0]?.mentor?.profileImageUrl
                     ? `https://res.cloudinary.com/dlcsyyk7z/image/upload/v1696240416/${profile?.participants[0]?.mentor?.profileImageUrl}`
@@ -47,12 +47,12 @@ const UserProfileComponent = ({
             <div className="flex flex-col-2 justify-start  w-3/4 ">
               <div className="flex flex-col-2 ">
                 <div className="  my-5 w-[26vh]">
-                  <h1 className="text-xl focus:scale-105 px-2 ">
+                  <h1 className="text-xl focus:scale-105 px-2 truncate">
                     {" "}
                     {profile?.participants[0]?.mentor?.firstName}{" "}
                     {profile?.participants[0]?.mentor?.lastName}
                   </h1>
-                  <p className="text-xs mb-2 flex justify-between  px-2">
+                  <p className="text-xs mb-2 flex justify-between  px-2 truncate">
                     {profile?.latestMessage?.content}
                   </p>
                 </div>
@@ -81,16 +81,16 @@ const UserProfileComponent = ({
       >
         <Link to={`/mentors/connect/inbox/${profile._id}`}>
           <div
-            className={`flex flex-col-2 justify-between ${
+            className={`flex flex-col-2 gap-4 ${
               activeOrNot
                 ? "bg-blue-50 shadow-inner transition-colors"
                 : "bg-none transition-colors"
             }`}
           >
-            <div className="hidden sm:block text-center  w-1/4">
+            <div className="hidden sm:block  text-center w-14 h-14 ">
               {" "}
               <img
-                className="ml-2 h-1/2 rounded-full object-cover mt-5"
+                className="ml-2 md:w-10 md:h-10 lg:w-14 lg:h-14  mx-auto rounded-full object-cover mt-5"
                 src={
                   profile.participants[0]?.mentee?.profileImageUrl
                     ? `https://res.cloudinary.com/dlcsyyk7z/image/upload/v1696240416/${profile.participants[0]?.mentee?.profileImageUrl}`
@@ -102,7 +102,7 @@ const UserProfileComponent = ({
             <div className="flex flex-col-2 justify-start w-3/4 ">
               <div className="flex flex-col-2 ">
                 <div className="  my-5 w-[26vh]">
-                  <h1 className="text-xl px-2 focus:scale-105 ">
+                  <h1 className="text-xl px-2 focus:scale-105 truncate">
                     {profile?.participants[0]?.mentee?.firstName}{" "}
                     {profile?.participants[0]?.mentee?.lastName}
                   </h1>
