@@ -27,15 +27,15 @@ const UserProfileComponent = ({
       >
         <Link to={`/mentees/connect/inbox/${profile._id}`}>
           <div
-            className={`flex flex-col-2 justify-between ${
+            className={`flex flex-col-2 gap-4 ${
               activeOrNot
                 ? "bg-blue-50 shadow-inner transition-colors"
                 : "bg-none transition-colors"
             }`}
           >
-            <div className="hidden sm:block max-w-md text-center w-1/4 rounded-full">
+            <div className="hidden sm:block max-w-md text-center  w-14 h-14  rounded-full">
               <img
-                className="ml-2 h-1/2 w-1/2 rounded-full object-cover mt-5"
+                className="ml-2 md:w-10 md:h-10 lg:w-14 lg:h-14  mx-auto rounded-full object-cover mt-5"
                 src={
                   profile?.participants[0]?.mentor?.profileImageUrl
                     ? `https://res.cloudinary.com/dlcsyyk7z/image/upload/v1696240416/${profile?.participants[0]?.mentor?.profileImageUrl}`
