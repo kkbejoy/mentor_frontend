@@ -57,7 +57,7 @@ const SlotUpdateForm = ({
         isOpen={updateModalOpen}
         onRequestClose={() => setUpdateModal(false)}
         contentLabel="My Modal" // Add a content label for accessibility
-        className="w-full max-w-lg h-[75vh] bg-white rounded-lg shadow-lg items-center mx-auto mt-20"
+        className="w-full p-5 max-w-lg h-fit bg-white rounded-lg shadow-lg items-center mx-auto mt-20"
       >
         <div className=" p-5 ">
           <h1 className="text-xl text-center font-bold align-middle">
@@ -110,21 +110,21 @@ const SlotUpdateForm = ({
                   Discussion Topic:
                 </h1>
               </div>
-              <div>
-                <h2 className="text-md font-normal text-gray-950 mx-2">
+              <div className="flex overflow-x-hidden">
+                <h2 className="text-md font-normal w-72 text-gray-950 mx-2  truncate">
                   {data?.menteeQueryTitle ? data?.menteeQueryTitle : null}
                 </h2>
               </div>
             </div>
 
-            <div className="flex flex-row mt-3">
+            <div className="flex flex-row mt-3 ">
               <div>
                 <h1 className="text-md font-semibold text-gray-950">
                   Details:
                 </h1>
               </div>
-              <div>
-                <h2 className="text-md font-normal text-gray-950 mx-2">
+              <div className="h-52 flex overflow-y-auto">
+                <h2 className="text-md font-normal h-52 flex  w-96 text-gray-950 mx-2 ">
                   {data?.menteeQueryDescription
                     ? data?.menteeQueryDescription
                     : null}

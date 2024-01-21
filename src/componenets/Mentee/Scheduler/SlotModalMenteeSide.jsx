@@ -86,7 +86,7 @@ const SlotModalMenteeSide = ({
         isOpen={newSlotModalOpen}
         onRequestClose={() => setNewSlotModal(false)}
         contentLabel="My Modal" // Add a content label for accessibility
-        className="w-full max-w-lg h-[80vh] bg-white rounded-lg shadow-lg items-center mx-auto mt-20"
+        className="w-full p-3 max-w-lg h-[78vh] bg-white rounded-lg shadow-lg items-center mx-auto mt-20"
       >
         <div className=" p-5 ">
           <h1 className="text-xl text-center font-bold align-middle">

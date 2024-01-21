@@ -65,7 +65,7 @@ const MentorFormModalComponent = ({
         isOpen={newSlotModalOpen}
         onRequestClose={() => setNewSlotModal(false)}
         contentLabel="My Modal" // Add a content label for accessibility
-        className="w-full max-w-lg h-[75vh] bg-white rounded-lg shadow-lg items-center mx-auto mt-20"
+        className="w-full max-w-lg h-fit p-5 bg-white rounded-lg shadow-lg items-center mx-auto mt-20"
       >
         <div className=" p-5 ">
           <h1 className="text-xl text-center font-bold align-middle">
