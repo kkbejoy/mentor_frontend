@@ -26,7 +26,8 @@ export function Moderator() {
   return (
     <>
       <NavbarModerator />
-      <Outlet /> <Toaster />
+      <Outlet />
+      <ScrollRestoration /> <Toaster />
     </>
   );
 }
@@ -80,6 +81,7 @@ export function Mentee() {
   return (
     <>
       <Outlet />
+      <ScrollRestoration />
       <Toaster />
     </>
   );
@@ -89,7 +91,8 @@ export function Mentor() {
     <>
       {" "}
       <NavbarMentor />
-      <Outlet /> <Toaster />
+      <Outlet />
+      <ScrollRestoration /> <Toaster />
     </>
   );
 }
