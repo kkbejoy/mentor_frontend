@@ -37,7 +37,7 @@ const ChatUsersListComponent = ({
 
   return (
     <>
-      <section className="bg-white h-[100vh] overflow-x-hidden overflow-y-visible w-1/4 mt-3 ">
+      <section className="bg-white h-[100vh] overflow-x-hidden overflow-y-visible w-1/4 mt-3 p-1 ">
         {/* Search COmponent */}
         <SearchBoxComponent searchName={setSearchString} />
         {/* profileCards */}

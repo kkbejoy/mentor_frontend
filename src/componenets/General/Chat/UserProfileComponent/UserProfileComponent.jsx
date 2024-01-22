@@ -19,7 +19,7 @@ const UserProfileComponent = ({
               ? "bg-slate-50"
               : "bg-slate-200 font-semibold"
             : "bg-white"
-        } cursor-pointer gap-2 border-2 shadow-xl hover:bg-slate-300 max-h-24 min-h-20 max-w-sm min-w-sm`}
+        } cursor-pointer gap-2 border-2 shadow-xl hover:bg-slate-300 max-h-24 min-h-20 max-w-sm min-w-sm p-`}
         key={profile._id}
       >
         <Link to={`/mentees/connect/inbox/${profile._id}`}>
