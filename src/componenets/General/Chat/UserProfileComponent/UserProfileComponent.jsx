@@ -8,9 +8,6 @@ const UserProfileComponent = ({
   conversationId,
   activeOrNot,
 }) => {
-  // if (userType === "mentee") console.log("Mentee side Proifles", profile);
-  // if (userType === "mentor") console.log("Mentor side Proifles", profile);
-  console.log("Conversations Profile", profile);
   const inputTime = profile?.latestMessage?.createdAt;
   const time = getTimeDifference(inputTime);
   if (userType === "mentee") {
@@ -67,7 +64,6 @@ const UserProfileComponent = ({
       </div>
     );
   } else if (userType === "mentor") {
-    console.log("Mentor side", activeOrNot);
     return (
       <div
         className={`${

@@ -40,20 +40,15 @@ const InboxPageMentor = () => {
     socket = io(BASE_URL);
 
     //Set up  a socket for a person
-    console.log("Mentor Id", mentorId);
     socket.emit("setup", mentorId);
     socket.on("connection", () => {
-      console.log(" Socket Connection", socket);
+      console.log(" Socket Connection");
     });
     //new Message
-    socket.on("new message", (newMessage) => {
-      console.log("New Message reveived Mentor side ", newMessage);
-    });
-    console.log(" Socket Checking");
+    socket.on("new message", (newMessage) => {});
 
     socket.on("messageReveived", (newMessage) => {
       // toast.success("new Message receive dfrom mentee", newMessage);
-      console.log("New Message reveived Mentor side ", newMessage);
       if (newMessage?.sender?.senderType === "mentor") return;
       setNewMessageFromSocket(newMessage);
     });
@@ -82,8 +77,6 @@ const InboxPageMentor = () => {
   // }, [conversationId]);
   useEffect(() => {
     if (newMessageFromSocket?.conversation?._id === conversationId) {
-      console.log("Mesage Recieved", newMessageFromSocket);
-
       dispatch(addNewMessagMentorSide(newMessageFromSocket));
     }
     dispatch(fetchMentorConversations());

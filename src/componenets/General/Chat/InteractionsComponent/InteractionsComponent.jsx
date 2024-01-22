@@ -23,7 +23,6 @@ const InteractionsComponent = ({
     conversationId,
     userType
   );
-  console.log("Chat box Profile", profile);
 
   return (
     <aside className=" h-screen w-3/4 mx-auto">

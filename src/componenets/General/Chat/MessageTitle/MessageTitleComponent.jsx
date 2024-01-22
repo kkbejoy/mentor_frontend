@@ -8,7 +8,6 @@ const MessageTitleComponent = ({
   senderId,
   userType,
 }) => {
-  console.log("Image url", senderId);
   return (
     <div className="flex flex-col-2 bg-gray-100 ">
       <div className="h-20">

@@ -34,7 +34,6 @@ const ChatUsersListComponent = ({
       ? filteredConversationListMenteeSide
       : filteredConversationListMentorSide
     : conversationsList;
-  console.log("Conversations list1", conversations);
 
   return (
     <>
