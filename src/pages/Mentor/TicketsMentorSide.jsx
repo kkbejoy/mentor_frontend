@@ -15,7 +15,7 @@ const TicketsMentorSidePage = () => {
   }, [pageRerender]);
   return (
     <div>
-      <NavbarMentor />
+      {/* <NavbarMentor /> */}
       <TicketsListMentorSide
         pageRerenderFunction={setPageRerender}
         userType={userTypes.MENTOR}

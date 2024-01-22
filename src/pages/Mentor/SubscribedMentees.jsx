@@ -14,7 +14,7 @@ const SubscribedMentees = () => {
   }, []);
   return (
     <>
-      <NavbarMentor />
+      {/* <NavbarMentor /> */}
       <HorizontalDivider title={"Subscribed Mentees"} />
       <SubscribedMenteesTable />
       <FooterComponent />

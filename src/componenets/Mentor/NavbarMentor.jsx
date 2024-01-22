@@ -35,7 +35,7 @@ const NavbarMentor = () => {
   return (
     <Disclosure
       as="nav"
-      className="relative bg-mentorBlue  sticky top-0 z-10 w-full  shadow-stone-500/40"
+      className=" bg-mentorBlue sticky top-0 z-10 w-full  shadow-stone-500/40"
     >
       {({ open }) => (
         <>

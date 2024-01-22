@@ -106,6 +106,8 @@ const ProfileInformationEditComponent = ({ setRerender, reRenderState }) => {
       <SkillMoldal
         modalOpen={skillModal}
         onRequestCloseFunction={setSkillModal}
+        setRerender={setRerender}
+        modalOpenAndClose={setSkillModal}
       />
       {/* Skills */}
       <div className="mx-3  ">

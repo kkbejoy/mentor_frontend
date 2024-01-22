@@ -8,7 +8,7 @@ const MentorsProfile = () => {
   const [reRenderState, setRerender] = useState({});
   return (
     <div>
-      <NavbarMentor />
+      {/* <NavbarMentor /> */}
       <HorizontalDivider title={"Mentor Profile"} />
       {/* <div className="w-3/4"> */}
       <ProfileInformationEditComponent

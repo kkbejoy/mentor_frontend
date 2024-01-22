@@ -42,8 +42,8 @@ const LineChart = ({ InputData }) => {
   return (
     <div className=" h-96 w-2/3 mt-7 px-20">
       <p className="text-left font-semibold">New Mentees Enrollments</p>
-      {!isDataLoading ? (
-        <Line ref={chartRef} data={inputData} className=" shadow-lg p-3" />
+      {inputData ? (
+        <Line ref={chartRef} data={inputData} className=" shadow-xl p-3" />
       ) : (
         <ChatLineGraphSkeleton />
       )}{" "}

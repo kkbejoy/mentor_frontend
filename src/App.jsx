@@ -9,7 +9,7 @@ import {
 } from "./slices/MenteeSlices/menteeNotificationSlice";
 import NavbarModerator from "./componenets/Moderator/NavbarModerator";
 import { useDispatch, useSelector } from "react-redux";
-import { addNewMessagMentorSide } from "./slices/MentorSlices/messageSlice";
+import NavbarMentor from "./componenets/Mentor/NavbarMentor";
 import { ScrollRestoration } from "react-router-dom";
 
 export function Home() {
@@ -87,6 +87,8 @@ export function Mentee() {
 export function Mentor() {
   return (
     <>
+      {" "}
+      <NavbarMentor />
       <Outlet /> <Toaster />
     </>
   );

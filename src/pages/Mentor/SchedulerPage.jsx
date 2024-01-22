@@ -19,7 +19,7 @@ const SchedulerPage = () => {
   }, [mentorId, renderCalender]);
   return (
     <div>
-      <NavbarMentor />
+      {/* <NavbarMentor /> */}
       <div className="w-3/4 mx-auto my-10">
         <CalenderComponent
           setCalenderRerenderFunction={setCalenderRerender}

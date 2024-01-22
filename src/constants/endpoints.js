@@ -1,4 +1,4 @@
-export const BASE_URL = "https://server.mentornudge.online";
+export const BASE_URL = "http://localhost:5000";
 
 const END_POINTS = {
   //Mentee Or General Routes

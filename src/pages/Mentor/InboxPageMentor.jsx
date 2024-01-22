@@ -96,7 +96,7 @@ const InboxPageMentor = () => {
   }, [messagesSocket]);
   return (
     <div>
-      <NavbarMentor />
+      {/* <NavbarMentor /> */}
       <div className="flex flex-col-2 overflow-hidden">
         {" "}
         <ChatUsersListComponent

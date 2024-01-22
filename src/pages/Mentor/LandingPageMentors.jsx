@@ -22,7 +22,7 @@ const LandingPageMentor = () => {
   }, []);
   return (
     <div className="">
-      <NavbarMentor />
+      {/* <NavbarMentor /> */}
       {/* <LineChart UserData={UserData} /> */}
       <Welcome />
       <div className="flex h-screen mt-3">

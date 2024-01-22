@@ -10,7 +10,7 @@ const SubscribedMenteesTable = () => {
   //   console.log("Use Table", useTable);
   return (
     <>
-      <div className="mx-14 my-14">
+      <div className="mx-14 my-14 h-screen">
         {menteesList && (
           <MenteeListTable columns={enrollmentDetails} data={menteesList} />
         )}

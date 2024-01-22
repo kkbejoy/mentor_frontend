@@ -6,7 +6,7 @@ import {
   extractDateFromInput,
   extractTimeFromInput,
 } from "../../../utilities/timeManagementFunctions";
-import { BASE_URL } from "../../../constants/constants";
+import { BASE_URL, CLIENT_URL } from "../../../constants/constants";
 import { toast } from "sonner";
 
 const UpcommingLiveList = () => {
@@ -22,7 +22,7 @@ const UpcommingLiveList = () => {
 
   const handleMentorGoLive = async (slotId, menteeName) => {
     try {
-      window.open(`http://localhost:5173/mentors/connect/live/${slotId}`);
+      window.open(`${CLIENT_URL}/mentors/connect/live/${slotId}`);
     } catch (error) {
       console.log("error:", error);
       toast.error("Please refresh the page..!!");
