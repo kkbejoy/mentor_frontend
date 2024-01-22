@@ -17,12 +17,9 @@ const TicketsListModeratorSide = ({ pageRerenderFunction }) => {
     (state) => state?.moderatorSideTicketsList?.data
   );
 
-  console.log("Tickets list", ticketsListModatorSide);
-
   //Function that controls modal
 
   const modalContol = async (ticket) => {
-    console.log("This ticket", ticket);
     try {
       setSelectedTicket({ ...ticket });
       setTicketModal(true);
@@ -36,7 +33,6 @@ const TicketsListModeratorSide = ({ pageRerenderFunction }) => {
   const handleAccussedBlockButtonClick = async () => {
     try {
       setIsLoading(true);
-      console.log("User type:", selectedTicket);
       const ticketId = selectedTicket?._id;
       const responseFromAPI = await modifyTicketStatus(ticketId);
       setIsLoading(false);
@@ -91,7 +87,13 @@ const TicketsListModeratorSide = ({ pageRerenderFunction }) => {
               <td className="py-3 px-6">
                 <h1 className="font-bold text-red-800 hover:scale-105">
                   <Link
-                    to={`/browse/mentor/profile/${ticket?.accused?.accusedId?._id}`}
+                    to={
+                      `${
+                        ticket?.complainant?.complainantType == userTypes.MENTOR
+                      }`
+                        ? null
+                        : `/browse/mentor/profile/${ticket?.accused?.accusedId?._id}`
+                    }
                     target="_blank"
                   >
                     {" "}
