@@ -14,9 +14,7 @@ const UpcommingLiveList = () => {
   const liveData = useSelector(
     (state) => state?.mentorHomePageTodaysLiveList?.data
   );
-  console.log("Upcoming live lst", liveData);
   useEffect(() => {
-    console.log("From useEffects");
     dispatch(fetchUpcomingLivesMentorHomePage());
   }, []);
 
@@ -56,9 +54,6 @@ const UpcommingLiveList = () => {
             const time = extractTimeFromInput(slots?.start);
             const difference = compareTimeWithCurrentTime(slots?.start);
 
-            console.log("Current TIme", difference);
-
-            console.log("Slots", slots);
             return (
               <tr
                 key={slots._id}

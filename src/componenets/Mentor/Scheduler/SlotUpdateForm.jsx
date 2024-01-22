@@ -19,7 +19,6 @@ const SlotUpdateForm = ({
   const [isDeleted, setDeleted] = useState(false);
   const mentorId = getMentorIdFromLocalStorage();
   const socketInstance = setUpSocket(mentorId);
-  console.log("Slot object", SlotObject);
   useEffect(() => {
     // SlotObject.then((slot) => {
     // socketInstance?.emit("scheduler", slot.resonseFromDb);
@@ -34,10 +33,8 @@ const SlotUpdateForm = ({
   const handleSlotDeletion = async () => {
     try {
       setLoading(true);
-      console.log("Delete Button Pressed");
 
       const res = await deleteSlot(data?._id);
-      console.log("Resinse from deletetion", res);
       const newRes = { ...renderState, ...res };
       socketInstance?.emit("scheduler", res?.data?.notifyMentee);
 

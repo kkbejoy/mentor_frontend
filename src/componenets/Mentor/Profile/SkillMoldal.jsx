@@ -11,7 +11,6 @@ const SkillMoldal = ({
   modalOpenAndClose,
 }) => {
   const [newSkill, setNewSkill] = useState("");
-  console.log("value of new skill", newSkill);
 
   const handleAddNewSkillButton = async (e) => {
     e.preventDefault();
@@ -21,7 +20,6 @@ const SkillMoldal = ({
       const responseFromApi = await addNewMentorSkill(expertise);
       setRerender({ ...responseFromApi });
       modalOpenAndClose(false);
-      console.log("Expertise", expertise);
     } catch (error) {
       console.log(error);
     }

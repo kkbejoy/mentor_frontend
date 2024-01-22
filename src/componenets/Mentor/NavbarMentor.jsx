@@ -21,7 +21,6 @@ const NavbarMentor = () => {
     // { name: "Mentors List", href: "#", current: false },
   ];
   const isAuthenticated = checkAuthentication();
-  console.log("Authenticated", isAuthenticated);
 
   useEffect(() => {
     dispatch(fetchTheNumberOfUnreadMesagesMentorSide());
@@ -31,7 +30,6 @@ const NavbarMentor = () => {
     (state) => state?.mentorSideUnreaMessageCount?.unreadCount
   );
 
-  console.log("Unread Conversations:", unreadConversationLength);
   return (
     <Disclosure
       as="nav"

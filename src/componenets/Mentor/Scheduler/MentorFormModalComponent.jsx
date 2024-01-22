@@ -32,7 +32,6 @@ const MentorFormModalComponent = ({
     type: "available",
     mentorPreferences: "",
   };
-  console.log("Start time", startTime);
 
   const handleNewScheduleSubmission = async (
     values,
@@ -45,7 +44,6 @@ const MentorFormModalComponent = ({
         end: endTimeInGMT,
         type: "available",
       };
-      console.log("Time:", SlotBookingObject);
       const respose = mentorNewTimeSlotApi(SlotBookingObject);
       respose.then((res) => {
         const newRes = { ...renderState, ...res };

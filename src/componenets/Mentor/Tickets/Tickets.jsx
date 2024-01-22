@@ -14,8 +14,6 @@ const TicketsListMentorSide = ({ pageRerenderFunction, userType }) => {
     (state) => state?.mentorSideTickets?.data
   );
 
-  console.log("Tickets list", ticketsListMenteeSide);
-
   return (
     <div className=" h-screen ">
       <RaiseANewTicketModal

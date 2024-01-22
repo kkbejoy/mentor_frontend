@@ -26,11 +26,9 @@ const ProfileImageUploader = ({ profileImage, setRerender }) => {
       formData.append("file", selectedImage);
       formData.append("upload_preset", "mentor");
       formData.append("public_id", `mentors/mentor/${uniqueName}`);
-      console.log("Form data", formData);
       //Uplloading image to cloudinary
       const uploadResponse = await imageUploadToCloudinary(formData);
       const updatedObject = {};
-      console.log("Updated Response", uploadResponse);
       updatedObject.profileImageUrl = uploadResponse.public_id;
       const apiResponse = await updateMentorProfile(updatedObject);
       setRerender({ ...apiResponse });

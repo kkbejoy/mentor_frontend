@@ -49,7 +49,6 @@ const ProfileInformationEditComponent = ({ setRerender, reRenderState }) => {
       formData.append("file", selectedImage);
       formData.append("upload_preset", "mentor");
       formData.append("public_id", `mentors/mentor/${uniqueName}`);
-      console.log("Form data", formData);
       //Uplloading image to cloudinary
       const uploadResponse = await imageUploadToCloudinary(formData);
       reRenderState({ ...uploadResponse });
@@ -65,7 +64,6 @@ const ProfileInformationEditComponent = ({ setRerender, reRenderState }) => {
 
   const handleSubmit = async (values, { setSubmitting }) => {
     try {
-      console.log("Input to the form", values);
       let imageUploaderResponse;
 
       //If there is an image it will be uploaded to cloudinary
@@ -73,12 +71,9 @@ const ProfileInformationEditComponent = ({ setRerender, reRenderState }) => {
         imageUploaderResponse = await handleImageUpload();
       }
       const skills = values?.skills?.split(",");
-      console.log(skills);
       delete values.skills;
       values.expertise = skills;
-      console.log("Form entered Details", values);
       const updatedObject = values;
-      console.log("Updated Response", imageUploaderResponse);
       updatedObject.profileImageUrl = imageUploaderResponse?.public_id;
       const res = await updateMentorProfile(updatedObject);
       setRerender({ ...res });
@@ -90,7 +85,6 @@ const ProfileInformationEditComponent = ({ setRerender, reRenderState }) => {
   const deleteThisSKill = async (e, skill) => {
     try {
       e.preventDefault();
-      console.log("Skill to delete", skill);
       const res = await removeAskillFromMentorSkillArray(skill);
       setRerender({ ...res });
     } catch (error) {
