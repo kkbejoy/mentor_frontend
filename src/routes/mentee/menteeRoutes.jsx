@@ -18,7 +18,8 @@ import MenteeAuthProvider from "./MenteeAuthProvider";
 // import MentorProfilePage from "../../pages/Mentee/MentorProfilePage";
 
 import ErrorPage from "../../componenets/General/Fallback/ErrorPage";
-import SpinnerModal from "../../componenets/General/LoadingSpinners/SpinnerModal";
+// import SpinnerModal from "../../componenets/General/LoadingSpinners/SpinnerModal";
+// import FallbackLoader from "../../componenets/General/LoadingSpinners/FallbackLoader";
 
 //Lazy Loaded Componenents
 const BrowseMentorPage = lazy(() =>
@@ -221,9 +222,9 @@ export const MenteeRoute = {
         </Suspense>
       ),
     },
-    {
-      path: "trail",
-      element: <SpinnerModal />,
-    },
+    // {
+    //   path: "trail",
+    //   element: <FallbackLoader />,
+    // },
   ],
 };
