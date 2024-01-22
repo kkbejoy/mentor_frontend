@@ -6,7 +6,7 @@ const MenteeSlotVacantComponent = ({ props, formattedTime }) => {
     <div className=" h-full shadow-md bg-green-400  text-black text-center transform-cpu transition-transform hover:scale-105">
       <div className="flex flex-col-2">
         <img
-          className="w-1/4 h-1/4 rounded-full object-cover pt-3"
+          className="w-1/4 h-1/4 rounded-full object-cover pt-1"
           src={`https://res.cloudinary.com/dlcsyyk7z/image/upload/v1696240416/${props?.event?.mentorProfileImage}`}
           alt=""
         />{" "}

@@ -1,2 +1,11 @@
-.rbc-header {
+.rbc-event {
+  background-color: white !important;
+  border: none !important;
+}
+
+.rbc-event-content {
+  height: 100% !important;
+}
+.rbc-event-label {
+  display: none !important;
 }
