@@ -6,6 +6,7 @@ import {
   setPriceRange,
   setRating,
 } from "../../slices/MenteeSlices/searchSlice";
+import MentorCardShimmers from "../General/Cards/MentorCardShimmers";
 export const MentorSearchResultComponent = () => {
   const dispatch = useDispatch();
 
@@ -34,9 +35,13 @@ export const MentorSearchResultComponent = () => {
   }, [search, price, rating]);
   if (!mentorsListArray) {
     return (
-      <div className="h-screen flex place-content-center">
-        <h1 className="text-lg text-center font-semibold">Loading</h1>
-      </div>
+      <>
+        <MentorCardShimmers />
+        <MentorCardShimmers />
+      </>
+      // <div className="h-screen flex place-content-center">
+      //   <h1 className="text-lg text-center font-semibold">Loading</h1>
+      // </div>
     );
   }
   return (

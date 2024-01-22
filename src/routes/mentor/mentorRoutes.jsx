@@ -9,7 +9,7 @@ import InboxPageMentor from "../../pages/Mentor/InboxPageMentor";
 import VideoCallInterfaceMentorSidePage from "../../pages/Mentor/VideoCallInterface";
 import TicketsMentorSidePage from "../../pages/Mentor/TicketsMentorSide";
 import ErrorPage from "../../componenets/General/Fallback/ErrorPage";
-
+import MentorCardShimmers from "../../componenets/General/Cards/MentorCardShimmers";
 export const MentorRoutes = {
   path: "/mentors",
   element: (
@@ -51,9 +51,9 @@ export const MentorRoutes = {
       path: "tickets",
       element: <TicketsMentorSidePage />,
     },
-    // {
-    //   path: "/mentors/trail",
-    //   element: <EmojiPicketComponent />,
-    // },
+    {
+      path: "/mentors/trail",
+      element: <MentorCardShimmers />,
+    },
   ],
 };
