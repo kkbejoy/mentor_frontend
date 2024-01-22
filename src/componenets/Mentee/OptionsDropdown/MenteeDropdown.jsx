@@ -10,7 +10,11 @@ export default function MenteeDropDown() {
   const links = [
     { href: "/mentees/profile", label: "Profile" },
     { href: "/mentees/booked-slots", label: "Booked Slots" },
-    // { href: "/license", label: "License" },
+    { href: "/mentees/subscribed-mentors", label: "Subscriptions" },
+    {
+      href: "/mentees/tickets",
+      label: "Raise a Ticket",
+    },
     // { href: "/sign-out", label: "Sign out" },
   ];
   // const { mentorId } = getMentorIdFromLocalStorage();

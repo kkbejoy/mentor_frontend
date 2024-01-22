@@ -9,7 +9,6 @@ const MenteeProfileEditComponent = ({ profile, reRenderFunction }) => {
   const [selectedImage, setSelectedImage] = useState("");
   const handleSubmit = async (values, { setSubmitting, setFieldError }) => {
     try {
-      console.log("Entered form values", values);
       const apiResponse = await updateMenteeProfile(values);
       reRenderFunction({ ...apiResponse });
     } catch (error) {
@@ -18,10 +17,35 @@ const MenteeProfileEditComponent = ({ profile, reRenderFunction }) => {
   };
   const initialValues = {};
   return (
-    <div className="flex">
+    <div className="flex flex-col-3 mt-10">
+      <div className="mx-auto m">
+        {" "}
+        <div className="gap-y-6">
+          {/* <h3 className="block text-sm text-left font-medium leading-6 text-gray-900">
+          Existing Avatar
+        </h3> */}
+          <img
+            src={
+              profile.profileImageUrl
+                ? `https://res.cloudinary.com/dlcsyyk7z/image/upload/v1696240416/${profile.profileImageUrl}`
+                : "https://res.cloudinary.com/dlcsyyk7z/image/upload/v1698830239/mentors/mentor/images_2_d4e6fp_siwirt_a7fcrt.jpg"
+            }
+            alt="avatar"
+            style={{ maxWidth: "200px" }}
+            loading="lazy"
+            className="my-4 rounded-xl shadow-2xl"
+          />
+        </div>
+        <h1 className="text-2xl font-bold mb-2">
+          {profile.firstName + " " + profile.lastName}
+        </h1>
+        <h1 className="text-lg font-bold mb-5">{profile.email}</h1>
+      </div>
       <div className="mt-10 sm:mx-auto sm:w-full sm:max-w-sm">
         {" "}
-        <div>{/* <h1 className="text-lg">hello</h1> */}</div>
+        <div>
+          <h1 className="text-lg font-semibold">Update Profile</h1>
+        </div>
         <Formik
           initialValues={initialValues}
           //   validationSchema={menteeRegistrationValidationSchema}
@@ -76,9 +100,9 @@ const MenteeProfileEditComponent = ({ profile, reRenderFunction }) => {
                 />
               </div>
 
-              <div className="mt-7">
+              {/* <div className="mt-7">
                 <h1 className="font-semibold">Email:{profile?.email}</h1>
-              </div>
+              </div> */}
             </div>
 
             <div>

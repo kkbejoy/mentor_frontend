@@ -37,12 +37,12 @@ const NavbarMentee = () => {
       name: "Browse Mentors",
       href: routesFrontend.MentorBrowsePage,
     },
-    { name: "Subscriptions", href: "/mentees/subscribed-mentors" },
+    // { name: "Subscriptions", href: "/mentees/subscribed-mentors" },
     { name: "Schedules", href: "/mentees/schedules" },
-    {
-      name: "Raise a Ticket",
-      href: "/mentees/tickets",
-    },
+    // {
+    //   name: "Raise a Ticket",
+    //   href: "/mentees/tickets",
+    // },
     { name: "Connect", href: "/mentees/connect/inbox/", notify: true },
     // { name: "Applicants", href: "#", current: false },
     // { name: "Mentors List", href: "#", current: false },

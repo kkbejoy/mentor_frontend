@@ -1,23 +1,56 @@
+import { Suspense, lazy } from "react";
 import { Mentee } from "../../App";
-
-import BrowseMentorPage from "../../pages/Mentee/BrowseMentorPage";
-import LandingPageMentee from "../../pages/Mentee/LandingPageMentees";
-import MentorProfilePage from "../../pages/Mentee/MentorProfilePage";
-// import PaymentFailedPage from "../../pages/Mentee/PaymentFailedPage";
-import PaymentSuccesPage from "../../pages/Mentee/PaymentSuccesPage";
-
-import SchedulerPage from "../../pages/Mentee/SchedulerPage";
-import SubscribedMentorsPage from "../../pages/Mentee/SubscribedMentorsPage";
-
 import MenteeAuthProvider from "./MenteeAuthProvider";
-import InboxPageMentee from "../../pages/Mentee/InboxPageMentee";
 
+// import InboxPageMentee from "../../pages/Mentee/InboxPageMentee";
 // import InboxEmptyPage from "../../pages/Mentee/InboxEmptyPage";
-import MenteeProfile from "../../pages/Mentee/MenteeProfile";
-import BookedSlotsList from "../../pages/Mentee/BookedSlotsList";
-import VideoCallInterfaceMenteeSidePage from "../../pages/Mentee/VideoCallInterface";
-import TicketsMenteePage from "../../pages/Mentee/TicketsMenteePage";
+// import MenteeProfile from "../../pages/Mentee/MenteeProfile";
+// import BookedSlotsList from "../../pages/Mentee/BookedSlotsList";
+// import VideoCallInterfaceMenteeSidePage from "../../pages/Mentee/VideoCallInterface";
+// import TicketsMenteePage from "../../pages/Mentee/TicketsMenteePage";
+// import PaymentFailedPage from "../../pages/Mentee/PaymentFailedPage";
+// import PaymentSuccesPage from "../../pages/Mentee/PaymentSuccesPage";
+
+// import SchedulerPage from "../../pages/Mentee/SchedulerPage";
+// import SubscribedMentorsPage from "../../pages/Mentee/SubscribedMentorsPage";
+// import BrowseMentorPage from "../../pages/Mentee/BrowseMentorPage";
+// import LandingPageMentee from "../../pages/Mentee/LandingPageMentees";
+// import MentorProfilePage from "../../pages/Mentee/MentorProfilePage";
+
 import ErrorPage from "../../componenets/General/Fallback/ErrorPage";
+import SpinnerModal from "../../componenets/General/LoadingSpinners/SpinnerModal";
+
+//Lazy Loaded Componenents
+const BrowseMentorPage = lazy(() =>
+  import("../../pages/Mentee/BrowseMentorPage")
+);
+const LandingPageMentee = lazy(() =>
+  import("../../pages/Mentee/LandingPageMentees")
+);
+const MentorProfilePage = lazy(() =>
+  import("../../pages/Mentee/MentorProfilePage")
+);
+const PaymentSuccesPage = lazy(() =>
+  import("../../pages/Mentee/PaymentSuccesPage")
+);
+const SubscribedMentorsPage = lazy(() =>
+  import("../../pages/Mentee/SubscribedMentorsPage")
+);
+const SchedulerPage = lazy(() => import("../../pages/Mentee/SchedulerPage"));
+const VideoCallInterfaceMenteeSidePage = lazy(() =>
+  import("../../pages/Mentee/VideoCallInterface")
+);
+const BookedSlotsList = lazy(() =>
+  import("../../pages/Mentee/BookedSlotsList")
+);
+const MenteeProfile = lazy(() => import("../../pages/Mentee/MenteeProfile"));
+const InboxPageMentee = lazy(() =>
+  import("../../pages/Mentee/InboxPageMentee")
+);
+
+const TicketsMenteePage = lazy(() =>
+  import("../../pages/Mentee/TicketsMenteePage")
+);
 
 // const InboxPageMentee =React.lazy(import("../../pages/Mentee/InboxPageMentee"))
 export const MenteeRoute = {
@@ -31,27 +64,87 @@ export const MenteeRoute = {
   children: [
     {
       path: "",
-      element: <LandingPageMentee />,
+      element: (
+        <Suspense
+          fallback={
+            <div className="text-center text-lg font-semibold items-center">
+              Loading...
+            </div>
+          }
+        >
+          <LandingPageMentee />,
+        </Suspense>
+      ),
     },
     {
       path: "profile",
-      element: <MenteeProfile />,
+      element: (
+        <Suspense
+          fallback={
+            <div className="text-center text-lg font-semibold items-center">
+              Loading...
+            </div>
+          }
+        >
+          <MenteeProfile />,
+        </Suspense>
+      ),
     },
     {
       path: "browse/mentor/:search",
-      element: <BrowseMentorPage />,
+      element: (
+        <Suspense
+          fallback={
+            <div className="text-center text-lg font-semibold items-center">
+              Loading...
+            </div>
+          }
+        >
+          <BrowseMentorPage />,
+        </Suspense>
+      ),
     },
     {
       path: "browse/mentor/profile/:id",
-      element: <MentorProfilePage />,
+      element: (
+        <Suspense
+          fallback={
+            <div className="text-center text-lg font-semibold items-center">
+              Loading...
+            </div>
+          }
+        >
+          <MentorProfilePage />,
+        </Suspense>
+      ),
     },
     {
       path: "subscribed-mentors",
-      element: <SubscribedMentorsPage />,
+      element: (
+        <Suspense
+          fallback={
+            <div className="text-center text-lg font-semibold items-center">
+              Loading...
+            </div>
+          }
+        >
+          <SubscribedMentorsPage />,
+        </Suspense>
+      ),
     },
     {
       path: "payment/success/:paymentId",
-      element: <PaymentSuccesPage />,
+      element: (
+        <Suspense
+          fallback={
+            <div className="text-center text-lg font-semibold items-center">
+              Loading...
+            </div>
+          }
+        >
+          <PaymentSuccesPage />,
+        </Suspense>
+      ),
     },
     // {
     //   path: "payment/failed",
@@ -59,27 +152,78 @@ export const MenteeRoute = {
     // },
     {
       path: "schedules",
-      element: <SchedulerPage />,
+      element: (
+        <Suspense
+          fallback={
+            <div className="text-center text-lg font-semibold items-center">
+              Loading...
+            </div>
+          }
+        >
+          <SchedulerPage />
+        </Suspense>
+      ),
     },
-    // {
-    //   path: "connect/inbox",
-    //   element: <InboxEmptyPage />,
-    // },
+
     {
       path: "connect/inbox/:conversationId?",
-      element: <InboxPageMentee />,
+      element: (
+        <Suspense
+          fallback={
+            <div className="text-center text-lg font-semibold items-center">
+              Loading...
+            </div>
+          }
+        >
+          <InboxPageMentee />
+        </Suspense>
+      ),
     },
     {
       path: "connect/live/:conversationId?",
-      element: <VideoCallInterfaceMenteeSidePage />,
+      element: (
+        <Suspense
+          fallback={
+            <div className="text-center text-lg font-semibold items-center">
+              Loading...
+            </div>
+          }
+        >
+          <VideoCallInterfaceMenteeSidePage />
+        </Suspense>
+      ),
     },
     {
       path: "booked-slots",
-      element: <BookedSlotsList />,
+      element: (
+        <Suspense
+          fallback={
+            <div className="text-center text-lg font-semibold items-center">
+              Loading...
+            </div>
+          }
+        >
+          <BookedSlotsList />,
+        </Suspense>
+      ),
     },
     {
       path: "tickets",
-      element: <TicketsMenteePage />,
+      element: (
+        <Suspense
+          fallback={
+            <div className="text-center text-lg font-semibold items-center">
+              Loading...
+            </div>
+          }
+        >
+          <TicketsMenteePage />,
+        </Suspense>
+      ),
+    },
+    {
+      path: "trail",
+      element: <SpinnerModal />,
     },
   ],
 };

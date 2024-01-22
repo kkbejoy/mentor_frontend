@@ -49,8 +49,8 @@ const MenteeProfileImageUploader = ({ image, reRenderFunction }) => {
     <>
       {" "}
       <div className="grid px-5">
-        <h1 className="font-semibold">Existing Avatar</h1>
-        <img
+        <h1 className="font-semibold">Update Avatar</h1>
+        {/* <img
           src={
             image
               ? `https://res.cloudinary.com/dlcsyyk7z/image/upload/v1696240416/${image}`
@@ -58,7 +58,7 @@ const MenteeProfileImageUploader = ({ image, reRenderFunction }) => {
           }
           className="w-32 h-fit"
           alt=""
-        />
+        /> */}
         {/* <h2 className="font-semibold">Avatar</h2> */}
         <input
           type="file"
