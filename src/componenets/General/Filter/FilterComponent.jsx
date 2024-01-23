@@ -63,13 +63,13 @@ const FilterComponent = ({ applyFilter }) => {
   ];
 
   return (
-    <div className="block md:inline-flex w-full p-4 bg-white">
+    <div className="hidden md:block lg:inline-flex w-full p-4 bg-white">
       <div className="ml-2 items-center space-x-4 w-1/2">
         <label className="block text-sm font-medium text-gray-700 mb-2">
           Price:
         </label>
         <div className="flex w-1/2">
-          <div className="inline-flex items-center">
+          <div className="hidden  md:inline-flex items-center">
             {priceObject?.map((priceRange) => {
               return (
                 <div

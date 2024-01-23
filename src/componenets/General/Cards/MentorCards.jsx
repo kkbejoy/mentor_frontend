@@ -22,10 +22,10 @@ const MentorCards = ({ mentor }) => {
         </div>
         {/* <VerticalLine /> */}
         <div className="p-6 w-2/3 min-h-[25vh]">
-          <div className="font-bold text-2xl mb-2 truncate">
+          <div className="font-bold w-32 text-2xl mb-2 truncate">
             {mentor.firstName} {mentor.lastName}
           </div>
-          <div className="text-gray-600 text-sm truncate">
+          <div className="text-gray-600 text-sm w-32 truncate">
             {mentor?.jobTitle} @ {mentor?.firmName}
           </div>
 
