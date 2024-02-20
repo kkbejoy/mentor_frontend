@@ -4,6 +4,8 @@ import { ZegoUIKitPrebuilt } from "@zegocloud/zego-uikit-prebuilt";
 import { getMenteeNameFromLocalStorage } from "../../utilities/localStorageUtilities";
 import { getMenteeIdFromLocalStorage } from "../../utilities/reusableFunctions";
 import { checkSlotCredentials } from "../../api/menteesConfiguration/menteeServices";
+import NavbarMentee from "../../componenets/Mentee/NavbarMentee";
+
 import { set } from "date-fns";
 const env = import.meta.env;
 
@@ -57,7 +59,13 @@ const VideoCallInterfaceMenteeSidePage = () => {
       showScreenSharingButton: true,
     });
   };
-  return <div>{authticated ? <div ref={meeting} /> : null}</div>;
+  return (
+    <div>
+      {" "}
+      <NavbarMentee />
+      {authticated ? <div ref={meeting} /> : null}
+    </div>
+  );
 };
 
 export default VideoCallInterfaceMenteeSidePage;
