@@ -1,7 +1,7 @@
 import { Suspense, lazy } from "react";
 import { Mentee } from "../../App";
 import MenteeAuthProvider from "./MenteeAuthProvider";
-
+import { SuspenseLoader } from "../../componenets/General/SuspenseLoader/SuspenseLoader";
 // import InboxPageMentee from "../../pages/Mentee/InboxPageMentee";
 // import InboxEmptyPage from "../../pages/Mentee/InboxEmptyPage";
 // import MenteeProfile from "../../pages/Mentee/MenteeProfile";
@@ -66,13 +66,7 @@ export const MenteeRoute = {
     {
       path: "",
       element: (
-        <Suspense
-          fallback={
-            <div className="text-center text-lg font-semibold items-center">
-              Loading...
-            </div>
-          }
-        >
+        <Suspense fallback={SuspenseLoader}>
           <LandingPageMentee />,
         </Suspense>
       ),
@@ -222,9 +216,9 @@ export const MenteeRoute = {
         </Suspense>
       ),
     },
-    // {
-    //   path: "trail",
-    //   element: <FallbackLoader />,
-    // },
+    {
+      path: "trail",
+      element: <SuspenseLoader />,
+    },
   ],
 };

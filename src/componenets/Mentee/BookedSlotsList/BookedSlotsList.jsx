@@ -7,6 +7,7 @@ import {
 } from "../../../utilities/timeManagementFunctions";
 import ConfirmationModal from "../../General/Modals/CancelConfirmationModal";
 import { cancelABookedSlot } from "../../../api/menteesConfiguration/menteeServices";
+import { CLIENT_URL } from "../../../constants/constants";
 
 const BookedSlotsListComponenet = ({
   BookeSotsList,
@@ -17,7 +18,7 @@ const BookedSlotsListComponenet = ({
 
   const handleMenteeGoLive = async (slotId, menteeName) => {
     try {
-      window.open(`http://localhost:5173/mentees/connect/live/${slotId}`);
+      window.open(`${CLIENT_URL}/mentees/connect/live/${slotId}`);
     } catch (error) {
       console.log("error:", error);
       toast.error("Please refresh the page..!!");
