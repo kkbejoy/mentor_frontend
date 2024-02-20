@@ -161,6 +161,7 @@ const Login = ({ role, setSuccess, isSuccess }) => {
                 mentorName,
                 message,
                 mentorRefreshToken,
+                profileImageUrl,
               } = res.payload;
 
               const mentorAuthData = {
@@ -169,6 +170,7 @@ const Login = ({ role, setSuccess, isSuccess }) => {
                 mentorId,
                 mentorName,
                 message,
+                profileImageUrl,
                 refreshToken: mentorRefreshToken,
               };
               console.log("Mentor Then");

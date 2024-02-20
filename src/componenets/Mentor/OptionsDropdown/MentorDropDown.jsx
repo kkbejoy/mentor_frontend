@@ -11,8 +11,10 @@ import {
   getMenteeNameFromLocalStorage,
   getMentorNameFromLocalStorage,
 } from "../../../utilities/localStorageUtilities";
-
+import { getMentorProfileImageUrl } from "../../../utilities/localStorageUtilities";
 export default function MentorDropDown() {
+  const profileImageURL = getMentorProfileImageUrl();
+  console.log("Mentor profile pic:", profileImageURL);
   const links = [
     { href: "/mentors/profile", label: "Profile" },
     { href: "/mentors/subscribed-mentees", label: "Mentees List" },
@@ -28,7 +30,11 @@ export default function MentorDropDown() {
           <Menu.Button className="inline-flex w-full justify-center rounded-md bg-black/20 px-4 py-2 text-sm font-medium text-white hover:bg-black/30 focus:outline-none focus-visible:ring-2 focus-visible:ring-white/75">
             <img
               className="rounded-t-lg h-8 w-8 mr-3"
-              src="https://res.cloudinary.com/dlcsyyk7z/image/upload/v1698830239/mentors/mentor/images_2_d4e6fp_siwirt_a7fcrt.jpg"
+              src={
+                profileImageURL
+                  ? `https://res.cloudinary.com/dlcsyyk7z/image/upload/v1698830239/${profileImageURL}`
+                  : `https://res.cloudinary.com/dlcsyyk7z/image/upload/v1698830239/mentors/mentor/images_2_d4e6fp_siwirt_a7fcrt.jpg`
+              }
               alt=""
             />{" "}
             {mentorName}
