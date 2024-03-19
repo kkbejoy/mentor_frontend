@@ -8,7 +8,7 @@ import { SuspenseLoader } from "../../componenets/General/SuspenseLoader/Suspens
 // import BookedSlotsList from "../../pages/Mentee/BookedSlotsList";
 // import VideoCallInterfaceMenteeSidePage from "../../pages/Mentee/VideoCallInterface";
 // import TicketsMenteePage from "../../pages/Mentee/TicketsMenteePage";
-// import PaymentFailedPage from "../../pages/Mentee/PaymentFailedPage";
+import PaymentFailedPage from "../../pages/Mentee/PaymentFailedPage";
 // import PaymentSuccesPage from "../../pages/Mentee/PaymentSuccesPage";
 
 // import SchedulerPage from "../../pages/Mentee/SchedulerPage";
@@ -66,7 +66,7 @@ export const MenteeRoute = {
     {
       path: "",
       element: (
-        <Suspense fallback={SuspenseLoader}>
+        <Suspense fallback={<SuspenseLoader />}>
           <LandingPageMentee />,
         </Suspense>
       ),
@@ -74,7 +74,7 @@ export const MenteeRoute = {
     {
       path: "profile",
       element: (
-        <Suspense fallback={SuspenseLoader}>
+        <Suspense fallback={<SuspenseLoader />}>
           <MenteeProfile />,
         </Suspense>
       ),
@@ -82,7 +82,7 @@ export const MenteeRoute = {
     {
       path: "browse/mentor/:search",
       element: (
-        <Suspense fallback={SuspenseLoader}>
+        <Suspense fallback={<SuspenseLoader />}>
           <BrowseMentorPage />,
         </Suspense>
       ),
@@ -90,7 +90,7 @@ export const MenteeRoute = {
     {
       path: "browse/mentor/profile/:id",
       element: (
-        <Suspense fallback={SuspenseLoader}>
+        <Suspense fallback={<SuspenseLoader />}>
           <MentorProfilePage />,
         </Suspense>
       ),
@@ -98,7 +98,7 @@ export const MenteeRoute = {
     {
       path: "subscribed-mentors",
       element: (
-        <Suspense fallback={SuspenseLoader}>
+        <Suspense fallback={<SuspenseLoader />}>
           <SubscribedMentorsPage />,
         </Suspense>
       ),
@@ -106,19 +106,19 @@ export const MenteeRoute = {
     {
       path: "payment/success/:paymentId",
       element: (
-        <Suspense fallback={SuspenseLoader}>
+        <Suspense fallback={<SuspenseLoader />}>
           <PaymentSuccesPage />,
         </Suspense>
       ),
     },
-    // {
-    //   path: "payment/failed",
-    //   element: <PaymentFailedPage />,
-    // },
+    {
+      path: "payment/failed",
+      element: <PaymentFailedPage />,
+    },
     {
       path: "schedules",
       element: (
-        <Suspense fallback={SuspenseLoader}>
+        <Suspense fallback={<SuspenseLoader />}>
           <SchedulerPage />
         </Suspense>
       ),
@@ -127,7 +127,7 @@ export const MenteeRoute = {
     {
       path: "connect/inbox/:conversationId?",
       element: (
-        <Suspense fallback={SuspenseLoader}>
+        <Suspense fallback={<SuspenseLoader />}>
           <InboxPageMentee />
         </Suspense>
       ),
@@ -135,7 +135,7 @@ export const MenteeRoute = {
     {
       path: "connect/live/:conversationId?",
       element: (
-        <Suspense fallback={SuspenseLoader}>
+        <Suspense fallback={<SuspenseLoader />}>
           <VideoCallInterfaceMenteeSidePage />
         </Suspense>
       ),
@@ -143,7 +143,7 @@ export const MenteeRoute = {
     {
       path: "booked-slots",
       element: (
-        <Suspense fallback={SuspenseLoader}>
+        <Suspense fallback={<SuspenseLoader />}>
           <BookedSlotsList />,
         </Suspense>
       ),
@@ -151,13 +151,7 @@ export const MenteeRoute = {
     {
       path: "tickets",
       element: (
-        <Suspense
-          fallback={
-            <div className="text-center text-lg font-semibold items-center">
-              Loading...
-            </div>
-          }
-        >
+        <Suspense fallback={<SuspenseLoader />}>
           <TicketsMenteePage />,
         </Suspense>
       ),
