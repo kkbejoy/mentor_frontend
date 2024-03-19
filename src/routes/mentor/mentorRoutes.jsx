@@ -34,9 +34,6 @@ const TicketsMentorSidePage = lazy(() =>
 const ErrorPage = lazy(() =>
   import("../../componenets/General/Fallback/ErrorPage")
 );
-const MentorCardShimmers = lazy(() =>
-  import("../../componenets/General/Cards/MentorCardShimmers")
-);
 
 //Mentor Routes
 export const MentorRoutes = {
