@@ -8,7 +8,7 @@ const PaymentFailedPage = () => {
     <div>
       <NavbarHome />
       <PaymentFailure />
-      {/* <FooterComponent /> */}
+      <FooterComponent />
     </div>
   );
 };

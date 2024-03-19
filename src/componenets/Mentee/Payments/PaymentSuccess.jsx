@@ -14,29 +14,31 @@ const PaymentSuccess = ({ amount, paymentMethod, transactionId }) => {
     });
   });
   return (
-    <div className="bg-green-200 p-4 rounded-lg shadow-lg">
-      <h2 className="text-2xl font-semibold text-green-700">
-        Payment Successful
-      </h2>
-      <p className="text-lg text-green-800">Thank you for your payment!</p>
-
-      {amount && (
-        <p className="text-lg text-green-800">
-          <strong>Amount:</strong> ${amount}
+    <div className="flex flex-col items-center p-4 rounded-lg shadow-lg h-screen">
+      <div className="bg-gradient-to-r from-green-200 ... animate-pulse p-4 rounded-lg shadow-2xl my-auto">
+        {" "}
+        <h2 className="text-2xl font-semibold  text-back text-center">
+          Payment Successful
+        </h2>
+        <p className="text-lg text-green-800 text-center">
+          Thank you for your payment!
         </p>
-      )}
-
-      {paymentMethod && (
-        <p className="text-lg text-green-800">
-          <strong>Payment Method:</strong> {paymentMethod}
-        </p>
-      )}
-
-      {transactionId && (
-        <p className="text-lg text-green-800">
-          <strong>Transaction ID:</strong> {transactionId}
-        </p>
-      )}
+        {amount && (
+          <p className="text-lg text-green-800">
+            <strong>Amount:</strong> ${amount}
+          </p>
+        )}
+        {paymentMethod && (
+          <p className="text-lg text-green-800">
+            <strong>Payment Method:</strong> {paymentMethod}
+          </p>
+        )}
+        {transactionId && (
+          <p className="text-lg text-green-800">
+            <strong>Transaction ID:</strong> {transactionId}
+          </p>
+        )}
+      </div>
     </div>
   );
 };
