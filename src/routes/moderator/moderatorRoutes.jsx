@@ -18,6 +18,7 @@ import ErrorPage from "../../componenets/General/Fallback/ErrorPage";
 // const VideoCallInterfaceMentorSidePage = lazy(() =>
 //   import("../../pages/Mentor/VideoCallInterface")
 // );
+import { SuspenseLoader } from "../../componenets/General/SuspenseLoader/SuspenseLoader";
 
 //Lazy Loaded Pages
 const MentorsListPage = lazy(() => import("../../pages/Moderator/MentorsList"));
@@ -48,11 +49,7 @@ export const ModeratorRoutes = {
     {
       path: "",
       element: (
-        <Suspense
-          fallback={
-            <div className="text-center text-lg font-semibold">Loading...</div>
-          }
-        >
+        <Suspense fallback={<SuspenseLoader />}>
           <LandingPageModerator />,
         </Suspense>
       ),
@@ -60,11 +57,7 @@ export const ModeratorRoutes = {
     {
       path: "mentees-list",
       element: (
-        <Suspense
-          fallback={
-            <div className="text-center text-lg font-semibold">Loading...</div>
-          }
-        >
+        <Suspense fallback={<SuspenseLoader />}>
           <MenteesListPage />,
         </Suspense>
       ),
@@ -72,11 +65,7 @@ export const ModeratorRoutes = {
     {
       path: "mentors-list",
       element: (
-        <Suspense
-          fallback={
-            <div className="text-center text-lg font-semibold">Loading...</div>
-          }
-        >
+        <Suspense fallback={<SuspenseLoader />}>
           <MentorsListPage />,
         </Suspense>
       ),
@@ -84,11 +73,7 @@ export const ModeratorRoutes = {
     {
       path: "mentor-applicants",
       element: (
-        <Suspense
-          fallback={
-            <div className="text-center text-lg font-semibold">Loading...</div>
-          }
-        >
+        <Suspense fallback={<SuspenseLoader />}>
           <MentroApplicantsPage />,
         </Suspense>
       ),
@@ -96,11 +81,7 @@ export const ModeratorRoutes = {
     {
       path: "tickets",
       element: (
-        <Suspense
-          fallback={
-            <div className="text-center text-lg font-semibold">Loading...</div>
-          }
-        >
+        <Suspense fallback={<SuspenseLoader />}>
           <TicketsPage />
         </Suspense>
       ),
