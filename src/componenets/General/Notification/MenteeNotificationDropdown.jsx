@@ -87,6 +87,7 @@ function NotificationDropdown({
                     }
                   })
                   .reverse()
+                  .slice(0, 5)
               ) : (
                 <div className="py-2 border-b">
                   <p className="text-sm">No new notifications</p>
