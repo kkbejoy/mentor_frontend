@@ -55,7 +55,7 @@ export const MentorRoutes = {
     {
       path: "scheduler",
       element: (
-        <Suspense fallback={SuspenseLoader}>
+        <Suspense fallback={<SuspenseLoader />}>
           <SchedulerPage />
         </Suspense>
       ),
@@ -63,7 +63,7 @@ export const MentorRoutes = {
     {
       path: "profile",
       element: (
-        <Suspense fallback={SuspenseLoader}>
+        <Suspense fallback={<SuspenseLoader />}>
           <MentorsProfile />
         </Suspense>
       ),
@@ -71,7 +71,7 @@ export const MentorRoutes = {
     {
       path: "subscribed-mentees",
       element: (
-        <Suspense fallback={SuspenseLoader}>
+        <Suspense fallback={<SuspenseLoader />}>
           <SubscribedMentees />
         </Suspense>
       ),
@@ -79,7 +79,7 @@ export const MentorRoutes = {
     {
       path: "connect/inbox/:conversationId?",
       element: (
-        <Suspense fallback={SuspenseLoader}>
+        <Suspense fallback={<SuspenseLoader />}>
           <InboxPageMentor />
         </Suspense>
       ),
@@ -87,7 +87,7 @@ export const MentorRoutes = {
     {
       path: "connect/live/:conversationId?",
       element: (
-        <Suspense fallback={SuspenseLoader}>
+        <Suspense fallback={<SuspenseLoader />}>
           <VideoCallInterfaceMentorSidePage />
         </Suspense>
       ),
@@ -95,7 +95,7 @@ export const MentorRoutes = {
     {
       path: "tickets",
       element: (
-        <Suspense fallback={SuspenseLoader}>
+        <Suspense fallback={<SuspenseLoader />}>
           <TicketsMentorSidePage />
         </Suspense>
       ),
