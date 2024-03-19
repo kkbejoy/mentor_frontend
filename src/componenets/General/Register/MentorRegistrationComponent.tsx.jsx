@@ -21,51 +21,60 @@ export const MentorRegisterComponent = () => {
   };
   const handleSubmit = async (values, { setSubmitting, setFieldError }) => {
     setIsPageLoading(true);
-    console.log("Form entered Details", values);
-    const skills = values.skills.split(",");
-    console.log(skills);
-    delete values.skills;
-    values.expertise = skills;
-    console.log("Form entered Details", values);
+    try {
+      console.log("Form entered Details", values);
+      const skills = values.skills.split(",");
+      console.log(skills);
+      delete values.skills;
+      values.expertise = skills;
+      console.log("Form entered Details", values);
 
-    await mentorRegistration(values)
-      .then((res) => {
-        console.log("Mentor Registration success", res);
-        // setIsPageLoading(false);
-        setIsModalOpen(true);
-
-        setTimeout(() => {
-          navigate("/");
-        }, 4000);
-      })
-      .catch((error) => {
-        console.log("Error From Mentor reg error", error.response);
-        if (error?.response.status === 403 && error?.response.data?.blocked) {
-          console.log(1);
-          setFieldError("confirmpassword", error?.response.data.error);
-          setIsPageLoading(false);
-        } else if (error?.response.status === 403) {
-          console.log("Previous application undergoing review");
+      await mentorRegistration(values)
+        .then((res) => {
+          console.log("Mentor Registration success", res);
+          // setIsPageLoading(false);
           setIsModalOpen(true);
-          setIsPageLoading(false);
+
           setTimeout(() => {
             navigate("/");
           }, 4000);
-        } else if (error?.response.status === 409) {
-          console.log(3);
-          setFieldError("confirmpassword", error?.response.data.error);
-          setIsPageLoading(false);
-          setTimeout(() => {
-            navigate("/auth/login");
-          }, 4000);
-        } else {
-          console.log("SOmething went wriog");
-          setFieldError(
-            "confirmpassword",
-            "Something went wrong..!! Please try Again"
-          );
-        }
-      });
+        })
+        .catch((error) => {
+          console.log("Error From Mentor reg error", error.response);
+          if (error?.response.status === 403 && error?.response.data?.blocked) {
+            console.log(1);
+            setFieldError("confirmpassword", error?.response.data.error);
+            setIsPageLoading(false);
+          } else if (error?.response.status === 403) {
+            console.log("Previous application undergoing review");
+            setIsModalOpen(true);
+            setIsPageLoading(false);
+            setTimeout(() => {
+              navigate("/");
+            }, 4000);
+          } else if (error?.response.status === 409) {
+            console.log(3);
+            setFieldError("confirmpassword", error?.response.data.error);
+            setIsPageLoading(false);
+            setTimeout(() => {
+              navigate("/auth/login");
+            }, 4000);
+          } else {
+            console.log("SOmething went Wrong");
+            setFieldError(
+              "confirmpassword",
+              "Something went wrong..!! Please try Again"
+            );
+            setIsPageLoading(false);
+          }
+        });
+    } catch (error) {
+      setFieldError(
+        "confirmpassword",
+        "Something went wrong..!! Please try Again"
+      );
+      setIsPageLoading(false);
+    }
     setSubmitting(false);
   };
 
@@ -118,7 +127,7 @@ export const MentorRegisterComponent = () => {
                       type="text"
                       autoComplete="name"
                       required
-                      className="block w-full rounded-md border-0 py-1.5 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:text-sm sm:leading-6"
+                      className="px-1  block w-full rounded-md border-0 py-1.5 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:text-sm sm:leading-6"
                     />
                     <ErrorMessage
                       name="firstName"
@@ -141,7 +150,7 @@ export const MentorRegisterComponent = () => {
                       type="text"
                       autoComplete="off"
                       required
-                      className="block w-full rounded-md border-0 py-1.5 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:text-sm sm:leading-6"
+                      className="px-1 block w-full rounded-md border-0 py-1.5 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:text-sm sm:leading-6"
                     />
                     <ErrorMessage
                       name="lastName"
@@ -164,7 +173,7 @@ export const MentorRegisterComponent = () => {
                       type="email"
                       autoComplete="email"
                       required
-                      className="block w-full rounded-md border-0 py-1.5 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:text-sm sm:leading-6"
+                      className="px-1 block w-full rounded-md border-0 py-1.5 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:text-sm sm:leading-6"
                     />
                     <ErrorMessage
                       name="email"
@@ -188,7 +197,7 @@ export const MentorRegisterComponent = () => {
                       type="tel"
                       autoComplete="tel"
                       required
-                      className="block w-full rounded-md border-0 py-1.5 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:text-sm sm:leading-6"
+                      className="px-1 block w-full rounded-md border-0 py-1.5 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:text-sm sm:leading-6"
                     />
                     <ErrorMessage
                       name="phone"
@@ -212,7 +221,7 @@ export const MentorRegisterComponent = () => {
                       type="text"
                       autoComplete="name"
                       required
-                      className="block w-full rounded-md border-0 py-1.5 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:text-sm sm:leading-6"
+                      className="px-1 block w-full rounded-md border-0 py-1.5 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:text-sm sm:leading-6"
                     />
                     <ErrorMessage
                       name="jobTitle"
@@ -236,7 +245,7 @@ export const MentorRegisterComponent = () => {
                       type="text"
                       autoComplete="name"
                       required
-                      className="block w-full rounded-md border-0 py-1.5 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:text-sm sm:leading-6"
+                      className="px-1 block w-full rounded-md border-0 py-1.5 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:text-sm sm:leading-6"
                     />
                     <ErrorMessage
                       name="firmName"
@@ -258,7 +267,7 @@ export const MentorRegisterComponent = () => {
                       id="location"
                       name="location"
                       type="text"
-                      className="block w-full rounded-md border-0 py-1.5 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:text-sm sm:leading-6"
+                      className="px-1 block w-full rounded-md border-0 py-1.5 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:text-sm sm:leading-6"
                     />
                   </div>
                 </div>
@@ -270,13 +279,15 @@ export const MentorRegisterComponent = () => {
                   >
                     Bio
                   </label>
-                  <div className="mt-2">
+                  <div className="mt-2 overflow-y-auto">
                     <Field
                       id="bio"
+                      component="textarea"
                       name="bio"
                       type="text"
+                      rows="3"
                       required
-                      className="block w-full rounded-md border-0 py-1.5 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:text-sm sm:leading-6"
+                      className=" px-1 h-20 scroll block w-full rounded-md border-0 py-1.5 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:text-sm sm:leading-6"
                     />
                     <ErrorMessage
                       name="bio"
@@ -299,7 +310,7 @@ export const MentorRegisterComponent = () => {
                       name="educationalQualification"
                       type="text"
                       required
-                      className="block w-full rounded-md border-0 py-1.5 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:text-sm sm:leading-6"
+                      className="px-1 block w-full rounded-md border-0 py-1.5 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:text-sm sm:leading-6"
                     />
                     <ErrorMessage
                       name="educationalQualification"
@@ -322,7 +333,7 @@ export const MentorRegisterComponent = () => {
                       name="hourlyRate"
                       type="number"
                       required
-                      className="block w-full rounded-md border-0 py-1.5 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:text-sm sm:leading-6"
+                      className="px-1 block w-full rounded-md border-0 py-1.5 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:text-sm sm:leading-6"
                     />
                     <ErrorMessage
                       name="hourlyRate"
@@ -345,7 +356,7 @@ export const MentorRegisterComponent = () => {
                       name="skills"
                       type="text"
                       required
-                      className="block w-full rounded-md border-0 py-1.5 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:text-sm sm:leading-6"
+                      className="px-1 block w-full rounded-md border-0 py-1.5 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:text-sm sm:leading-6"
                     />
                     <ErrorMessage
                       name="skills"
@@ -367,7 +378,7 @@ export const MentorRegisterComponent = () => {
                       id="website"
                       name="website"
                       type="url"
-                      className="block w-full rounded-md border-0 py-1.5 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:text-sm sm:leading-6"
+                      className="px-1 block w-full rounded-md border-0 py-1.5 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:text-sm sm:leading-6"
                     />
                   </div>
                 </div>
@@ -384,7 +395,7 @@ export const MentorRegisterComponent = () => {
                       id="twitterUrl"
                       name="twitterUrl"
                       type="text"
-                      className="block w-full rounded-md border-0 py-1.5 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:text-sm sm:leading-6"
+                      className="px-1 block w-full rounded-md border-0 py-1.5 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:text-sm sm:leading-6"
                     />
                   </div>
                 </div>
@@ -401,7 +412,7 @@ export const MentorRegisterComponent = () => {
                       id="linkedInUrl"
                       name="linkedInUrl"
                       type="text"
-                      className="block w-full rounded-md border-0 py-1.5 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:text-sm sm:leading-6"
+                      className="px-1 block w-full rounded-md border-0 py-1.5 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:text-sm sm:leading-6"
                     />
                   </div>
                 </div>
@@ -422,7 +433,7 @@ export const MentorRegisterComponent = () => {
                       type="password"
                       autoComplete="current-password"
                       required
-                      className="block w-full rounded-md border-0 py-1.5 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:text-sm sm:leading-6"
+                      className="px-1 block w-full rounded-md border-0 py-1.5 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:text-sm sm:leading-6"
                     />
                     <ErrorMessage
                       name="password"
@@ -448,7 +459,7 @@ export const MentorRegisterComponent = () => {
                       type="password"
                       autoComplete="new-password"
                       required
-                      className="block w-full rounded-md border-0 py-1.5 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:text-sm sm:leading-6"
+                      className="px-1 block w-full rounded-md border-0 py-1.5 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:text-sm sm:leading-6"
                     />
                     <ErrorMessage
                       name="confirmpassword"

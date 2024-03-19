@@ -136,11 +136,14 @@ const Login = ({ role, setSuccess, isSuccess }) => {
               } else if (res?.error.message === "Network Error") {
                 setFieldError("password", "Please try again later");
                 setLoading(false);
+              } else {
+                throw res;
               }
             }
           })
           .catch((error) => {
             console.log("error from catch", error?.error.message);
+            setFieldError("password", "Please try again later");
             setLoading(false);
             // if(error.?error.message)
           });
