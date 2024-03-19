@@ -153,9 +153,10 @@ const SlotModalMenteeSide = ({
                     id="menteeQueryTitle"
                     name="menteeQueryTitle"
                     type="text"
+                    component="textarea"
                     autoComplete="off"
                     required
-                    className="block  w-full rounded-md border-0 py-1.5 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:text-sm sm:leading-6"
+                    className="px-2 block  w-full rounded-md border-0 py-1.5 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:text-sm sm:leading-6"
                   />
                   <ErrorMessage
                     name="menteeQueryTitle"
@@ -175,8 +176,10 @@ const SlotModalMenteeSide = ({
                     id="menteeQueryDescription"
                     name="menteeQueryDescription"
                     type="text"
+                    component="textarea"
+                    rows="5"
                     autoComplete="off"
-                    className="block w-full h-28 rounded-md border-0 py-1.5 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:text-sm sm:leading-6"
+                    className="px-2 block w-full h-28 rounded-md border-0 py-1.5 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:text-sm sm:leading-6"
                   />{" "}
                   <ErrorMessage
                     name="menteeQueryDescription"
