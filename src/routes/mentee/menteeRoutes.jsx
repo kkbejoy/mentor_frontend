@@ -74,13 +74,7 @@ export const MenteeRoute = {
     {
       path: "profile",
       element: (
-        <Suspense
-          fallback={
-            <div className="text-center text-lg font-semibold items-center">
-              Loading...
-            </div>
-          }
-        >
+        <Suspense fallback={SuspenseLoader}>
           <MenteeProfile />,
         </Suspense>
       ),
@@ -88,13 +82,7 @@ export const MenteeRoute = {
     {
       path: "browse/mentor/:search",
       element: (
-        <Suspense
-          fallback={
-            <div className="text-center text-lg font-semibold items-center">
-              Loading...
-            </div>
-          }
-        >
+        <Suspense fallback={SuspenseLoader}>
           <BrowseMentorPage />,
         </Suspense>
       ),
@@ -102,13 +90,7 @@ export const MenteeRoute = {
     {
       path: "browse/mentor/profile/:id",
       element: (
-        <Suspense
-          fallback={
-            <div className="text-center text-lg font-semibold items-center">
-              Loading...
-            </div>
-          }
-        >
+        <Suspense fallback={SuspenseLoader}>
           <MentorProfilePage />,
         </Suspense>
       ),
@@ -116,13 +98,7 @@ export const MenteeRoute = {
     {
       path: "subscribed-mentors",
       element: (
-        <Suspense
-          fallback={
-            <div className="text-center text-lg font-semibold items-center">
-              Loading...
-            </div>
-          }
-        >
+        <Suspense fallback={SuspenseLoader}>
           <SubscribedMentorsPage />,
         </Suspense>
       ),
@@ -130,13 +106,7 @@ export const MenteeRoute = {
     {
       path: "payment/success/:paymentId",
       element: (
-        <Suspense
-          fallback={
-            <div className="text-center text-lg font-semibold items-center">
-              Loading...
-            </div>
-          }
-        >
+        <Suspense fallback={SuspenseLoader}>
           <PaymentSuccesPage />,
         </Suspense>
       ),
@@ -148,13 +118,7 @@ export const MenteeRoute = {
     {
       path: "schedules",
       element: (
-        <Suspense
-          fallback={
-            <div className="text-center text-lg font-semibold items-center">
-              Loading...
-            </div>
-          }
-        >
+        <Suspense fallback={SuspenseLoader}>
           <SchedulerPage />
         </Suspense>
       ),
@@ -163,13 +127,7 @@ export const MenteeRoute = {
     {
       path: "connect/inbox/:conversationId?",
       element: (
-        <Suspense
-          fallback={
-            <div className="text-center text-lg font-semibold items-center">
-              Loading...
-            </div>
-          }
-        >
+        <Suspense fallback={SuspenseLoader}>
           <InboxPageMentee />
         </Suspense>
       ),
@@ -177,13 +135,7 @@ export const MenteeRoute = {
     {
       path: "connect/live/:conversationId?",
       element: (
-        <Suspense
-          fallback={
-            <div className="text-center text-lg font-semibold items-center">
-              Loading...
-            </div>
-          }
-        >
+        <Suspense fallback={SuspenseLoader}>
           <VideoCallInterfaceMenteeSidePage />
         </Suspense>
       ),
@@ -191,13 +143,7 @@ export const MenteeRoute = {
     {
       path: "booked-slots",
       element: (
-        <Suspense
-          fallback={
-            <div className="text-center text-lg font-semibold items-center">
-              Loading...
-            </div>
-          }
-        >
+        <Suspense fallback={SuspenseLoader}>
           <BookedSlotsList />,
         </Suspense>
       ),
@@ -216,9 +162,9 @@ export const MenteeRoute = {
         </Suspense>
       ),
     },
-    {
-      path: "trail",
-      element: <SuspenseLoader />,
-    },
+    // {
+    //   path: "trail",
+    //   element: <SuspenseLoader />,
+    // },
   ],
 };

@@ -5,6 +5,7 @@ import MentorAuthProvider from "./MentorAuthProvider";
 // import SchedulerPage from "../../pages/Mentor/SchedulerPage";
 // import MentorsProfile from "../../pages/Mentor/MentorsProfile";
 // import SubscribedMentees from "../../pages/Mentor/SubscribedMentees";
+import { SuspenseLoader } from "../../componenets/General/SuspenseLoader/SuspenseLoader";
 
 // import InboxPageMentor from "../../pages/Mentor/InboxPageMentor";
 // import VideoCallInterfaceMentorSidePage from "../../pages/Mentor/VideoCallInterface";
@@ -54,11 +55,7 @@ export const MentorRoutes = {
     {
       path: "scheduler",
       element: (
-        <Suspense
-          fallback={
-            <div className="text-center text-lg font-semibold">Loading...</div>
-          }
-        >
+        <Suspense fallback={SuspenseLoader}>
           <SchedulerPage />
         </Suspense>
       ),
@@ -66,11 +63,7 @@ export const MentorRoutes = {
     {
       path: "profile",
       element: (
-        <Suspense
-          fallback={
-            <div className="text-center text-lg font-semibold">Loading...</div>
-          }
-        >
+        <Suspense fallback={SuspenseLoader}>
           <MentorsProfile />
         </Suspense>
       ),
@@ -78,11 +71,7 @@ export const MentorRoutes = {
     {
       path: "subscribed-mentees",
       element: (
-        <Suspense
-          fallback={
-            <div className="text-center text-lg font-semibold">Loading...</div>
-          }
-        >
+        <Suspense fallback={SuspenseLoader}>
           <SubscribedMentees />
         </Suspense>
       ),
@@ -90,11 +79,7 @@ export const MentorRoutes = {
     {
       path: "connect/inbox/:conversationId?",
       element: (
-        <Suspense
-          fallback={
-            <div className="text-center text-lg font-semibold">Loading...</div>
-          }
-        >
+        <Suspense fallback={SuspenseLoader}>
           <InboxPageMentor />
         </Suspense>
       ),
@@ -102,11 +87,7 @@ export const MentorRoutes = {
     {
       path: "connect/live/:conversationId?",
       element: (
-        <Suspense
-          fallback={
-            <div className="text-center text-lg font-semibold">Loading...</div>
-          }
-        >
+        <Suspense fallback={SuspenseLoader}>
           <VideoCallInterfaceMentorSidePage />
         </Suspense>
       ),
@@ -114,18 +95,14 @@ export const MentorRoutes = {
     {
       path: "tickets",
       element: (
-        <Suspense
-          fallback={
-            <div className="text-center text-lg font-semibold">Loading...</div>
-          }
-        >
+        <Suspense fallback={SuspenseLoader}>
           <TicketsMentorSidePage />
         </Suspense>
       ),
     },
-    {
-      path: "trail",
-      element: <MentorCardShimmers />,
-    },
+    // {
+    //   path: "trail",
+    //   element: <MentorCardShimmers />,
+    // },
   ],
 };
