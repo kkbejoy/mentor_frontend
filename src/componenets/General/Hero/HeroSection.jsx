@@ -51,7 +51,7 @@ export default function HeroSection() {
         {/* </div> */}
         <div className="mx-auto max-w-xl py-32 sm:py-14 lg:my-auto">
           <div className="hidden sm:mb-8 sm:flex sm:justify-center">
-            <div className="relative rounded-full px-3 py-1 text-sm leading-6 text-gray-600 ring-1  ring-gray-900/10 hover:ring-gray-900/20">
+            <div className="relative rounded-full px-3 py-1 text-sm leading-6 text-bodyText ring-1  ring-gray-900/10 hover:ring-gray-900/20">
               Learn a new skill, launch a project, land your dream career.
               {/* <a href="#" className="font-semibold text-indigo-600">
                 <span className="absolute inset-0" aria-hidden="true" />
@@ -65,7 +65,7 @@ export default function HeroSection() {
             </h1> */}
 
             <HomePageTypewriter />
-            <p className="mt-6 text-lg leading-8 text-gray-600">
+            <p className="mt-6 text-lg leading-8 text-bodyText">
               {HeroSectionWelcomeMessage}
             </p>
             <div className="mt-10 flex items-center justify-center "></div>

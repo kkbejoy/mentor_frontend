@@ -67,7 +67,7 @@ export default function NavbarHome() {
                         (item.current
                           ? "bg-gray-900 text-white"
                           : "text-gray-300 hover:bg-gray-700 hover:text-white",
-                        "rounded-md px-3 py-2 text-sm font-medium")
+                        "rounded-md px-3 py-2 text-sm font-medium hover:bg-navbarHover")
                       }
                       aria-current={item.current ? "page" : undefined}
                     >
@@ -86,7 +86,9 @@ export default function NavbarHome() {
                       "Logout"
                     ) : ( */}
                     <Link to={"/auth/login"}>
-                      <p className="font-normal">Login</p>
+                      <p className="font-normal rounded-md px-3 py-2 hover:bg-navbarHover">
+                        Login
+                      </p>
                     </Link>
                     {/* )} */}
                     <Menu.Button className="relative flex rounded-full bg-gray-800 text-sm focus:outline-none focus:ring-2 focus:ring-white focus:ring-offset-2 focus:ring-offset-gray-800">

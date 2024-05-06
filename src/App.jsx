@@ -18,6 +18,7 @@ export function Home() {
       {/* <NavbarMentee /> */}
       <Outlet /> <ScrollRestoration />
       <Toaster />
+      {/* </div> */}
     </>
   );
 }

@@ -1,5 +1,8 @@
 const env = import.meta.env;
-export const BASE_URL = env.VITE_SERVER_URL;
+export const BASE_URL = "https://server.mentornudge.online";
+//  env.VITE_SERVER_URL;
+// export const BASE_URL = env.VITE_SERVER_URL;
+//
 
 export const CLIENT_URL = "http://mentornudge.online";
 

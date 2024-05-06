@@ -4,7 +4,13 @@ export default {
   theme: {
     extend: {
       colors: {
-        mentorBlue: "#172e59",
+        mentorBlue: "#121481",
+        navbarHover: "#1b1e9a",
+        bodyText: " #555555",
+        textHeadline: "Headlines",
+        cardsBG: "#F3F2F1",
+        cardButton: "#0078D7",
+        cardButtonHover: "#4984fb",
         sendMessages: "#172e59",
       },
     },
