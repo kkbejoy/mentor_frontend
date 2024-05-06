@@ -7,7 +7,7 @@ export default {
         mentorBlue: "#121481",
         navbarHover: "#1b1e9a",
         bodyText: " #555555",
-        textHeadline: "Headlines",
+        textHeadline: "#333333",
         cardsBG: "#F3F2F1",
         cardButton: "#0078D7",
         cardButtonHover: "#4984fb",
