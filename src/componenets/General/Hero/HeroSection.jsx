@@ -23,17 +23,17 @@ export default function HeroSection() {
   useEffect(() => {
     dispatch(fetchMentorsListUsingSearchInput({ search, price, rating }));
   }, []);
-  const settings = {
-    dots: true,
-    infinite: true,
-    slidesToShow: 3,
-    slidesToScroll: 1,
-    autoplay: true,
-    speed: 2000,
-    autoplaySpeed: 1500,
-    cssEase: "linear",
-  };
-  const trailArray = [{}, {}, {}];
+  // const settings = {
+  //   dots: true,
+  //   infinite: true,
+  //   slidesToShow: 3,
+  //   slidesToScroll: 1,
+  //   autoplay: true,
+  //   speed: 2000,
+  //   autoplaySpeed: 1500,
+  //   cssEase: "linear",
+  // };
+  // const trailArray = [{}, {}, {}];
   return (
     <div className="bg-white">
       <div className="relative isolate px-6  lg:px-8">

@@ -14,9 +14,14 @@ const HomePageMentorCards = ({ profile, index }) => {
   return (
     <>
       <motion.div
-        initial={{ x: index + 1 * 1000, y: 0 }}
-        animate={{ x: 0, y: 0 }}
-        transition={{ duration: 5, delay: index * 0.5, ease: "linear" }}
+        initial={{ x: index + 1 * 750, y: 0, opacity: 0 }}
+        animate={{ x: 0, y: 0, opacity: 1, pathLength: 1 }}
+        transition={{
+          type: "tween",
+          duration: 3.5,
+          delay: index * 0.2,
+          ease: "easeInOut",
+        }}
         // dragConstraints={{ left: 0, right: 0, top: 0, bottom: 0 }}
         whileHover={{
           scale: 1.1,
