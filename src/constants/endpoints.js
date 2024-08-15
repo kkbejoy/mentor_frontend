@@ -1,6 +1,7 @@
 const env = import.meta.env;
 
-export const BASE_URL = "https://server.mentornudge.online";
+export const BASE_URL = "https://mentor-server-2bcz.onrender.com";
+  // "https://server.mentornudge.online";
 // env.VITE_SERVER_URL;
 
 const END_POINTS = {
